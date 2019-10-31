@@ -1,6 +1,6 @@
 import {
     fase2
-} from "/fase2.js";
+} from "./fase2.js";
 export {
     gameover2
 };
