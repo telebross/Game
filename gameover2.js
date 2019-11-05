@@ -99,6 +99,7 @@ gameover2.create = function () {
     music = this.sound.add("music");
     music.play({
         loop: true
+        volume: 0.3
     });
 
 
