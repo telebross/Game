@@ -1,6 +1,6 @@
 import {
     fase2
-} from "./fase2.js";
+} from "/fase2.js";
 export {
     gameover2
 };
@@ -99,7 +99,6 @@ gameover2.create = function () {
     music = this.sound.add("music");
     music.play({
         loop: true
-        volume: 0.3
     });
 
 

@@ -1,4 +1,4 @@
-import { fase1 } from "./fase1.js";
+import { fase1 } from "/fase1.js";
 
 var player;
 var scoreText;
@@ -92,7 +92,6 @@ gameover1.create = function() {
   music = this.sound.add("music");
   music.play({
     loop: true
-    volume: 0.3
   });
 
   //fullscreen

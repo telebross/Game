@@ -1,9 +1,9 @@
 import {
     gameover2
-} from "./gameover2.js";
+} from "/gameover2.js";
 import {
     fase1
-} from "./fase1.js";
+} from "/fase1.js";
 export {
     fase2
 };
