@@ -21,12 +21,12 @@ start.preload = function() {
   this.load.image("blocolongo", "assets/bloco2.png");
   this.load.image("star", "assets/star.png");
   this.load.image("bomb", "assets/bomb.png");
-  this.load.image("boi", "assets/boi.png");
+  
   this.load.image("porta", "assets/portaverde.png");
   this.load.image("parede", "assets/parede.png");
   this.load.image("resistor", "assets/fases/fase4/resistor.png");
   this.load.image("iniciar", "assets/iniciar.png");
-  this.load.image("inicio", "assets/início.png");
+  this.load.image("inicio", "assets/inicio.png");
   // this.load.image('telebross', 'assets/telebross.png');
   this.load.image("capacitor", "assets/fases/fase5/capacitor.png");
   this.load.image("indutor", "assets/fases/fase5/indutor.png");
@@ -47,7 +47,7 @@ start.preload = function() {
     frameWidth: 9,
     frameHeight: 16
   });*/
-  this.load.audio("music", "assets/sons/music.mp3");
+  this.load.audio("music", "assets/sons/telainicial.mp3");
 };
 start.create = function() {
   //animação do diodo

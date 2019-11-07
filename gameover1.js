@@ -6,7 +6,7 @@ var scoreText;
 var platforms;
 
 var gameOver = true;
-var music;
+var muerte;
 
 var gameover1 = new Phaser.Scene("gameover1");
 
@@ -17,7 +17,7 @@ gameover1.preload = function() {
   this.load.image("blocolongo", "assets/bloco2.png");
   this.load.image("morto", "assets/ifiano/morto.png");
   this.load.image("bomb", "assets/bomb.png");
-  this.load.image("boi", "assets/boi.png");
+  
   this.load.image("porta", "assets/saida.png");
   this.load.image("reiniciar", "assets/reiniciar.png");
 
@@ -33,7 +33,7 @@ gameover1.preload = function() {
     frameWidth: 64,
     frameHeight: 64
   });
-  this.load.audio("music", "assets/music.mp3");
+  this.load.audio("muerte", "assets/sons/morte.mp3");
 };
 
 gameover1.create = function() {
@@ -89,11 +89,12 @@ gameover1.create = function() {
   this.physics.add.collider(player, platforms);
 
   //criação da musica
-  music = this.sound.add("music");
-  music.play({
-    loop: true,
-    volume: 0.3
+  muerte = this.sound.add("muerte");
+  muerte.play({
+    loop: false,
+    volume: 1
   });
+  //music.stop(); //adicionar delay para gerar o stop.
 
   //fullscreen
   var button = this.add
@@ -129,7 +130,7 @@ gameover1.create = function() {
   trocacena.on(
     "pointerup",
     function() {
-      music.stop();
+      //music.stop();
       player.anims.play("turn", false);
       gameOver = false;
       this.scene.start(fase1);

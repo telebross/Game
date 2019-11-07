@@ -10,6 +10,7 @@ var bombs;
 //var inimigoX; // posicao x do slime
 //var inimigoY; // posicao y do slime
 var inimigo;
+var boneco;
 //var inimigopoint = 400;
 
 //plataformas/icones na tela
@@ -39,12 +40,12 @@ var proximafase = false;
 var portas;
 
 //adicionando sons
-var music;
+var fundodojogo;
+var coleta;
 
 var fase1 = new Phaser.Scene("fase1");
 
 fase1.preload = function() {
-  console.log("fase1.preload");
   //carregando imagens em geral
   this.load.image("parede", "assets/parede.png");
   this.load.image("ground", "assets/plataforma.png");
@@ -53,7 +54,7 @@ fase1.preload = function() {
   this.load.image("star", "assets/dude.png");
   this.load.image("telefone", "assets/fases/fase1/telefone.png");
   this.load.image("bomb", "assets/bomb.png");
-  this.load.image("boi", "assets/boi.png");
+ 
   this.load.image("porta", "assets/portaverde.png");
 
   //animações dos personagem
@@ -75,7 +76,7 @@ fase1.preload = function() {
   });
 
   //animação coletáveis
-  this.load.spritesheet("dude", "assets/fases/fase1/antena.png", {
+  this.load.spritesheet("antena", "assets/fases/fase1/antena.png", {
     frameWidth: 60,
     frameHeight: 59
   });
@@ -99,7 +100,8 @@ fase1.preload = function() {
   });*/
 
   //audios do jogo
-  this.load.audio("music", "assets/sons/music.mp3");
+  this.load.audio("fundodojogo", "assets/sons/fundodojogo.mp3");
+  this.load.audio("coleta", "assets/sons/coleta.mp3");
 };
 
 fase1.create = function() {
@@ -215,7 +217,7 @@ fase1.create = function() {
     repeat: 0
   });
 
-  //animação de coletável
+  /* //animação de coletável
   this.anims.create({
     key: "dude",
     frames: this.anims.generateFrameNumbers("dude", {
@@ -224,7 +226,7 @@ fase1.create = function() {
     }),
     frameRate: 20,
     repeat: -1
-  });
+  });*/
 
   //animação da porta
   this.anims.create({
@@ -238,21 +240,24 @@ fase1.create = function() {
   });
   //animação do 'inimigo'
   this.anims.create({
-    key: "dude",
-    frames: this.anims.generateFrameNumbers("dude", {
+    key: "animeantena",
+    frames: this.anims.generateFrameNumbers("antena", {
       start: 0,
-      end: 9
+      end: 4
     }),
-    frameRate: 20,
+    frameRate: 4,
     repeat: -1
   });
 
+  //adicionando efeito de coleta
+  coleta = this.sound.add("coleta");
+
   //adicionando musica de fundo
 
-  music = this.sound.add("music");
-  music.play({
+  fundodojogo = this.sound.add("fundodojogo");
+  fundodojogo.play({
     loop: true,
-    volume: 0.3
+    volume: 1
   });
 
   //  Input Events
@@ -288,10 +293,10 @@ fase1.create = function() {
     }
   });
 
-  telefones.children.iterate(function(child) {
+  /*telefones.children.iterate(function(child) {
     //  Give each star a slightly different bounce
     child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
-  });
+  });*/
 
   bombs = this.physics.add.group();
   portas = this.physics.add.group();
@@ -370,10 +375,10 @@ fase1.create = function() {
   this.physics.add.collider(player, inimigo, hitBomb, null, this);
 
   //adicionando inimigo
-  var boneco = inimigo.create(500, 510, "dude");
-  boneco.setBounce(1);
+  boneco = inimigo.create(500, 510, "antena");
+  boneco.setBounce(0);
   boneco.setCollideWorldBounds(true);
-  boneco.setVelocity(Phaser.Math.Between(-200, 200), 20);
+  boneco.setVelocityX(100);
   boneco.allowGravity = false;
 };
 
@@ -479,15 +484,15 @@ fase1.update = function() {
   */
 
   //movimentação inimigo
-  /*if ((inimigo.body.position.x - 400) > 75) {
-    inimigo.setVelocityX(-100);
-    //slime.setFlipX(false);
-    inimigo.anims.play('dude', true);
-  } else if ((inimigo.body.position.x - 400) < -75) {
-    inimigo.setVelocityX(100);
-    //slime.setFlipX(true);
-    inimigo.anims.play('dude', true);
-  }*/
+  if (boneco.body.position.x - 500 > 75) {
+    boneco.setVelocityX(-100);
+    boneco.setFlipX(false);
+    boneco.anims.play("animeantena", true);
+  } else if (boneco.body.position.x - 500 < -75) {
+    boneco.setVelocityX(100);
+    boneco.setFlipX(true);
+    boneco.anims.play("animeantena", true);
+  }
 };
 
 //coletar estrelas e aparecer bombas/inimigo
@@ -501,14 +506,14 @@ function collectStar(player, telefone, boneco) {
 
   if (telefones.countActive(true) === 0) {
     //  A new batch of stars to collect
-    telefones.children.iterate(function(child) {
+    /* telefones.children.iterate(function(child) {
       child.enableBody(true, child.x, 0, true, true);
     });
 
     var x =
       player.x < 400
         ? Phaser.Math.Between(400, 800)
-        : Phaser.Math.Between(0, 400);
+        : Phaser.Math.Between(0, 400);*/
 
     var bomb = bombs.create(x, 16, "bomb");
     bomb.setBounce(1);
@@ -533,21 +538,22 @@ function abrirporta(player, telefone) {
   scoreJogador1 += 1;
   scoreText.setText("Score1: " + scoreJogador1);
 
-  if (telefones.countActive(true) === 0) {
+  /*if (telefones.countActive(true) === 0) {
     //  A new batch of stars to collect
     telefones.children.iterate(function(child) {
       child.enableBody(true, 0, 0, true, true);
     });
 
     //var x = (player.x < 400) // ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
-
-    var porta = portas.create(3000, 500, "saida");
-    //this.physics.pause();
-    //porta.setBounce(1);
-    porta.setCollideWorldBounds(true);
-    // porta.setVelocity(Phaser.Math.Between(-200, 200), 20);
-    porta.allowGravity = true;
-  }
+*/
+  var porta = portas.create(3000, 500, "saida");
+  //this.physics.pause();
+  //porta.setBounce(1);
+  porta.setCollideWorldBounds(true);
+  // porta.setVelocity(Phaser.Math.Between(-200, 200), 20);
+  porta.allowGravity = true;
+  //}
+  coleta.play();
 }
 
 //coletar coletáveis para aparecer porta
@@ -587,8 +593,9 @@ function hitBomb(player, bomb) {
   player.setTint(0xff0000);
   // player.anims.play('dead', true);
   this.physics.pause();
-  music.stop();
+  fundodojogo.stop();
   gameOver = true;
+  scoreJogador1 = 0;
   this.scene.start(gameover1);
 
   //criar atraso na morte para que apareça a animação
@@ -600,8 +607,10 @@ function mudarfase(player, portas) {
 
   player.setTint(0xff0000);
   portas.anims.play("saida", true);
+  fundodojogo.stop();
   //mudaça de fase
   gameOver = true;
+  scoreJogador1 = 0;
   this.scene.start(fase2); // não troca a cena, aparece a porta e a animação
 }
 
