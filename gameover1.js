@@ -1,4 +1,4 @@
-import { fase1 } from "/fase1.js";
+import { fase1 } from "./fase1.js";
 
 var player;
 var scoreText;
