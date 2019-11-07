@@ -91,7 +91,8 @@ gameover1.create = function() {
   //criação da musica
   music = this.sound.add("music");
   music.play({
-    loop: true
+    loop: true,
+    volume: 0.3
   });
 
   //fullscreen
