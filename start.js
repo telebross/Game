@@ -21,7 +21,7 @@ start.preload = function() {
   this.load.image("blocolongo", "assets/bloco2.png");
   this.load.image("star", "assets/star.png");
   this.load.image("bomb", "assets/bomb.png");
-  
+
   this.load.image("porta", "assets/portaverde.png");
   this.load.image("parede", "assets/parede.png");
   this.load.image("resistor", "assets/fases/fase4/resistor.png");

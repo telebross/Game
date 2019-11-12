@@ -1,6 +1,12 @@
-import { fase2 } from "./fase2.js";
-import { start } from "./start.js";
-import { formatura } from "./formatura.js";
+import {
+  fase2
+} from "./fase2.js";
+import {
+  start
+} from "./start.js";
+import {
+  formatura
+} from "./formatura.js";
 
 //criação do player 1
 var player;
@@ -24,7 +30,7 @@ var music;
 
 var endgame = new Phaser.Scene("endgame");
 
-endgame.preload = function() {
+endgame.preload = function () {
   //carregando imagens em geral
   this.load.image("parede", "assets/parede.png");
   this.load.image("ground", "assets/plataforma.png");
@@ -81,7 +87,7 @@ endgame.preload = function() {
   this.load.audio("music", "assets/sons/music.mp3");
 };
 
-endgame.create = function() {
+endgame.create = function () {
   this.physics.world.setBounds(0, 0, 800, 600);
 
   //  colocando a imagem de fundo
@@ -204,7 +210,7 @@ endgame.create = function() {
     }
   });
 
-  stars.children.iterate(function(child) {
+  stars.children.iterate(function (child) {
     //  Give each star a slightly different bounce
     child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
   });
@@ -226,7 +232,7 @@ endgame.create = function() {
 
   button.on(
     "pointerup",
-    function() {
+    function () {
       if (this.scale.isFullscreen) {
         button.setFrame(0);
 
@@ -245,7 +251,7 @@ endgame.create = function() {
 
   FKey.on(
     "down",
-    function() {
+    function () {
       if (this.scale.isFullscreen) {
         button.setFrame(0);
         this.scale.stopFullscreen();
@@ -278,7 +284,7 @@ endgame.create = function() {
     .setInteractive();
   trocacena.on(
     "pointerup",
-    function() {
+    function () {
       music.stop();
       this.scene.start(start);
     },
@@ -286,6 +292,8 @@ endgame.create = function() {
   );
 };
 
-endgame.update = function() {};
+endgame.update = function () {};
 
-export { endgame };
+export {
+  endgame
+};

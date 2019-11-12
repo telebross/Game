@@ -1,6 +1,12 @@
-import { fase2 } from "./fase2.js";
-import { start } from "./start.js";
-import { endgame } from "./endgame.js";
+import {
+  fase2
+} from "./fase2.js";
+import {
+  start
+} from "./start.js";
+import {
+  endgame
+} from "./endgame.js";
 
 //criação do player 1
 var player;
@@ -24,7 +30,7 @@ var formatura;
 
 var formatura = new Phaser.Scene("formatura");
 
-formatura.preload = function() {
+formatura.preload = function () {
   //carregando imagens em geral
   this.load.image("parede", "assets/parede.png");
   this.load.image("ground", "assets/plataforma.png");
@@ -84,7 +90,7 @@ formatura.preload = function() {
   this.load.audio("formatura", "assets/sons/formatura.mp3");
 };
 
-formatura.create = function() {
+formatura.create = function () {
   this.physics.world.setBounds(0, 0, 800, 600);
 
   //  colocando a imagem de fundo
@@ -197,7 +203,7 @@ formatura.create = function() {
     }
   });
 
-  stars.children.iterate(function(child) {
+  stars.children.iterate(function (child) {
     //  Give each star a slightly different bounce
     child.setBounceY(Phaser.Math.FloatBetween(1, 1));
     child.setVelocity(Phaser.Math.Between(-200, 200), 20);
@@ -237,7 +243,7 @@ formatura.create = function() {
 
   button.on(
     "pointerup",
-    function() {
+    function () {
       if (this.scale.isFullscreen) {
         button.setFrame(0);
 
@@ -256,7 +262,7 @@ formatura.create = function() {
 
   FKey.on(
     "down",
-    function() {
+    function () {
       if (this.scale.isFullscreen) {
         button.setFrame(0);
         this.scale.stopFullscreen();
@@ -289,7 +295,7 @@ formatura.create = function() {
     .setInteractive();
   trocacena.on(
     "pointerup",
-    function() {
+    function () {
       formatura.stop();
       this.scene.start(endgame);
     },
@@ -297,7 +303,7 @@ formatura.create = function() {
   );
 };
 
-formatura.update = function() {
+formatura.update = function () {
   //movimentação do personagem 1
   if (cursors.left.isDown) {
     player.setVelocityX(-160);
@@ -315,4 +321,6 @@ formatura.update = function() {
   }
 };
 
-export { formatura };
+export {
+  formatura
+};

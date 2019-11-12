@@ -1,5 +1,9 @@
-import { fase2 } from "./fase2.js";
-export { gameover2 };
+import {
+  fase2
+} from "./fase2.js";
+export {
+  gameover2
+};
 
 var player;
 var scoreText;
@@ -11,7 +15,7 @@ var muerte;
 
 var gameover2 = new Phaser.Scene("gameover");
 
-gameover2.preload = function() {
+gameover2.preload = function () {
   this.load.image("parede", "assets/parede.png");
   this.load.image("ground", "assets/plataforma.png");
   this.load.image("bloco", "assets/bloco.png");
@@ -37,7 +41,7 @@ gameover2.preload = function() {
   this.load.audio("muerte", "assets/sons/morte.mp3");
 };
 
-gameover2.create = function() {
+gameover2.create = function () {
   //  A simple background for our game
   this.add.image(400, 300, "parede");
   this.add.image(1200, 300, "parede");
@@ -103,7 +107,7 @@ gameover2.create = function() {
 
   FKey.on(
     "down",
-    function() {
+    function () {
       if (this.scale.isFullscreen) {
         button.setFrame(1);
         this.scale.stopFullscreen();
@@ -126,7 +130,7 @@ gameover2.create = function() {
     .setInteractive();
   trocacena.on(
     "pointerup",
-    function() {
+    function () {
       muerte.stop();
       player.anims.play("turn", false);
       gameOver = false;
