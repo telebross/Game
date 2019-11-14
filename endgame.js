@@ -1,228 +1,184 @@
 import {
-  fase2
-} from "./fase2.js";
-import {
   start
 } from "./start.js";
-import {
-  formatura
-} from "./formatura.js";
-
-//criação do player 1
-var player;
-
-//plataformas/icones na tela
-var scoreText;
-var platforms;
-
-var bombs;
-
-//parte de coletáveis
-var diploma;
-var telefones;
-//var antena;
-//var animes;
-
-var cursors;
-
-//adicionando sons
-var music;
 
 var endgame = new Phaser.Scene("endgame");
 
+var player;
+var stars;
+var bombs;
+var platforms;
+var resistor;
+var capacitor;
+var indutor;
+var score = 0;
+var gameOver = true;
+var scoreText;
+var formouText;
+var music;
+
 endgame.preload = function () {
-  //carregando imagens em geral
   this.load.image("parede", "assets/parede.png");
   this.load.image("ground", "assets/plataforma.png");
   this.load.image("bloco", "assets/bloco.png");
   this.load.image("blocolongo", "assets/bloco2.png");
-  this.load.image("boi", "assets/boi.png");
-  this.load.image("porta", "assets/portaverde.png");
-  this.load.image("recomeçar", "assets/recomeçar.png");
-  this.load.image("diploma", "assets/diploma.png");
+  this.load.image("star", "assets/star.png");
+  this.load.image("bomb", "assets/bomb.png");
 
-  //animações dos personagem
+  this.load.image("porta", "assets/portaverde.png");
+  this.load.image("parede", "assets/parede.png");
+  this.load.image("resistor", "assets/fases/fase4/resistor.png");
+  this.load.image("recomeçar", "assets/recomeçar.png");
+  this.load.image("inicio", "assets/inicio.png");
+  // this.load.image('telebross', 'assets/telebross.png');
+  this.load.image("capacitor", "assets/fases/fase5/capacitor.png");
+  this.load.image("indutor", "assets/fases/fase5/indutor.png");
   this.load.spritesheet("idle", "assets/ifiano/idle.png", {
     frameWidth: 38,
     frameHeight: 62
   });
-  this.load.spritesheet("run", "assets/ifiano/run.png", {
-    frameWidth: 43,
-    frameHeight: 62
-  });
-  this.load.spritesheet("runleft", "assets/ifiano/runleft.png", {
-    frameWidth: 43,
-    frameHeight: 62
-  });
-  this.load.spritesheet("dead", "assets/ifiano/dead.png", {
-    frameWidth: 77,
-    frameHeight: 62
-  });
-
-  //animação coletáveis
-  this.load.spritesheet("dude", "assets/fases/fase1/antena.png", {
-    frameWidth: 60,
-    frameHeight: 59
-  });
-
-  //fullscreen
   this.load.spritesheet("fullscreen", "assets/fullscreen.png", {
     frameWidth: 64,
     frameHeight: 64
   });
-
-  //animação da porta
-  this.load.spritesheet("saida", "assets/saida.png", {
-    frameWidth: 60,
-    frameHeight: 85
+  //animação do diodo
+  /*this.load.spritesheet('diodo', 'assets/fases/fase5/diodo.png', {
+    frameWidth: 0,
+    frameHeight: 16,
   });
-
-  //animações dos inimigos
-  /*this.load.spritesheet('dude', 'assets/dude.png', {
-      frameWidth: 32,
-      frameHeight: 48
-    });*/
-
-  //audios do jogo
-  this.load.audio("music", "assets/sons/music.mp3");
+  this.load.spritesheet('diodo2', 'assets/fases/fase5/diodo.png', {
+    frameWidth: 9,
+    frameHeight: 16
+  });*/
+  this.load.audio("music", "assets/sons/telainicial.mp3");
 };
-
 endgame.create = function () {
-  this.physics.world.setBounds(0, 0, 800, 600);
 
-  //  colocando a imagem de fundo
+
+
+  //  A simple background for our game
   this.add.image(400, 300, "parede");
-  this.add.image(1200, 300, "parede");
-  this.add.image(2000, 300, "parede");
-  this.add.image(2800, 300, "parede");
+  this.add.image(500, 510, "porta");
 
-  //adionando imagem de porta
-  this.add.image(400, 510, "porta");
+  //texto final do jogo
+  this.formouText = this.add.text(100, 100, "você está formado", {
+    fontSize: "50px",
+    fill: "#000"
+  });
+  this.formouText = this.add.text(200, 200, "parabéns!!", {
+    fontSize: "50px",
+    fill: "#000"
+  });
+  this.formouText.visible = true;
 
-  //  The platforms group contains the ground and the 2 ledges we can jump on
+  //adicionando qualquer texto ao jogo
+  /*this.GameOverText = this.add.text(25, 200, 'click here play game', { //(x,y, 'texto',)
+    fontSize: '64px', //tamanho do texto
+    fill: '#000' //cor do texto(procurar no piskel cor desejada)
+
+  });
+  this.GameOverText.visible = true // se o texto será visível
+*/
+  //adicionando física das plataformas
   platforms = this.physics.add.staticGroup();
 
-  //  criando física das plataformas
+  //  Here we create the ground.
   //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
   platforms
     .create(400, 700, "ground")
     .setScale(2)
     .refreshBody(); // chão
   platforms
-    .create(600, 440, "bloco")
+    .create(1200, 700, "ground")
+    .setScale(2)
+    .refreshBody(); //chão
+  platforms
+    .create(600, 455, "bloco")
     .setScale(2)
     .refreshBody(); //nivel 1
   platforms
-    .create(350, 310, "blocolongo")
+    .create(350, 320, "blocolongo")
     .setScale(2)
     .refreshBody(); //nivel 2
 
-  // The player and its settings
+  //criação do player
   player = this.physics.add.sprite(100, 450, "idle");
-  //player2 = this.physics.add.sprite(150, 450, 'idle');
 
-  //  Player physics properties. Give the little guy a slight bounce.
+  //player não bater nas bordas
   player.setCollideWorldBounds(true);
-  //player2.setCollideWorldBounds(true);
 
-  //  Our player animations, turning, walking left and walking right.
-  this.anims.create({
-    key: "left",
-    frames: this.anims.generateFrameNumbers("runleft", {
-      start: 0,
-      end: 15
-    }),
-    frameRate: 15,
-    repeat: -1
-  });
+  //adicionando musica
+  /*var music = this.sound.add('music');
+  music.play();*/
 
-  this.anims.create({
-    key: "turn",
-    frames: this.anims.generateFrameNumbers("idle", {
-      start: 0,
-      end: 15
-    }),
-    frameRate: 20,
-    repeat: -1
-  });
-
-  this.anims.create({
-    key: "right",
-    frames: this.anims.generateFrameNumbers("run", {
-      start: 0,
-      end: 15
-    }),
-    frameRate: 20,
-    repeat: -1
-  });
-
-  this.anims.create({
-    key: "dead",
-    frames: this.anims.generateFrameNumbers("dead", {
-      start: 0,
-      end: 16
-    }),
-    frameRate: 10,
-    repeat: 0
-  });
-
-  //animação de coletável
-  this.anims.create({
-    key: "dude",
-    frames: this.anims.generateFrameNumbers("dude", {
-      start: 0,
-      end: 9
-    }),
-    frameRate: 20,
-    repeat: -1
-  });
-
-  //animação da porta
-  this.anims.create({
-    key: "saida",
-    frames: this.anims.generateFrameNumbers("saida", {
-      start: 0,
-      end: 4
-    }),
-    frameRate: 1,
-    repeat: 0
-  });
-
-  //adicionando musica de fundo
-
-  music = this.sound.add("music");
-  music.play({
-    loop: true,
-    volume: 0.3
-  });
-
-  //  Input Eventscursors
-  cursors = this.input.keyboard.createCursorKeys();
-
-  //  Some stars to collect, 12 in total, evenly spaced 70 pixels apart along the x axis
-  stars = this.physics.add.group({
-    key: "diploma",
+  //adiconando objetos a tela
+  capacitor = this.physics.add.group({
+    key: "capacitor",
     repeat: 2,
     setXY: {
       x: 12,
-      y: 0,
+      y: 50,
       stepX: 70
+      // stepY: 70,
     }
   });
-
-  stars.children.iterate(function (child) {
+  //parte que os resistores quicam
+  capacitor.children.iterate(function (child) {
     //  Give each star a slightly different bounce
-    child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+    /*child.setBounceY(Phaser.Math.FloatBetween(1, 1));
+    child.setVelocity(Phaser.Math.Between(-200, 200), 20);
+    child.setCollideWorldBounds(true);*/
+    child.setBounce(1);
+    child.setCollideWorldBounds(true);
+    child.setVelocity(Phaser.Math.Between(-200, 200), 20);
+    child.allowGravity = false;
   });
 
-  bombs = this.physics.add.group();
-
-  //  The score1
-  scoreText = this.add.text(16, 16, "score1: 0", {
-    fontSize: "32px",
-    fill: "#000"
+  //adiconando objetos a tela
+  resistor = this.physics.add.group({
+    key: "resistor",
+    repeat: 2,
+    setXY: {
+      x: 48,
+      y: 20,
+      stepX: 70
+      // stepY: 70,
+    }
   });
-  scoreText.setScrollFactor(0);
+  //parte que os resistores quicam
+  resistor.children.iterate(function (child) {
+    //  Give each star a slightly different bounce
+    /*child.setBounceY(Phaser.Math.FloatBetween(1, 1));
+    child.setVelocity(Phaser.Math.Between(-200, 200), 20);
+    child.setCollideWorldBounds(true);*/
+    child.setBounce(1);
+    child.setCollideWorldBounds(true);
+    child.setVelocity(Phaser.Math.Between(-200, 200), 20);
+    child.allowGravity = false;
+  });
+
+  //adiconando objetos a tela
+  indutor = this.physics.add.group({
+    key: "indutor",
+    repeat: 2,
+    setXY: {
+      x: 64,
+      y: 0,
+      stepX: 70
+      // stepY: 70,
+    }
+  });
+  //parte que os resistores quicam
+  indutor.children.iterate(function (child) {
+    //  Give each star a slightly different bounce
+    /*child.setBounceY(Phaser.Math.FloatBetween(1, 1));
+    child.setVelocity(Phaser.Math.Between(-200, 200), 20);
+    child.setCollideWorldBounds(true);*/
+    child.setBounce(1);
+    child.setCollideWorldBounds(true);
+    child.setVelocity(Phaser.Math.Between(-200, 200), 20);
+    child.allowGravity = false;
+  });
 
   //fullscreen
   var button = this.add
@@ -235,18 +191,16 @@ endgame.create = function () {
     function () {
       if (this.scale.isFullscreen) {
         button.setFrame(0);
-
         this.scale.stopFullscreen();
       } else {
         button.setFrame(1);
-
         this.scale.startFullscreen();
       }
     },
     this
   );
-  button.setScrollFactor(0);
 
+  //fullscreen com tecla F
   var FKey = this.input.keyboard.addKey("F");
 
   FKey.on(
@@ -263,20 +217,23 @@ endgame.create = function () {
     this
   );
 
+  //criação de bombas
+  bombs = this.physics.add.group();
+
   //  Collide the player and the stars with the platforms
   this.physics.add.collider(player, platforms);
-
-  this.physics.add.collider(stars, platforms);
-  this.physics.add.collider(telefones, platforms); //coletável com plataforma
   this.physics.add.collider(bombs, platforms);
-  //this.physics.add.collider(portas, platforms);
-  //this.physics.add.collider(inimigo, platforms);
-  //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
-  //this.physics.add.overlap(player, stars, collectStar, null, this);
-  //this.physics.add.overlap(player, telefones, abrirporta, null, this);
-  //this.physics.add.overlap(player, telefones, coletar, null, this); //coletar coletáveis
+  this.physics.add.collider(resistor, platforms);
+  this.physics.add.collider(capacitor, platforms);
+  this.physics.add.collider(indutor, platforms);
 
-  //adicionando inimigo
+  //adicionando musica
+  var music = this.sound.add("music");
+
+  music.play({
+    loop: true,
+    volume: 0.3
+  });
 
   var trocacena = this.add
     .image(500 - 64, 400, "recomeçar", 0)
@@ -291,8 +248,6 @@ endgame.create = function () {
     this
   );
 };
-
-endgame.update = function () {};
 
 export {
   endgame

@@ -53,7 +53,7 @@ gameover1.create = function() {
     fontSize: "64px",
     fill: "#000"
   });
-  this.GameOverText = this.add.text(200, 200, "clique aqui", {
+  this.GameOverText = this.add.text(200, 200, "fase1", {
     fontSize: "64px",
     fill: "#000"
   });

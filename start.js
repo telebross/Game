@@ -1,4 +1,7 @@
-import { fase1 } from "./fase1.js";
+import {
+  fase1
+} from "./fase1.js";
+
 
 var start = new Phaser.Scene("start");
 
@@ -14,7 +17,7 @@ var gameOver = true;
 var scoreText;
 var music;
 
-start.preload = function() {
+start.preload = function () {
   this.load.image("parede", "assets/parede.png");
   this.load.image("ground", "assets/plataforma.png");
   this.load.image("bloco", "assets/bloco.png");
@@ -49,7 +52,7 @@ start.preload = function() {
   });*/
   this.load.audio("music", "assets/sons/telainicial.mp3");
 };
-start.create = function() {
+start.create = function () {
   //animação do diodo
   /*this.anims.create({
     key: 'diodovermelho',
@@ -73,7 +76,7 @@ start.create = function() {
   */
   //  A simple background for our game
   this.add.image(400, 300, "parede");
-  this.add.image(500, 510, "porta");
+  this.add.image(700, 510, "porta");
 
   //adicionando qualquer texto ao jogo
   /*this.GameOverText = this.add.text(25, 200, 'click here play game', { //(x,y, 'texto',)
@@ -120,21 +123,21 @@ start.create = function() {
     key: "capacitor",
     repeat: 2,
     setXY: {
-      x: 12,
-      y: 50,
-      stepX: 70
-      // stepY: 70,
+      x: 100,
+      y: 0,
+      stepX: 100
+
     }
   });
   //parte que os resistores quicam
-  capacitor.children.iterate(function(child) {
+  capacitor.children.iterate(function (child) {
     //  Give each star a slightly different bounce
     /*child.setBounceY(Phaser.Math.FloatBetween(1, 1));
     child.setVelocity(Phaser.Math.Between(-200, 200), 20);
     child.setCollideWorldBounds(true);*/
     child.setBounce(1);
     child.setCollideWorldBounds(true);
-    child.setVelocity(Phaser.Math.Between(-200, 200), 20);
+    child.setVelocity(Phaser.Math.Between(-100, 100), 40);
     child.allowGravity = false;
   });
 
@@ -143,21 +146,21 @@ start.create = function() {
     key: "resistor",
     repeat: 2,
     setXY: {
-      x: 48,
+      x: 0,
       y: 20,
-      stepX: 70
+      stepX: 200
       // stepY: 70,
     }
   });
   //parte que os resistores quicam
-  resistor.children.iterate(function(child) {
+  resistor.children.iterate(function (child) {
     //  Give each star a slightly different bounce
     /*child.setBounceY(Phaser.Math.FloatBetween(1, 1));
     child.setVelocity(Phaser.Math.Between(-200, 200), 20);
     child.setCollideWorldBounds(true);*/
     child.setBounce(1);
     child.setCollideWorldBounds(true);
-    child.setVelocity(Phaser.Math.Between(-200, 200), 20);
+    child.setVelocity(Phaser.Math.Between(-100, 100), 40);
     child.allowGravity = false;
   });
 
@@ -166,21 +169,21 @@ start.create = function() {
     key: "indutor",
     repeat: 2,
     setXY: {
-      x: 64,
+      x: 50,
       y: 0,
-      stepX: 70
+      stepX: 150
       // stepY: 70,
     }
   });
   //parte que os resistores quicam
-  indutor.children.iterate(function(child) {
+  indutor.children.iterate(function (child) {
     //  Give each star a slightly different bounce
     /*child.setBounceY(Phaser.Math.FloatBetween(1, 1));
     child.setVelocity(Phaser.Math.Between(-200, 200), 20);
     child.setCollideWorldBounds(true);*/
     child.setBounce(1);
     child.setCollideWorldBounds(true);
-    child.setVelocity(Phaser.Math.Between(-200, 200), 20);
+    child.setVelocity(Phaser.Math.Between(-100, 100), 40);
     child.allowGravity = false;
   });
 
@@ -192,7 +195,7 @@ start.create = function() {
 
   button.on(
     "pointerup",
-    function() {
+    function () {
       if (this.scale.isFullscreen) {
         button.setFrame(0);
         this.scale.stopFullscreen();
@@ -209,7 +212,7 @@ start.create = function() {
 
   FKey.on(
     "down",
-    function() {
+    function () {
       if (this.scale.isFullscreen) {
         button.setFrame(0);
         this.scale.stopFullscreen();
@@ -245,7 +248,7 @@ start.create = function() {
     .setInteractive();
   trocacena.on(
     "pointerup",
-    function() {
+    function () {
       music.stop();
       this.scene.start(fase1);
     },
@@ -253,4 +256,6 @@ start.create = function() {
   );
 };
 
-export { start };
+export {
+  start
+};

@@ -13,7 +13,7 @@ var platforms;
 var gameOver = true;
 var muerte;
 
-var gameover2 = new Phaser.Scene("gameover");
+var gameover2 = new Phaser.Scene("gameover2");
 
 gameover2.preload = function () {
   this.load.image("parede", "assets/parede.png");

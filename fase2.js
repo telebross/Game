@@ -2,8 +2,8 @@ import {
   gameover2
 } from "./gameover2.js";
 import {
-  formatura
-} from "./formatura.js";
+  fase3
+} from "./fase3.js";
 
 //criação do player 1
 var player;
@@ -13,7 +13,8 @@ var inimigo;
 var boneco1;
 var boneco2;
 var boneco3;
-var bombs;
+var boneco4;
+
 
 //plataformas/icones na tela
 var scoreText;
@@ -22,7 +23,10 @@ var platforms;
 
 //parte de coletáveis
 var binarios;
+var binarios2;
 var pl;
+var pl2;
+
 
 //movimtação de câmeras
 var moveCam = false;
@@ -49,7 +53,8 @@ fase2.preload = function () {
   this.load.image("bloco", "assets/bloco.png");
   this.load.image("blocolongo", "assets/bloco2.png");
   this.load.image("porta", "assets/portaverde.png");
-  this.load.image("letreiro", "assets/fases/fase2/fase2.png");
+  this.load.image("letreiro2", "assets/fases/fase2/fase2.png");
+
   //animações dos personagem
   this.load.spritesheet("idle", "assets/ifiano/idle.png", {
     frameWidth: 38,
@@ -64,15 +69,23 @@ fase2.preload = function () {
     frameHeight: 62
   });
 
+  //animação da porta
+  this.load.spritesheet("saida", "assets/saida.png", {
+    frameWidth: 60,
+    frameHeight: 85
+  });
+
 
   //animação coletáveis
+  //coletavel1
   this.load.spritesheet("binarios", "assets/fases/fase2/binarios.png", {
-    frameWidth: 60,
-    frameHeight: 60
+    frameWidth: 56,
+    frameHeight: 45
   });
-  this.load.spritesheet("pl", "assets/fases/fase2/portaslogicas.png", {
+  //coletavel2
+  this.load.spritesheet("pl1", "assets/fases/fase2/portaslogicas.png", {
     frameWidth: 60,
-    frameHeight: 60
+    frameHeight: 37
   });
 
 
@@ -113,13 +126,13 @@ fase2.create = function () {
   this.add.image(2800, 300, "parede");
 
   //adicionando letreiro da fase
-  this.add.image(400, 200, "letreiro");
+  this.add.image(400, 200, "letreiro2");
 
   //  The platforms group contains the ground and the 2 ledges we can jump on
   platforms = this.physics.add.staticGroup();
 
-  //  criando física das plataformas
-  //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
+  //  criando chão 
+
   platforms
     .create(400, 700, "ground")
     .setScale(2)
@@ -131,91 +144,182 @@ fase2.create = function () {
   platforms
     .create(2000, 700, "ground")
     .setScale(2)
-    .refreshBody(); //chãoplatforms
+    .refreshBody(); //chão
   platforms
     .create(2800, 700, "ground")
     .setScale(2)
     .refreshBody(); //chão
 
-  //primeiro abstáculo
+
+  //criando plataformas
+  // primeira linha
 
   platforms
-    .create(500, 400, "blocolongo")
-    .setScale(2)
+    .create(904, 445, "blocolongo") //nível 1  eixo Y 127
+    .setScale(2) //distancia entre os blocos eixo X 204
+    .refreshBody();
+  platforms
+    .create(1108, 445, "blocolongo") //nível 2 eixo Y 
+    .setScale(2) //distancia entre os blocos eixo X 204
+    .refreshBody();
+  platforms
+    .create(1312, 445, "blocolongo") //nível 2 eixo Y 
+    .setScale(2) //distancia entre os blocos eixo X 204
+    .refreshBody();
+  platforms
+    .create(1516, 445, "blocolongo") //nível 2 eixo Y 
+    .setScale(2) //distancia entre os blocos eixo X 204
+    .refreshBody();
+  platforms
+    .create(1720, 445, "blocolongo") //nível 2 eixo Y 
+    .setScale(2) //distancia entre os blocos eixo X 204
+    .refreshBody();
+  platforms
+    .create(1924, 445, "blocolongo") //nível 2 eixo Y 
+    .setScale(2) //distancia entre os blocos eixo X 204
+    .refreshBody();
+  platforms
+    .create(2128, 445, "blocolongo") //nível 2 eixo Y 
+    .setScale(2) //distancia entre os blocos eixo X 204
+    .refreshBody();
+  platforms
+    .create(2332, 445, "blocolongo") //nível 2 eixo Y 
+    .setScale(2) //distancia entre os blocos eixo X 204
+    .refreshBody();
+  platforms
+    .create(2536, 445, "blocolongo") //nível 2 eixo Y 
+    .setScale(2) //distancia entre os blocos eixo X 204
+    .refreshBody();
+  platforms
+    .create(2740, 445, "blocolongo") //nível 2 eixo Y 
+    .setScale(2) //distancia entre os blocos eixo X 204
+    .refreshBody();
+  platforms
+    .create(2944, 445, "blocolongo") //nível 2 eixo Y 
+    .setScale(2) //distancia entre os blocos eixo X 204
     .refreshBody();
 
+  //----------------------------------------------------
+  //segunda linha
   platforms
-    .create(704, 400, "blocolongo")
-    .setScale(2)
+    .create(904, 318, "blocolongo") //nível 2 eixo Y
+    .setScale(2) //distancia entre os blocos eixo X 204
+    .refreshBody();
+  platforms
+    .create(1108, 318, "blocolongo") //nível 2 eixo Y 
+    .setScale(2) //distancia entre os blocos eixo X 204
+    .refreshBody();
+  platforms
+    .create(1312, 318, "blocolongo") //nível 2 eixo Y 
+    .setScale(2) //distancia entre os blocos eixo X 204
+    .refreshBody();
+  platforms
+    .create(1516, 318, "blocolongo") //nível 2 eixo Y 
+    .setScale(2) //distancia entre os blocos eixo X 204
+    .refreshBody();
+  platforms
+    .create(1720, 318, "blocolongo") //nível 2 eixo Y 
+    .setScale(2) //distancia entre os blocos eixo X 204
+    .refreshBody();
+  platforms
+    .create(1924, 318, "blocolongo") //nível 2 eixo Y 
+    .setScale(2) //distancia entre os blocos eixo X 204
+    .refreshBody();
+  platforms
+    .create(2128, 318, "blocolongo") //nível 2 eixo Y 
+    .setScale(2) //distancia entre os blocos eixo X 204
+    .refreshBody();
+  platforms
+    .create(2332, 318, "blocolongo") //nível 2 eixo Y 
+    .setScale(2) //distancia entre os blocos eixo X 204
+    .refreshBody();
+  platforms
+    .create(2536, 318, "blocolongo") //nível 2 eixo Y 
+    .setScale(2) //distancia entre os blocos eixo X 204
+    .refreshBody();
+  platforms
+    .create(2740, 318, "blocolongo") //nível 2 eixo Y 
+    .setScale(2) //distancia entre os blocos eixo X 204
+    .refreshBody();
+  platforms
+    .create(2944, 318, "blocolongo") //nível 2 eixo Y 
+    .setScale(2) //distancia entre os blocos eixo X 204
+    .refreshBody();
+
+  //-------------------------------------------------
+  //terceira linha
+  platforms
+    .create(904, 191, "blocolongo") //nível 2 eixo Y 
+    .setScale(2) //distancia entre os blocos eixo X 204
+    .refreshBody();
+  platforms
+    .create(1108, 191, "blocolongo") //nível 2 eixo Y 
+    .setScale(2) //distancia entre os blocos eixo X 204
+    .refreshBody();
+  platforms
+    .create(1312, 191, "blocolongo") //nível 2 eixo Y 
+    .setScale(2) //distancia entre os blocos eixo X 204
+    .refreshBody();
+  platforms
+    .create(1516, 191, "blocolongo") //nível 2 eixo Y 
+    .setScale(2) //distancia entre os blocos eixo X 204
+    .refreshBody();
+  platforms
+    .create(1720, 191, "blocolongo") //nível 2 eixo Y 
+    .setScale(2) //distancia entre os blocos eixo X 204
+    .refreshBody();
+  platforms
+    .create(1924, 191, "blocolongo") //nível 2 eixo Y 
+    .setScale(2) //distancia entre os blocos eixo X 204
+    .refreshBody();
+  platforms
+    .create(2128, 191, "blocolongo") //nível 2 eixo Y 
+    .setScale(2) //distancia entre os blocos eixo X 204
+    .refreshBody();
+  platforms
+    .create(2332, 191, "blocolongo") //nível 2 eixo Y 
+    .setScale(2) //distancia entre os blocos eixo X 204
+    .refreshBody();
+  platforms
+    .create(2536, 191, "blocolongo") //nível 2 eixo Y 
+    .setScale(2) //distancia entre os blocos eixo X 204
+    .refreshBody();
+  platforms
+    .create(2740, 191, "blocolongo") //nível 2 eixo Y 
+    .setScale(2) //distancia entre os blocos eixo X 204
+    .refreshBody();
+  platforms
+    .create(2944, 191, "blocolongo") //nível 2 eixo Y 
+    .setScale(2) //distancia entre os blocos eixo X 204
     .refreshBody();
   //-------------------------------------------
 
-  //criando segundo obstáculo
-  //primeira parte
-  platforms
-    .create(970, 508, "bloco")
-    .setScale(2)
-    .refreshBody(); //nivel 1
-  platforms
-    .create(1125, 508, "blocolongo")
-    .setScale(2)
-    .refreshBody(); //nivel 1
-  platforms
-    .create(1125, 444, "blocolongo")
-    .setScale(2)
-    .refreshBody(); //nivel 2
-  platforms
-    .create(1175, 380, "bloco")
-    .setScale(2)
-    .refreshBody(); //nivel 3
-  //segunda parte
-  platforms
-    .create(1400, 380, "bloco")
-    .setScale(2)
-    .refreshBody(); //nivel 3
-  platforms
-    .create(1448, 444, "blocolongo")
-    .setScale(2)
-    .refreshBody(); //nivel 2
-  platforms
-    .create(1602, 508, "bloco")
-    .setScale(2)
-    .refreshBody(); //nivel 1
-  platforms
-    .create(1448, 508, "blocolongo")
-    .setScale(2)
-    .refreshBody(); //nivel 1
-  //-------------------------------
-  //terceiro obstáculo
-  platforms
-    .create(2500, 508, "blocolongo")
-    .setScale(2)
-    .refreshBody(); //nivel1
-  platforms
-    .create(2704, 508, "blocolongo")
-    .setScale(2)
-    .refreshBody(); //nível 1
+  //escadinha
 
   platforms
-    .create(2550, 445, "bloco")
+    .create(600, 508, "bloco")
     .setScale(2)
-    .refreshBody(); //nivel 2
+    .refreshBody(); //nivel 1 D
   platforms
-    .create(2704, 445, "blocolongo")
+    .create(400, 444, "bloco")
     .setScale(2)
-    .refreshBody(); //nível 2
+    .refreshBody(); //nivel 2 E
   platforms
-    .create(2704, 383, "blocolongo")
+    .create(600, 350, "bloco")
     .setScale(2)
-    .refreshBody(); //nível 3
+    .refreshBody(); //nivel 3 D
   platforms
-    .create(2753, 321, "bloco")
+    .create(400, 245, "bloco")
     .setScale(2)
-    .refreshBody(); //nivel 4
+    .refreshBody(); //nivel 4 E
+  platforms
+    .create(600, 160, "bloco")
+    .setScale(2)
+    .refreshBody(); //nivel 3 D
+  //------------------------------------------------
 
-  // The player and its settings
+  // adicionando player ao jogo
   player = this.physics.add.sprite(100, 450, "idle");
-  //player2 = this.physics.add.sprite(150, 450, 'idle');
 
   //parte do player com cameras
   this.cameras.main.startFollow(
@@ -224,13 +328,11 @@ fase2.create = function () {
     0.05,
     0.05
   );
-  //this.cameras.main.startFollow(player2, true, 0.05, 0.05);
 
-  //  Player physics properties. Give the little guy a slight bounce.
+  //colição do player com as bordas do mapa
   player.setCollideWorldBounds(true);
-  //player2.setCollideWorldBounds(true);
 
-  //  Our player animations, turning, walking left and walking right.
+  //  criando animação do personagem
   this.anims.create({
     key: "left",
     frames: this.anims.generateFrameNumbers(
@@ -263,7 +365,8 @@ fase2.create = function () {
     repeat: -1
   });
 
-  this.anims.create({
+  //animação de morte
+  /*this.anims.create({
     key: "dead",
     frames: this.anims.generateFrameNumbers("dead", {
       start: 0,
@@ -271,7 +374,7 @@ fase2.create = function () {
     }),
     frameRate: 10,
     repeat: 0
-  });
+  });*/
 
 
 
@@ -296,14 +399,43 @@ fase2.create = function () {
         end: 10
       }
     ),
-    frameRate: 10,
+    frameRate: 3,
     repeat: -1
   });
 
-  //adicionando efeito de coleta
+  //animação coletável1
+  this.anims.create({
+    key: "animepl",
+    frames: this.anims.generateFrameNumbers(
+      "pl1", {
+        start: 0,
+        end: 6
+      }
+    ),
+    frameRate: 1,
+    repeat: -1
+  });
+  //animação coletável2
+  this.anims.create({
+    key: "animebinarios",
+    frames: this.anims.generateFrameNumbers(
+      "binarios", {
+        start: 0,
+        end: 4
+      }
+    ),
+    frameRate: 1,
+    repeat: -1
+  });
+
+  //------------------------------------------------
+
+  //adicionando sons
+
+  // efeito de coleta
   coleta = this.sound.add("coleta");
 
-  //adicionando musica de fundo
+  // musica de fundo
 
   fundodojogo = this.sound.add("fundodojogo");
   fundodojogo.play({
@@ -311,53 +443,80 @@ fase2.create = function () {
     volume: 1
   });
 
+  //---------------------------------------------------------
 
+  //adicionando coletáveis ao jogo
 
-  //  Some stars to collect, 12 in total, evenly spaced 70 pixels apart along the x axis
-  pl = this.physics.add.group({
-    key: "pl1",
-    repeat: 4,
-    setXY: {
-      x: 500, //como adicionar mais de um ícone
-      y: 0,
-
-      stepX: 500
-    }
-  });
-
-  pl.children.iterate(function (child) {
-    //  Give each star a slightly different bounce
-    child.setCircle(15);
-  });
-
-  //adicionando coletável como a estrela
+  //coletavel1 
   binarios = this.physics.add.group({
-    key: "binario",
-    repeat: 4,
+    key: "binarios",
+    repeat: 3,
     setXY: {
-      x: 100,
-      y: 0,
+      x: 1000,
+      y: 325,
       stepX: 500
     }
   });
 
-  binarios.children.iterate(function (child) {
+
+
+  /*binarios.children.iterate(function (child) {
     //  Give each star a slightly different bounce
     child.setCircle(25);
-  });
+  });*/
 
-  bombs = this.physics.add.group();
+  //coletável2
+  pl = this.physics.add.group({
+    key: "pl1",
+    repeat: 1,
+    setXY: {
+      x: 1100, //como adicionar mais de um ícone
+      y: 210,
+
+      stepX: 600
+    }
+  });
+  //coletável3
+  binarios2 = this.physics.add.group({
+    key: "binarios",
+    repeat: 1,
+    setXY: {
+      x: 1000,
+      y: 0,
+      stepX: 500
+    }
+  });
+  /*binarios2.children.iterate(function (child) {
+    //  Give each star a slightly different bounce
+    child.setCircle(25);
+  });*/
+
+  //coletável4
+  pl2 = this.physics.add.group({
+    key: "pl1",
+    repeat: 1,
+    setXY: {
+      x: 1100, //como adicionar mais de um ícone
+      y: 510,
+
+      stepX: 1000
+    }
+  });
+  //----------------------------------------------------------
+
+
+  //criando fica da porta/inimigo
   portas = this.physics.add.group();
   inimigo = this.physics.add.group();
 
-  //  The score1
-  scoreText = this.add.text(16, 16, "score1: 0", {
+  // placar do jogo
+  scoreText = this.add.text(16, 16, "nota: 0", {
     fontSize: "32px",
     fill: "#000"
   });
   scoreText.setScrollFactor(0);
 
-
+  //--------------------------------------------------
 
   //fullscreen
   var button = this.add
@@ -397,24 +556,20 @@ fase2.create = function () {
     },
     this
   );
+  //--------------------------------------------------------------
 
-  //  Collide the player and the stars with the platforms
+  //colisões
+
   this.physics.add.collider(player, platforms);
-  //this.physics.add.collider(player2, platforms);
-  this.physics.add.collider(pl, platforms);
+  this.physics.add.collider(pl, platforms); //coletável com plataforma
+  this.physics.add.collider(pl2, platforms); //coletável com plataforma
   this.physics.add.collider(binarios, platforms); //coletável com plataforma
-  //this.physics.add.collider(antena, platforms); //coletável com plataforma
-  this.physics.add.collider(bombs, platforms);
-  this.physics.add.collider(portas, platforms);
-  this.physics.add.collider(inimigo, platforms);
-  //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
-  this.physics.add.overlap(
-    player,
-    pl,
-    coletavel2,
-    null,
-    this
-  );
+  this.physics.add.collider(binarios2, platforms); //coletável com plataformas
+  this.physics.add.collider(portas, platforms); //porta com chão
+  this.physics.add.collider(inimigo, platforms); //nimigo com chão
+
+  //*------------------------------------------------------*
+  //coletavel1
   this.physics.add.overlap(
     player,
     binarios,
@@ -422,15 +577,34 @@ fase2.create = function () {
     null,
     this
   );
-
-  this.physics.add.collider(
+  //coletavel2
+  this.physics.add.overlap(
     player,
-    bombs,
-    hitBomb,
+    pl,
+    coletavel2,
     null,
     this
   );
-  //this.physics.add.collider(player2, bombs, hitBomb, null, this);
+  //coletavel3
+  this.physics.add.overlap(
+    player,
+    binarios2,
+    coletavel3,
+    null,
+    this
+  );
+  //coletavel4  
+  this.physics.add.overlap(
+    player,
+    pl2,
+    coletavel3,
+    null,
+    this
+  );
+
+  //-----------------------------------------------
+
+  //função mudar de fase
   this.physics.add.collider(
     player,
     portas,
@@ -438,6 +612,8 @@ fase2.create = function () {
     null,
     this
   );
+  //-------------------------------------------
+  //função de morte
   this.physics.add.collider(
     player,
     inimigo,
@@ -445,34 +621,48 @@ fase2.create = function () {
     null,
     this
   );
+  //-------------------------------------------
   //adicionando inimigo1
   boneco1 = inimigo.create(2000, 510, "fpfp");
   boneco1.setBounce(0);
   boneco1.setCollideWorldBounds(true);
   boneco1.setVelocityX(100);
   boneco1.allowGravity = false;
-  boneco1.setCircle(23);
+  //boneco1.setCircle(23);
+
   //adicionando inimigo2
-  boneco2 = inimigo.create(1300, 200, "fpfp");
+  boneco2 = inimigo.create(500, 0, "fpfp");
   boneco2.setBounce(1);
   boneco2.setCollideWorldBounds(true);
-  boneco2.setVelocityY(100);
+  boneco2.setVelocityY(10);
   boneco2.allowGravity = false;
-  boneco2.setCircle(23);
+  // boneco2.setCircle(23);
+
   //adicionando inimigo3
   boneco3 = inimigo.create(2900, 200, "fpfp");
   boneco3.setBounce(0);
   boneco3.setCollideWorldBounds(true);
   boneco3.setVelocityY(0);
   boneco3.allowGravity = false;
-  boneco3.setCircle(23);
+  //boneco3.setCircle(23);
+
+  //adicionando inimigo4
+  boneco4 = inimigo.create(1900, 300, "fpfp");
+  boneco4.setBounce(0);
+  boneco4.setCollideWorldBounds(true);
+  boneco4.setVelocityX(100);
+  boneco4.allowGravity = false;
+  //boneco3.setCircle(23);
 };
+//fim da função create
+//----------------------------------------------
 
 fase2.update = function () {
 
-
+  //criação da camera
   var cam = this.cameras.main;
 
+  //movimentação de cameras
   if (moveCam) {
     if (cursors.left.isDown) {
       cam.scrollX -= 4;
@@ -481,11 +671,11 @@ fase2.update = function () {
     }
   }
 
-  /* if (cursors.up.isDown) {
-     cam.scrollY -= 4;
-   } else if (cursors.down.isDown) {
-     cam.scrollY += 4;
-   }*/
+  if (cursors.up.isDown) {
+    cam.scrollY -= 4;
+  } else if (cursors.down.isDown) {
+    cam.scrollY += 4;
+  }
 
 
   //movimentação do personagem 1
@@ -504,7 +694,7 @@ fase2.update = function () {
     player.setVelocityY(-330);
   }
 
-
+  //-----------------------------------------------------
 
   //movimentação boneco1
   if (boneco1.body.position.x - 1999 > 200) {
@@ -518,6 +708,7 @@ fase2.update = function () {
   }
   //animação do boneco2
   boneco2.anims.play("animefpfp", true);
+
   //movimentação boneco3
   if (boneco3.body.position.x - 3000 > 10) {
     boneco3.setVelocityX(-300);
@@ -528,21 +719,62 @@ fase2.update = function () {
     boneco3.setFlipX(true);
     boneco3.anims.play("animefpfp", true);
   }
+
+  //movimentação boneco4
+  if (boneco4.body.position.x - 2000 > 300) {
+    boneco4.setVelocityX(-290);
+    boneco4.setFlipX(false);
+    boneco4.anims.play("animefpfp", true);
+  } else if (boneco4.body.position.x - 2000 < -1000) {
+    boneco4.setVelocityX(200);
+    boneco4.setFlipX(true);
+    boneco4.anims.play("animefpfp", true);
+  }
+
+  //--------------------------------------------------
+
+  //animação coletável1
+  binarios.children.iterate(function (child) {
+
+    child.anims.play("animebinarios", true);
+  });
+
+  //animação coletável2
+  pl.children.iterate(function (child) {
+
+    child.anims.play("animepl", true);
+  });
+
+  //animação coletável3
+  binarios2.children.iterate(function (child) {
+
+    child.anims.play("animebinarios", true);
+  });
+  //animação coletável4
+  pl2.children.iterate(function (child) {
+
+    child.anims.play("animepl", true);
+  });
 };
 
+
+//fim do update
+
+//-----------------------------------------------------------------
 
 //icone1 de coleta
 function coletavel1(player, binario) {
   binario.disableBody(true, true);
 
-  //  Add and update the score
+  //  adicionando +1 á nota
   scoreJogador1 += 1;
   scoreText.setText("nota: " + scoreJogador1);
 
   if (binarios.countActive(true) === 0) {
-    //  A new batch of stars to collect
+    //  novos coletáveis para coletar
     binarios.children.iterate(function (child) {
       child.enableBody(true, -300, 0, true, true);
+
     });
 
     /*var x =
@@ -570,14 +802,75 @@ function coletavel1(player, binario) {
 function coletavel2(player, p) {
   p.disableBody(true, true);
 
-  //  Add and update the score
+  //  adicionando +1 á nota
   scoreJogador1 += 1;
   scoreText.setText("nota: " + scoreJogador1);
 
   if (pl.countActive(true) === 0) {
-    //  A new batch of stars to collect
+    //  novos coletáveis para coletar
     pl.children.iterate(function (child) {
       child.enableBody(true, -300, 0, true, true);
+
+    });
+
+    //var x = (player.x < 400) // ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
+
+    /*var porta = portas.create(100, 500, "saida");
+    //this.physics.pause();
+    //porta.setBounce(1);
+    porta.setCollideWorldBounds(true);
+    // porta.setVelocity(Phaser.Math.Between(-200, 200), 20);
+    porta.allowGravity = true;*/
+  }
+  /*var porta = portas.create(3000, 500, "saida");
+  porta.setCollideWorldBounds(true);
+  porta.allowGravity = true;*/
+
+  coleta.play();
+}
+
+function coletavel3(player, b) {
+  b.disableBody(true, true);
+
+  //  adicionando +1 á nota
+  scoreJogador1 += 1;
+  scoreText.setText("nota: " + scoreJogador1);
+
+  if (binarios2.countActive(true) === 0) {
+    //  novos coletáveis para coletar
+    binarios2.children.iterate(function (child) {
+      child.enableBody(true, -300, 0, true, true);
+
+    });
+
+    //var x = (player.x < 400) // ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
+
+    /*var porta = portas.create(100, 500, "saida");
+    //this.physics.pause();
+    //porta.setBounce(1);
+    porta.setCollideWorldBounds(true);
+    // porta.setVelocity(Phaser.Math.Between(-200, 200), 20);
+    porta.allowGravity = true;*/
+  }
+  /*var porta = portas.create(3000, 500, "saida");
+  porta.setCollideWorldBounds(true);
+  porta.allowGravity = true;*/
+
+  coleta.play();
+}
+
+function coletavel4(player, l) {
+  l.disableBody(true, true);
+
+  //  adicionando +1 á nota
+  scoreJogador1 += 1;
+  scoreText.setText("nota: " + scoreJogador1);
+
+  if (pl2.countActive(true) === 0) {
+    //  novos coletáveis para coletar
+    pl2.children.iterate(function (child) {
+      child.enableBody(true, -300, 0, true, true);
+
     });
 
     //var x = (player.x < 400) // ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
@@ -597,6 +890,7 @@ function coletavel2(player, p) {
 }
 //-----------------------------------------------------------
 
+//função de morte
 function hitBomb(player, bomb) {
 
 
@@ -608,6 +902,7 @@ function hitBomb(player, bomb) {
   this.scene.start(gameover2);
 }
 
+//função de mudança de fase
 function mudarfase(player, portas) {
 
   player.disableBody(true, true);
@@ -616,9 +911,10 @@ function mudarfase(player, portas) {
   fundodojogo.stop();
   gameOver = true;
   scoreJogador1 = 0;
-  this.scene.start(formatura);
+  this.scene.start(fase3);
 }
 
+//exportando esta fase
 export {
   fase2
 };

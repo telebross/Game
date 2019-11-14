@@ -57,7 +57,7 @@ fase1.preload = function () {
   this.load.image("bomb", "assets/bomb.png");
   this.load.image("terminal1", "assets/fases/fase1/terminal.png");
   this.load.image("porta", "assets/portaverde.png");
-  this.load.image("letreiro", "assets/fases/fase1/fase1.png");
+  this.load.image("letreiro1", "assets/fases/fase1/fase1.png");
   //animações dos personagem
   this.load.spritesheet("idle", "assets/ifiano/idle.png", {
     frameWidth: 38,
@@ -121,7 +121,7 @@ fase1.create = function () {
   this.add.image(2800, 300, "parede");
 
   //adicionando letreiro da fase
-  this.add.image(400, 200, "letreiro");
+  this.add.image(400, 200, "letreiro1");
 
   //  The platforms group contains the ground and the 2 ledges we can jump on
   platforms = this.physics.add.staticGroup();
