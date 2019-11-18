@@ -1,26 +1,36 @@
-import { fase1 } from "./fase1.js";
+import {
+  fase1
+} from "./fase1.js";
 
+//definindo do morto
 var player;
-var scoreText;
 
+//definindo score
+var scoreText;
+//definindo plataformas
 var platforms;
 
+//definido o gameover
 var gameOver = true;
+//sons
 var muerte;
+
+//definindo logo da pendencia
+var pendencia;
 
 var gameover1 = new Phaser.Scene("gameover1");
 
-gameover1.preload = function() {
+gameover1.preload = function () {
+  //carregando imagens do jogo
   this.load.image("parede", "assets/parede.png");
   this.load.image("ground", "assets/plataforma.png");
   this.load.image("bloco", "assets/bloco.png");
   this.load.image("blocolongo", "assets/bloco2.png");
   this.load.image("morto", "assets/ifiano/morto.png");
-  this.load.image("bomb", "assets/bomb.png");
-  
-  this.load.image("porta", "assets/saida.png");
+  this.load.image("porta", "assets/portaverde.png");
   this.load.image("reiniciar", "assets/reiniciar.png");
 
+  //animação do personagem
   this.load.spritesheet("idle", "assets/ifiano/idle.png", {
     frameWidth: 38,
     frameHeight: 62
@@ -29,41 +39,65 @@ gameover1.preload = function() {
     frameWidth: 75,
     frameHeight: 62
   });
+  //fullscreen
   this.load.spritesheet("fullscreen", "assets/fullscreen.png", {
     frameWidth: 64,
     frameHeight: 64
   });
+  //animação pendencia
+  this.load.spritesheet("pendencia", "assets/pendencia.png", {
+    frameWidth: 60,
+    frameHeight: 60
+  })
+
+  //carregando sons
   this.load.audio("muerte", "assets/sons/morte.mp3");
 };
 
-gameover1.create = function() {
-  //  A simple background for our game
+gameover1.create = function () {
+
+  //imagem de fundo
   this.add.image(400, 300, "parede");
   this.add.image(1200, 300, "parede");
 
+  //imagem de porta
   this.add.image(500, 510, "porta");
 
-  //  The score
-  this.scoreText = this.add.text(16, 16, "score: 0", {
+  //  nota
+  this.scoreText = this.add.text(16, 16, "nota: 0", {
     fontSize: "32px",
     fill: "#000"
   });
-  //texto GameOver
-  this.GameOverText = this.add.text(100, 100, "Tente Novamente", {
-    fontSize: "64px",
-    fill: "#000"
-  });
-  this.GameOverText = this.add.text(200, 200, "fase1", {
-    fontSize: "64px",
-    fill: "#000"
-  });
-  this.GameOverText.visible = true;
+  
 
-  //  The platforms group contains the ground and the 2 ledges we can jump on
+
+  //animação pendencia
+  this.anims.create({
+    key: "animependencia",
+    frames: this.anims.generateFrameNumbers(
+      "pendencia", {
+        start: 0,
+        end: 4
+      }
+    ),
+    frameRate: 5,
+    repeat: -1
+  });
+
+
+  //adicionando objetos estáticos na tela
   platforms = this.physics.add.staticGroup();
+  pendencia = this.physics.add.staticGroup();
 
-  //  Here we create the ground.
-  //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
+  //criando letreiro
+  pendencia
+    .create(400, 150, "animependencia")
+    .setScale(4)
+    .refreshBody();
+
+
+  //criação das plataformas
+  //chão
   platforms
     .create(400, 700, "ground")
     .setScale(2)
@@ -80,13 +114,18 @@ gameover1.create = function() {
     .create(350, 310, "blocolongo")
     .setScale(2)
     .refreshBody(); //nivel 2
+  //------------------------------------------
 
-  // The player and its settings
+  //adicionando imagem do player morto
   player = this.physics.add.sprite(100, 450, "morto");
 
+  //player bater com bordas
   player.setCollideWorldBounds(true);
 
+  //player colidir com plataformas
   this.physics.add.collider(player, platforms);
+
+
 
   //criação da musica
   muerte = this.sound.add("muerte");
@@ -94,7 +133,6 @@ gameover1.create = function() {
     loop: false,
     volume: 1
   });
-  //music.stop(); //adicionar delay para gerar o stop.
 
   //fullscreen
   var button = this.add
@@ -106,7 +144,7 @@ gameover1.create = function() {
 
   FKey.on(
     "down",
-    function() {
+    function () {
       if (this.scale.isFullscreen) {
         button.setFrame(1);
         this.scale.stopFullscreen();
@@ -115,21 +153,19 @@ gameover1.create = function() {
         this.scale.startFullscreen();
       }
 
-      this.physics.add.collider(player, platforms);
     },
     this
   );
 
-  //  Collide the player and the stars with the platforms
-  this.physics.add.collider(player, platforms);
 
+  //botão para troca de cena
   var trocacena = this.add
-    .image(500 - 64, 400, "reiniciar", 0)
+    .image(550 - 64, 350, "reiniciar", 0)
     .setOrigin(1, 0)
     .setInteractive();
   trocacena.on(
     "pointerup",
-    function() {
+    function () {
       //music.stop();
       player.anims.play("turn", false);
       gameOver = false;
@@ -138,7 +174,20 @@ gameover1.create = function() {
     this
   );
 };
+//fim do create
+//----------------------------------------------
 
-gameover1.update = function() {};
+gameover1.update = function () {
+  //animação pendencia
+  pendencia.children.iterate(function (child) {
 
-export { gameover1 };
+    child.allowGravity = false;
+
+    child.anims.play("animependencia", true);
+  });
+
+};
+
+export {
+  gameover1
+};

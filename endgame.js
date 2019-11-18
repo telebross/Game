@@ -4,18 +4,24 @@ import {
 
 var endgame = new Phaser.Scene("endgame");
 
+//criação do personagem
 var player;
+
 var stars;
-var bombs;
+
+//plataformas
 var platforms;
+
+//ícones pulando na tela
 var resistor;
 var capacitor;
 var indutor;
-var score = 0;
-var gameOver = true;
-var scoreText;
-var formouText;
+
+//criando música
 var music;
+
+//letreiro de formado
+var formado;
 
 endgame.preload = function () {
   this.load.image("parede", "assets/parede.png");
@@ -23,8 +29,6 @@ endgame.preload = function () {
   this.load.image("bloco", "assets/bloco.png");
   this.load.image("blocolongo", "assets/bloco2.png");
   this.load.image("star", "assets/star.png");
-  this.load.image("bomb", "assets/bomb.png");
-
   this.load.image("porta", "assets/portaverde.png");
   this.load.image("parede", "assets/parede.png");
   this.load.image("resistor", "assets/fases/fase4/resistor.png");
@@ -37,53 +41,59 @@ endgame.preload = function () {
     frameWidth: 38,
     frameHeight: 62
   });
+  //movimentação do botão fullscreen
   this.load.spritesheet("fullscreen", "assets/fullscreen.png", {
     frameWidth: 64,
     frameHeight: 64
   });
-  //animação do diodo
-  /*this.load.spritesheet('diodo', 'assets/fases/fase5/diodo.png', {
-    frameWidth: 0,
-    frameHeight: 16,
+
+  //movimentação do letreiro de formado
+  this.load.spritesheet("formado", "assets/formado.png", {
+    frameWidth: 60,
+    frameHeight: 60
   });
-  this.load.spritesheet('diodo2', 'assets/fases/fase5/diodo.png', {
-    frameWidth: 9,
-    frameHeight: 16
-  });*/
+
   this.load.audio("music", "assets/sons/telainicial.mp3");
 };
+//fim do upload
+//--------------------------------------------------------------------
+
 endgame.create = function () {
 
+  //animação formado
+  this.anims.create({
+    key: "animeformado",
+    frames: this.anims.generateFrameNumbers(
+      "formado", {
+        start: 0,
+        end: 5
+      }
+    ),
+    frameRate: 5,
+    repeat: -1
+  });
 
-
-  //  A simple background for our game
+  // coloando imgaens na tela
   this.add.image(400, 300, "parede");
   this.add.image(500, 510, "porta");
 
-  //texto final do jogo
-  this.formouText = this.add.text(100, 100, "você está formado", {
-    fontSize: "50px",
-    fill: "#000"
-  });
-  this.formouText = this.add.text(200, 200, "parabéns!!", {
-    fontSize: "50px",
-    fill: "#000"
-  });
-  this.formouText.visible = true;
 
-  //adicionando qualquer texto ao jogo
-  /*this.GameOverText = this.add.text(25, 200, 'click here play game', { //(x,y, 'texto',)
-    fontSize: '64px', //tamanho do texto
-    fill: '#000' //cor do texto(procurar no piskel cor desejada)
 
-  });
-  this.GameOverText.visible = true // se o texto será visível
-*/
-  //adicionando física das plataformas
+
+  //adicionando física das plataformas/formado
   platforms = this.physics.add.staticGroup();
+  formado = this.physics.add.staticGroup();
 
-  //  Here we create the ground.
-  //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
+  formado
+    .create(400, 150, "animeformado")
+    .setScale(4)
+    .refreshBody();
+
+
+
+  //posicionando plataformas
+
+  //criando chão
   platforms
     .create(400, 700, "ground")
     .setScale(2)
@@ -92,10 +102,12 @@ endgame.create = function () {
     .create(1200, 700, "ground")
     .setScale(2)
     .refreshBody(); //chão
+  //bloco nivel1
   platforms
     .create(600, 455, "bloco")
     .setScale(2)
     .refreshBody(); //nivel 1
+  //bloco nível 2
   platforms
     .create(350, 320, "blocolongo")
     .setScale(2)
@@ -104,12 +116,10 @@ endgame.create = function () {
   //criação do player
   player = this.physics.add.sprite(100, 450, "idle");
 
-  //player não bater nas bordas
+  //player bater nas bordas
   player.setCollideWorldBounds(true);
 
-  //adicionando musica
-  /*var music = this.sound.add('music');
-  music.play();*/
+
 
   //adiconando objetos a tela
   capacitor = this.physics.add.group({
@@ -122,16 +132,13 @@ endgame.create = function () {
       // stepY: 70,
     }
   });
-  //parte que os resistores quicam
+  //parte que os capacitor quicam
   capacitor.children.iterate(function (child) {
-    //  Give each star a slightly different bounce
-    /*child.setBounceY(Phaser.Math.FloatBetween(1, 1));
-    child.setVelocity(Phaser.Math.Between(-200, 200), 20);
-    child.setCollideWorldBounds(true);*/
     child.setBounce(1);
     child.setCollideWorldBounds(true);
     child.setVelocity(Phaser.Math.Between(-200, 200), 20);
     child.allowGravity = false;
+    child.setScale(2)
   });
 
   //adiconando objetos a tela
@@ -147,10 +154,6 @@ endgame.create = function () {
   });
   //parte que os resistores quicam
   resistor.children.iterate(function (child) {
-    //  Give each star a slightly different bounce
-    /*child.setBounceY(Phaser.Math.FloatBetween(1, 1));
-    child.setVelocity(Phaser.Math.Between(-200, 200), 20);
-    child.setCollideWorldBounds(true);*/
     child.setBounce(1);
     child.setCollideWorldBounds(true);
     child.setVelocity(Phaser.Math.Between(-200, 200), 20);
@@ -168,12 +171,8 @@ endgame.create = function () {
       // stepY: 70,
     }
   });
-  //parte que os resistores quicam
+  //parte que os indutor quicam
   indutor.children.iterate(function (child) {
-    //  Give each star a slightly different bounce
-    /*child.setBounceY(Phaser.Math.FloatBetween(1, 1));
-    child.setVelocity(Phaser.Math.Between(-200, 200), 20);
-    child.setCollideWorldBounds(true);*/
     child.setBounce(1);
     child.setCollideWorldBounds(true);
     child.setVelocity(Phaser.Math.Between(-200, 200), 20);
@@ -217,12 +216,8 @@ endgame.create = function () {
     this
   );
 
-  //criação de bombas
-  bombs = this.physics.add.group();
-
-  //  Collide the player and the stars with the platforms
+  //colisão com plataformas
   this.physics.add.collider(player, platforms);
-  this.physics.add.collider(bombs, platforms);
   this.physics.add.collider(resistor, platforms);
   this.physics.add.collider(capacitor, platforms);
   this.physics.add.collider(indutor, platforms);
@@ -235,6 +230,7 @@ endgame.create = function () {
     volume: 0.3
   });
 
+  //botão para troca de cena
   var trocacena = this.add
     .image(500 - 64, 400, "recomeçar", 0)
     .setOrigin(1, 0)
@@ -247,6 +243,20 @@ endgame.create = function () {
     },
     this
   );
+};
+
+//fim do create
+//--------------------------------------
+
+endgame.update = function () {
+  //animação formado
+  formado.children.iterate(function (child) {
+
+    child.allowGravity = false;
+
+    child.anims.play("animeformado", true);
+  });
+
 };
 
 export {

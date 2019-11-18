@@ -52,9 +52,7 @@ fase1.preload = function () {
   this.load.image("ground", "assets/plataforma.png");
   this.load.image("bloco", "assets/bloco.png");
   this.load.image("blocolongo", "assets/bloco2.png");
-  this.load.image("star", "assets/dude.png");
   this.load.image("telefone", "assets/fases/fase1/telefone.png");
-  this.load.image("bomb", "assets/bomb.png");
   this.load.image("terminal1", "assets/fases/fase1/terminal.png");
   this.load.image("porta", "assets/portaverde.png");
   this.load.image("letreiro1", "assets/fases/fase1/fase1.png");
@@ -77,7 +75,7 @@ fase1.preload = function () {
   });
 
   //animação coletáveis
-  this.load.spritesheet("antena", "assets/fases/fase1/antena.png", {
+  this.load.spritesheet("antena1", "assets/fases/fase1/antena.png", {
     frameWidth: 60,
     frameHeight: 59
   });
@@ -240,7 +238,7 @@ fase1.create = function () {
       start: 0,
       end: 15
     }),
-    frameRate: 15,
+    frameRate: 25,
     repeat: -1
   });
 
@@ -250,7 +248,7 @@ fase1.create = function () {
       start: 0,
       end: 15
     }),
-    frameRate: 20,
+    frameRate: 25,
     repeat: -1
   });
 
@@ -260,7 +258,7 @@ fase1.create = function () {
       start: 0,
       end: 15
     }),
-    frameRate: 20,
+    frameRate: 25,
     repeat: -1
   });
 
@@ -297,8 +295,8 @@ fase1.create = function () {
   });
   //animação do 'inimigo'
   this.anims.create({
-    key: "animeantena",
-    frames: this.anims.generateFrameNumbers("antena", {
+    key: "animeantena1",
+    frames: this.anims.generateFrameNumbers("antena1", {
       start: 0,
       end: 4
     }),
@@ -428,21 +426,21 @@ fase1.create = function () {
   this.physics.add.collider(player, inimigo, hitBomb, null, this);
 
   //adicionando inimigo1
-  boneco1 = inimigo.create(2000, 510, "antena");
+  boneco1 = inimigo.create(2000, 510, "antena1");
   boneco1.setBounce(0);
   boneco1.setCollideWorldBounds(true);
   boneco1.setVelocityX(100);
   boneco1.allowGravity = false;
   boneco1.setCircle(23);
   //adicionando inimigo2
-  boneco2 = inimigo.create(1300, 200, "antena");
+  boneco2 = inimigo.create(1300, 200, "antena1");
   boneco2.setBounce(1);
   boneco2.setCollideWorldBounds(true);
   boneco2.setVelocityY(100);
   boneco2.allowGravity = false;
   boneco2.setCircle(23);
   //adicionando inimigo3
-  boneco3 = inimigo.create(2900, 200, "antena");
+  boneco3 = inimigo.create(2900, 200, "antena1");
   boneco3.setBounce(0);
   boneco3.setCollideWorldBounds(true);
   boneco3.setVelocityY(0);
@@ -547,23 +545,23 @@ fase1.update = function () {
   if (boneco1.body.position.x - 1999 > 200) {
     boneco1.setVelocityX(-200);
     boneco1.setFlipX(false);
-    boneco1.anims.play("animeantena", true);
+    boneco1.anims.play("animeantena1", true);
   } else if (boneco1.body.position.x - 1999 < -200) {
     boneco1.setVelocityX(200);
     boneco1.setFlipX(true);
-    boneco1.anims.play("animeantena", true);
+    boneco1.anims.play("animeantena1", true);
   }
   //animação do boneco2
-  boneco2.anims.play("animeantena", true);
+  boneco2.anims.play("animeantena1", true);
   //movimentação boneco3
   if (boneco3.body.position.x - 3000 > 10) {
     boneco3.setVelocityX(-300);
     boneco3.setFlipX(false);
-    boneco3.anims.play("animeantena", true);
+    boneco3.anims.play("animeantena1", true);
   } else if (boneco3.body.position.x - 3000 < -100) {
     boneco3.setVelocityX(300);
     boneco3.setFlipX(true);
-    boneco3.anims.play("animeantena", true);
+    boneco3.anims.play("animeantena1", true);
   }
 };
 

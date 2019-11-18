@@ -1,24 +1,23 @@
 import {
-  fase2
-} from "./fase2.js";
+  fase8
+} from "./fase8.js";
 import {
-  start
-} from "./start.js";
-import { endgame } from "./endgame.js";
+  endgame
+} from "./endgame.js";
 
 
 //criação do player 1
 var player;
 
-//plataformas/icones na tela
+//textos/placar
 var scoreText;
 var scoreJogador1;
-var orientaçaoText;
+
 
 //plataformas
 var platforms;
 
-var bombs;
+
 
 var gameOver;
 
@@ -37,6 +36,10 @@ var cursors;
 //adicionando sons
 var formatura;
 
+//setas
+var esquerda;
+var direita
+
 var formatura = new Phaser.Scene("formatura");
 
 formatura.preload = function () {
@@ -46,7 +49,6 @@ formatura.preload = function () {
   this.load.image("bloco", "assets/bloco.png");
   this.load.image("blocolongo", "assets/bloco2.png");
   this.load.image("diploma", "assets/diploma.png");
-  this.load.image("star", "assets/dude.png");
   this.load.image("telefone", "assets/fases/fase1/telefone.png");
   this.load.image("bomb", "assets/bomb.png");
   this.load.image("boi", "assets/boiformatura.png");
@@ -79,6 +81,17 @@ formatura.preload = function () {
     frameHeight: 64
   });
 
+  //animação setas
+  this.load.spritesheet("esquerda", "assets/setaesquerda.png", {
+    frameWidth: 60,
+    frameHeight: 60
+  })
+
+  this.load.spritesheet("direita", "assets/setadireita.png", {
+    frameWidth: 60,
+    frameHeight: 60
+  })
+
   //animação da porta
   this.load.spritesheet("saida", "assets/saida.png", {
     frameWidth: 60,
@@ -90,8 +103,11 @@ formatura.preload = function () {
   //audios do jogo
   this.load.audio("formatura", "assets/sons/formatura.mp3");
 };
+//fim do preload
+//-------------------------------------------------------------------
 
 formatura.create = function () {
+  //limites da camera/mapa
   this.cameras.main.setBounds(0, 0, 3200, 600);
   this.physics.world.setBounds(0, 0, 3200, 600);
 
@@ -101,11 +117,48 @@ formatura.create = function () {
   this.add.image(2000, 300, "parede");
   this.add.image(2800, 300, "parede");
 
-  //criando física da porta
-  portas = this.physics.add.group();
+  //animação seta esquerda
+  this.anims.create({
+    key: "animeesquerda",
+    frames: this.anims.generateFrameNumbers(
+      "esquerda", {
+        start: 0,
+        end: 3
+      }
+    ),
+    frameRate: 5,
+    repeat: -1
+  });
 
-  //  The platforms group contains the ground and the 2 ledges we can jump on
+  //animação seta direita
+  this.anims.create({
+    key: "animedireita",
+    frames: this.anims.generateFrameNumbers(
+      "direita", {
+        start: 0,
+        end: 3
+      }
+    ),
+    frameRate: 5,
+    repeat: -1
+  });
+
+  //criando física da porta/plataforma/setaesquerda/setadireita
+  portas = this.physics.add.group();
   platforms = this.physics.add.staticGroup();
+  esquerda = this.physics.add.staticGroup();
+  direita = this.physics.add.staticGroup();
+
+  //criando seta esquerda
+  esquerda
+    .create(2800, 200, "animeesquerda")
+    .setScale(4)
+    .refreshBody();
+  //criando seta direita
+  direita
+    .create(400, 200, "animedireita")
+    .setScale(4)
+    .refreshBody();
 
   //  criando chão do jogo
 
@@ -126,7 +179,7 @@ formatura.create = function () {
     .setScale(2)
     .refreshBody(); //chão
 
-  // The player and its settings
+  // adicionando player
   player = this.physics.add.sprite(100, 450, "idle");
 
 
@@ -139,12 +192,12 @@ formatura.create = function () {
     0.05
   );
 
-  //  Player physics properties. Give the little guy a slight bounce.
+  //colisão player plataformas
   player.setCollideWorldBounds(true);
 
-  //player2.setCollideWorldBounds(true);
 
-  //  Our player animations, turning, walking left and walking right.
+
+  //animação personagem
   this.anims.create({
     key: "left",
     frames: this.anims.generateFrameNumbers("runleft", {
@@ -185,17 +238,6 @@ formatura.create = function () {
     repeat: 0
   });
 
-  //animação de coletável
-  this.anims.create({
-    key: "dude",
-    frames: this.anims.generateFrameNumbers("dude", {
-      start: 0,
-      end: 9
-    }),
-    frameRate: 20,
-    repeat: -1
-  });
-
   //animação da porta
   this.anims.create({
     key: "saida",
@@ -215,17 +257,17 @@ formatura.create = function () {
     volume: 1
   });
 
-  //  Input Eventscursors
+  //  adicionando teclado alfanumerico
   cursors = this.input.keyboard.createCursorKeys();
 
-  //  Some stars to collect, 12 in total, evenly spaced 70 pixels apart along the x axis
+  //adicionando boi
   bois = this.physics.add.group({
     key: "boi",
-    repeat: 0,
+
     setXY: {
       x: 200,
       y: 0,
-      stepX: 70
+
     }
   });
 
@@ -236,37 +278,19 @@ formatura.create = function () {
     //child.setCollideWorldBounds(true);
     child.setBounce(1);
     child.setCollideWorldBounds(true);
-    child.setVelocity(Phaser.Math.Between(190, 190), 30);
+    child.setVelocity(Phaser.Math.Between(189, 189), 25);
     child.allowGravity = false;
   });
 
 
-
-
-
-  bombs = this.physics.add.group();
-
-  //  The score1
+  // nota
   scoreText = this.add.text(16, 16, "nota: 0", {
     fontSize: "32px",
     fill: "#000"
   });
   scoreText.setScrollFactor(0);
 
-  //texto orientativo
-  this.orientaçaoText = this.add.text(100, 100, "pegue seu diploma -->", {
-    fontSize: "32px",
-    fill: "#000"
-  });
-  this.orientaçaoText = this.add.text(2700, 100, "Achou que seria fácil?", {
-    fontSize: "32px",
-    fill: "#000"
-  });
-  this.orientaçaoText = this.add.text(2700, 200, "<-- encontre a porta", {
-    fontSize: "32px",
-    fill: "#000"
-  });
-  // this.orientaçãoText.visible = true;
+
 
   //fullscreen
   var button = this.add
@@ -307,39 +331,36 @@ formatura.create = function () {
     this
   );
 
-  //  Collide the player and the stars with the platforms
+  //adicionando colisões
   this.physics.add.collider(player, platforms);
-
   this.physics.add.collider(bois, platforms);
-  // this.physics.add.collider(telefones, platforms); //coletável com plataforma
-  this.physics.add.collider(bombs, platforms);
   this.physics.add.collider(portas, platforms);
-  //this.physics.add.collider(inimigo, platforms);
-  //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
-  //this.physics.add.overlap(player, stars, collectStar, null, this);
+
+  //adicionando colisão relacionado a uma função
   this.physics.add.overlap(player, bois, coletardiploma, null, this);
   this.physics.add.overlap(player, portas, mudarfase, null, this);
 
-  //this.physics.add.overlap(player, telefones, abrirporta, null, this);
-  //this.physics.add.overlap(player, telefones, coletar, null, this); //coletar coletáveis
 
-
-
-  /*var trocacena = this.add
-    .image(500 - 64, 400, "boi", 0)
-    .setOrigin(1, 0)
-    .setInteractive();
-  trocacena.on(
-    "pointerup",
-    function () {
-      formatura.stop();
-      this.scene.start(endgame);
-    },
-    this
-  );*/
 };
+//fim do create
+//----------------------------------------------------------------------
 
 formatura.update = function () {
+
+  //animação setaesquerda
+  esquerda.children.iterate(function (child) {
+
+    child.allowGravity = false;
+
+    child.anims.play("animeesquerda", true);
+  });
+  //animação setaedireta
+  direita.children.iterate(function (child) {
+
+    child.allowGravity = false;
+
+    child.anims.play("animedireita", true);
+  });
 
   //criação da camera
   var cam = this.cameras.main;
@@ -378,26 +399,21 @@ formatura.update = function () {
 
 function coletardiploma(player, boi) {
 
-  // player.disableBody(true, true);
+
   boi.disableBody(true, true);
 
   scoreJogador1 += 10;
   scoreText.setText("nota: " + scoreJogador1);
 
   if (bois.countActive(true) === 0) {
-    //  A new batch of stars to collect
-    /* bois.children.iterate(function (child) {
 
-       child.enableBody(true, child.x, 0, true, true);
-
-     });*/
 
     var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
 
-    var porta = portas.create(x, 16, "saida");
+    var porta = portas.create(2700, 16, "saida");
     porta.setBounce(1);
     porta.setCollideWorldBounds(true);
-    porta.setVelocity(Phaser.Math.Between(-190, -190), 30);
+    porta.setVelocity(Phaser.Math.Between(-188, -188), 30);
     porta.allowGravity = false;
 
 
@@ -408,8 +424,6 @@ function coletardiploma(player, boi) {
 function mudarfase(player, portas) {
 
   player.disableBody(true, true);
-  //portas.disableBody(true, true);
-
   player.setTint(0xff0000);
   formatura.stop();
   gameOver = true;

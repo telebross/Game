@@ -1,13 +1,12 @@
 import {
-    gameover3
-} from "./gameover3.js";
+    gameover7
+} from "./gameover7.js";
 import {
-    fase4
-} from "./fase4.js";
+    fase8
+} from "./fase8.js";
 
 //criação do player 1
 var player;
-//var player2;
 
 //criação de inimigos
 var inimigo;
@@ -19,9 +18,7 @@ var boneco4;
 
 //plataformas/icones na tela
 var scoreText;
-var scoreText2;
 var scoreJogador1 = 0;
-var scoreJogador2 = 0;
 var platforms;
 
 //parte de coletáveis
@@ -36,9 +33,7 @@ var moveCam = false;
 
 //movimentação personagens
 var cursors;
-var WKey;
-var AKey;
-var DKey;
+
 
 //mudança de cena
 var gameOver = false;
@@ -49,19 +44,19 @@ var portas;
 var fundodojogo;
 var coleta;
 
-//criando letreiro com escala
+//criação de letreiro
 var letreiro;
 
-var fase3 = new Phaser.Scene("fase3");
+var fase7 = new Phaser.Scene("fase7");
 
-fase3.preload = function () {
+fase7.preload = function () {
     //carregando imagens em geral
     this.load.image("parede", "assets/parede.png");
     this.load.image("ground", "assets/plataforma.png");
     this.load.image("bloco", "assets/bloco.png");
     this.load.image("blocolongo", "assets/bloco2.png");
     this.load.image("porta", "assets/portaverde.png");
-    this.load.image("letreiro3", "assets/fases/fase3/fase3.png");
+    this.load.image("letreiro7", "assets/fases/fase7/fase7.png");
 
     //animações dos personagem
     this.load.spritesheet("idle", "assets/ifiano/idle.png", {
@@ -86,21 +81,31 @@ fase3.preload = function () {
 
     //animação coletáveis
     //coletavel1
-    this.load.spritesheet("computador", "assets/fases/fase3/computador.png", {
-        frameWidth: 21,
-        frameHeight: 20
+    this.load.spritesheet("transistor", "assets/fases/fase7/transistor2.png", {
+        frameWidth: 50,
+        frameHeight: 61
     });
     //coletavel2
-    this.load.spritesheet("ip", "assets/fases/fase3/endereçosip.png", {
-        frameWidth: 46,
-        frameHeight: 52
+    this.load.spritesheet("fibra", "assets/fases/fase7/fibra.png", {
+        frameWidth: 60,
+        frameHeight: 67
+    });
+    //coletavel3
+    this.load.spritesheet("cabo", "assets/fases/fase7/caboderede.png", {
+        frameWidth: 60,
+        frameHeight: 60
     });
 
 
-    //animação inimigo
-    this.load.spritesheet("roteador", "assets/fases/fase3/roteador.png", {
-        frameWidth: 30,
-        frameHeight: 25
+    //animação inimigo1
+    this.load.spritesheet("antena", "assets/fases/fase7/antena2.png", {
+        frameWidth: 60,
+        frameHeight: 48
+    });
+    //animação inimigo2
+    this.load.spritesheet("bau", "assets/fases/fase7/bau.png", {
+        frameWidth: 31,
+        frameHeight: 21
     });
 
 
@@ -115,12 +120,9 @@ fase3.preload = function () {
     this.load.audio("coleta", "assets/sons/coleta.mp3");
 };
 
-fase3.create = function () {
+fase7.create = function () {
     // Teclado alfanumérico
     cursors = this.input.keyboard.createCursorKeys();
-    WKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
-    AKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-    DKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
 
     //parte de movimentação de cameras
     this.cameras.main.setBounds(0, 0, 3200, 600);
@@ -137,18 +139,18 @@ fase3.create = function () {
     this.add.image(2800, 300, "parede");
 
 
-    // adicionando física as plataformas/letreiro
+
+    //  The platforms group contains the ground and the 2 ledges we can jump on
     platforms = this.physics.add.staticGroup();
     letreiro = this.physics.add.staticGroup();
 
-
     //posicionando letreiro
     letreiro
-        .create(400, 200, "letreiro3")
+        .create(400, 200, "letreiro7")
         .setScale(8)
         .refreshBody();
 
-    //  criando chão
+    //  criando chão 
 
     platforms
         .create(400, 700, "ground")
@@ -166,6 +168,7 @@ fase3.create = function () {
         .create(2800, 700, "ground")
         .setScale(2)
         .refreshBody(); //chão
+
 
     //criando plataformas
     // primeira linha
@@ -336,21 +339,17 @@ fase3.create = function () {
 
     // adicionando player ao jogo
     player = this.physics.add.sprite(100, 450, "idle");
-    //player2 = this.physics.add.sprite(150, 450, 'idle');
 
-    //parte do player1 com cameras
+    //parte do player com cameras
     this.cameras.main.startFollow(
         player,
         true,
         0.05,
         0.05
     );
-    //parte do player 2 com câmeras
-    //this.cameras.main.startFollow(player2, true, 0.05, 0.05);
 
     //colição do player com as bordas do mapa
     player.setCollideWorldBounds(true);
-    //player2.setCollideWorldBounds(true);
 
     //  criando animação do personagem
     this.anims.create({
@@ -361,7 +360,7 @@ fase3.create = function () {
                 end: 15
             }
         ),
-        frameRate: 25,
+        frameRate: 15,
         repeat: -1
     });
 
@@ -371,7 +370,7 @@ fase3.create = function () {
             start: 0,
             end: 15
         }),
-        frameRate: 25,
+        frameRate: 20,
         repeat: -1
     });
 
@@ -381,19 +380,19 @@ fase3.create = function () {
             start: 0,
             end: 15
         }),
-        frameRate: 25,
+        frameRate: 20,
         repeat: -1
     });
 
     //animação de morte
     /*this.anims.create({
-        key: "dead",
-        frames: this.anims.generateFrameNumbers("dead", {
-            start: 0,
-            end: 16
-        }),
-        frameRate: 10,
-        repeat: 0
+      key: "dead",
+      frames: this.anims.generateFrameNumbers("dead", {
+        start: 0,
+        end: 16
+      }),
+      frameRate: 10,
+      repeat: 0
     });*/
 
 
@@ -410,24 +409,37 @@ fase3.create = function () {
         frameRate: 1,
         repeat: 0
     });
-    //animação do 'inimigo'
+    //animação do 'inimigo'1
     this.anims.create({
-        key: "animeroteador",
+        key: "animeantena",
         frames: this.anims.generateFrameNumbers(
-            "roteador", {
+            "antena", {
+                start: 0,
+                end: 4
+            }
+        ),
+        frameRate: 3,
+        repeat: -1
+    });
+
+    //animação do 'inimigo'2
+    this.anims.create({
+        key: "animebau",
+        frames: this.anims.generateFrameNumbers(
+            "bau", {
                 start: 0,
                 end: 1
             }
         ),
-        frameRate: 1,
+        frameRate: 3,
         repeat: -1
     });
 
     //animação coletável1
     this.anims.create({
-        key: "animeip",
+        key: "animetransistor",
         frames: this.anims.generateFrameNumbers(
-            "ip", {
+            "transistor", {
                 start: 0,
                 end: 1
             }
@@ -437,9 +449,9 @@ fase3.create = function () {
     });
     //animação coletável2
     this.anims.create({
-        key: "animecomputador",
+        key: "animefibra",
         frames: this.anims.generateFrameNumbers(
-            "computador", {
+            "fibra", {
                 start: 0,
                 end: 1
             }
@@ -447,8 +459,20 @@ fase3.create = function () {
         frameRate: 1,
         repeat: -1
     });
+    //animação coletável3
+    this.anims.create({
+        key: "animecabo",
+        frames: this.anims.generateFrameNumbers(
+            "cabo", {
+                start: 0,
+                end: 2
+            }
+        ),
+        frameRate: 2,
+        repeat: -1
+    });
 
-    //------------------------------------------
+    //------------------------------------------------
 
     //adicionando sons
 
@@ -456,6 +480,7 @@ fase3.create = function () {
     coleta = this.sound.add("coleta");
 
     // musica de fundo
+
     fundodojogo = this.sound.add("fundodojogo");
     fundodojogo.play({
         loop: true,
@@ -468,7 +493,7 @@ fase3.create = function () {
 
     //coletavel1 
     binarios = this.physics.add.group({
-        key: "computador",
+        key: "transistor",
         repeat: 3,
         setXY: {
             x: 1000,
@@ -486,7 +511,7 @@ fase3.create = function () {
 
     //coletável2
     pl = this.physics.add.group({
-        key: "ip",
+        key: "fibra",
         repeat: 1,
         setXY: {
             x: 1100, //como adicionar mais de um ícone
@@ -497,7 +522,7 @@ fase3.create = function () {
     });
     //coletável3
     binarios2 = this.physics.add.group({
-        key: "computador",
+        key: "rede",
         repeat: 1,
         setXY: {
             x: 1000,
@@ -512,11 +537,11 @@ fase3.create = function () {
 
     //coletável4
     pl2 = this.physics.add.group({
-        key: "ip",
+        key: "rede",
         repeat: 1,
         setXY: {
             x: 1100, //como adicionar mais de um ícone
-            y: 510,
+            y: 200,
 
             stepX: 1000
         }
@@ -524,10 +549,10 @@ fase3.create = function () {
     //----------------------------------------------------------
 
 
-    //criando fisica da porta/inimigo
+    //criando fica da porta/inimigo
     portas = this.physics.add.group();
     inimigo = this.physics.add.group();
-    //-------------------------------------------------------------------
+
     // placar do jogo
     scoreText = this.add.text(16, 16, "nota: 0", {
         fontSize: "32px",
@@ -535,14 +560,7 @@ fase3.create = function () {
     });
     scoreText.setScrollFactor(0);
 
-    //  The score2 player2
-    /*scoreText2 = this.add.text(16, 40, 'score2: 0', {
-        fontSize: '32px',
-        fill: '#000'
-    });
-    scoreText2.setScrollFactor(0);*/
-
-    //-----------------------------------------------------------------
+    //--------------------------------------------------
 
     //fullscreen
     var button = this.add
@@ -587,7 +605,6 @@ fase3.create = function () {
     //colisões
 
     this.physics.add.collider(player, platforms);
-    //this.physics.add.collider(player2, platforms); //segundo jogador
     this.physics.add.collider(pl, platforms); //coletável com plataforma
     this.physics.add.collider(pl2, platforms); //coletável com plataforma
     this.physics.add.collider(binarios, platforms); //coletável com plataforma
@@ -628,41 +645,9 @@ fase3.create = function () {
         null,
         this
     );
-    //-----------------------------------------
-    //coletáveis player2
-    //coletavel1
-    /* this.physics.add.overlap(
-         player2,
-         binarios,
-         coletavel1,
-         null,
-         this
-     );
-     //coletavel2
-     this.physics.add.overlap(
-         player2,
-         pl,
-         coletavel2,
-         null,
-         this
-     );
-     //coletavel3 
-     this.physics.add.overlap(
-         player2,
-         binarios2,
-         coletavel3,
-         null,
-         this
-     );
-     //coletavel4  
-     this.physics.add.overlap(
-         player2,
-         pl2,
-         coletavel3,
-         null,
-         this
-     );*/
-    //------------------------------------------
+
+    //-----------------------------------------------
+
     //função mudar de fase
     this.physics.add.collider(
         player,
@@ -671,15 +656,7 @@ fase3.create = function () {
         null,
         this
     );
-    //função mudar de fase player2
-    /* this.physics.add.collider(
-         player2,
-         portas,
-         mudarfase,
-         null,
-         this
-     );*/
-    //---------------------------------------------------
+    //-------------------------------------------
     //função de morte
     this.physics.add.collider(
         player,
@@ -688,53 +665,44 @@ fase3.create = function () {
         null,
         this
     );
-    //função de morte player2
-    /* this.physics.add.collider(
-         player2,
-         inimigo,
-         hitBomb,
-         null,
-         this
-     );*/
-
-    //---------------------------------------------------
-
+    //-------------------------------------------
     //adicionando inimigo1
-    boneco1 = inimigo.create(2000, 510, "roteador");
+    boneco1 = inimigo.create(2000, 510, "antena");
     boneco1.setBounce(0);
     boneco1.setCollideWorldBounds(true);
     boneco1.setVelocityX(100);
     boneco1.allowGravity = false;
-    boneco1.setCircle(13);
+    //boneco1.setCircle(23);
 
     //adicionando inimigo2
-    boneco2 = inimigo.create(500, 0, "roteador");
+    boneco2 = inimigo.create(500, 0, "antena");
     boneco2.setBounce(1);
     boneco2.setCollideWorldBounds(true);
     boneco2.setVelocityY(10);
     boneco2.allowGravity = false;
-    boneco2.setCircle(13);
+    // boneco2.setCircle(23);
 
     //adicionando inimigo3
-    boneco3 = inimigo.create(2900, 200, "roteador");
+    boneco3 = inimigo.create(2900, 200, "bau");
     boneco3.setBounce(0);
     boneco3.setCollideWorldBounds(true);
     boneco3.setVelocityY(0);
     boneco3.allowGravity = false;
-    boneco3.setCircle(13);
+    boneco3.setScale(2)
+    //boneco3.setCircle(23);
 
     //adicionando inimigo4
-    boneco4 = inimigo.create(1900, 300, "roteador");
+    boneco4 = inimigo.create(1900, 300, "antena");
     boneco4.setBounce(0);
     boneco4.setCollideWorldBounds(true);
     boneco4.setVelocityX(100);
     boneco4.allowGravity = false;
-    boneco4.setCircle(13);
+    //boneco3.setCircle(23);
 };
 //fim da função create
-//--------------------------------------------
+//----------------------------------------------
 
-fase3.update = function () {
+fase7.update = function () {
 
     //criação da camera
     var cam = this.cameras.main;
@@ -771,96 +739,67 @@ fase3.update = function () {
         player.setVelocityY(-330);
     }
 
-    //movimentação personagem 2
-
-    /*if (AKey.isDown) {
-        player2.setVelocityX(-300);
-
-        player2.anims.play('left', true);
-    } else if (DKey.isDown) {
-        player2.setVelocityX(300);
-
-        player2.anims.play('right', true);
-    } else
-
-    {
-        player2.setVelocityX(0);
-
-        player2.anims.play('turn');
-    }
-    if (WKey.isDown && player2.body.touching.down) {
-        player2.setVelocityY(-330);
-    }*/
-
-    //-----------------------------------------------
+    //-----------------------------------------------------
 
     //movimentação boneco1
     if (boneco1.body.position.x - 1999 > 200) {
         boneco1.setVelocityX(-200);
         boneco1.setFlipX(false);
-        boneco1.setCircle(15)
-        boneco1.anims.play("animeroteador", true);
+        boneco1.anims.play("animeantena", true);
     } else if (boneco1.body.position.x - 1999 < -200) {
         boneco1.setVelocityX(200);
         boneco1.setFlipX(true);
-        boneco1.setCircle(15)
-        boneco1.anims.play("animeroteador", true);
+        boneco1.anims.play("animeantena", true);
     }
     //animação do boneco2
-    boneco2.anims.play("animeroteador", true);
+    boneco2.anims.play("animeantena", true);
 
     //movimentação boneco3
     if (boneco3.body.position.x - 3000 > 10) {
         boneco3.setVelocityX(-300);
         boneco3.setFlipX(false);
-        boneco3.setCircle(15)
-        boneco3.anims.play("animeroteador", true);
+        boneco3.anims.play("animebau", true);
     } else if (boneco3.body.position.x - 3000 < -100) {
         boneco3.setVelocityX(300);
         boneco3.setFlipX(true);
-        boneco3.setCircle(15)
-        boneco3.anims.play("animeroteador", true);
+        boneco3.anims.play("animebau", true);
     }
 
     //movimentação boneco4
     if (boneco4.body.position.x - 2000 > 300) {
         boneco4.setVelocityX(-290);
         boneco4.setFlipX(false);
-
-        boneco4.anims.play("animeroteador", true);
+        boneco4.anims.play("animeantena", true);
     } else if (boneco4.body.position.x - 2000 < -1000) {
         boneco4.setVelocityX(200);
         boneco4.setFlipX(true);
-
-        boneco4.anims.play("animeroteador", true);
+        boneco4.anims.play("animeantena", true);
     }
 
-    //-------------------------------------------------
+    //--------------------------------------------------
 
     //animação coletável1
     binarios.children.iterate(function (child) {
 
-        child.anims.play("animecomputador", true);
-        child.setScale(2)
+        child.anims.play("animetransistor", true);
     });
 
     //animação coletável2
     pl.children.iterate(function (child) {
 
-        child.anims.play("animeip", true);
+        child.anims.play("animefibra", true);
     });
 
     //animação coletável3
     binarios2.children.iterate(function (child) {
 
-        child.anims.play("animecomputador", true);
-        child.setScale(2)
-    });
+        child.anims.play("animecabo", true);
 
+    });
     //animação coletável4
     pl2.children.iterate(function (child) {
 
-        child.anims.play("animeip", true);
+        child.anims.play("animecabo", true);
     });
 };
 
@@ -901,8 +840,6 @@ function coletavel1(player, binario) {
     porta.setCollideWorldBounds(true);
     porta.allowGravity = true;*/
 
-
-    //colocando som na coleta
     coleta.play();
 }
 
@@ -911,12 +848,12 @@ function coletavel1(player, binario) {
 function coletavel2(player, p) {
     p.disableBody(true, true);
 
-    //  adicionano +1 a nota
+    //  adicionando +1 á nota
     scoreJogador1 += 1;
     scoreText.setText("nota: " + scoreJogador1);
 
     if (pl.countActive(true) === 0) {
-        // adicionando novos coletáveis
+        //  novos coletáveis para coletar
         pl.children.iterate(function (child) {
             child.enableBody(true, -300, 0, true, true);
 
@@ -935,20 +872,18 @@ function coletavel2(player, p) {
     porta.setCollideWorldBounds(true);
     porta.allowGravity = true;*/
 
-
-    //colocando som na coleta
     coleta.play();
 }
 
 function coletavel3(player, b) {
     b.disableBody(true, true);
 
-    //  adicionano +1 a nota
+    //  adicionando +1 á nota
     scoreJogador1 += 1;
     scoreText.setText("nota: " + scoreJogador1);
 
     if (binarios2.countActive(true) === 0) {
-        // adicionando novos coletáveis
+        //  novos coletáveis para coletar
         binarios2.children.iterate(function (child) {
             child.enableBody(true, -300, 0, true, true);
 
@@ -967,20 +902,18 @@ function coletavel3(player, b) {
     porta.setCollideWorldBounds(true);
     porta.allowGravity = true;*/
 
-
-    //colocando som na coleta
     coleta.play();
 }
 
 function coletavel4(player, l) {
     l.disableBody(true, true);
 
-    //  adicionano +1 a nota
+    //  adicionando +1 á nota
     scoreJogador1 += 1;
     scoreText.setText("nota: " + scoreJogador1);
 
     if (pl2.countActive(true) === 0) {
-        // adicionando novos coletáveis
+        //  novos coletáveis para coletar
         pl2.children.iterate(function (child) {
             child.enableBody(true, -300, 0, true, true);
 
@@ -999,7 +932,6 @@ function coletavel4(player, l) {
     porta.setCollideWorldBounds(true);
     porta.allowGravity = true;*/
 
-    //colocando som na coleta
     coleta.play();
 }
 //-----------------------------------------------------------
@@ -1013,10 +945,10 @@ function hitBomb(player, bomb) {
     fundodojogo.stop();
     gameOver = true;
     scoreJogador1 = 0;
-    this.scene.start(gameover3);
+    this.scene.start(gameover7);
 }
 
-//função de mudança de fase
+//função de mudança de fases
 function mudarfase(player, portas) {
 
     player.disableBody(true, true);
@@ -1025,10 +957,10 @@ function mudarfase(player, portas) {
     fundodojogo.stop();
     gameOver = true;
     scoreJogador1 = 0;
-    this.scene.start(fase4);
+    this.scene.start(fase8);
 }
 
 //exportando esta fase
 export {
-    fase3
+    fase7
 };

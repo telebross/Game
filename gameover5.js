@@ -1,6 +1,6 @@
 import {
-    fase3
-} from "./fase3.js";
+    fase5
+} from "./fase5.js";
 
 
 //definindo do morto
@@ -19,9 +19,9 @@ var muerte;
 //definindo logo da pendencia
 var pendencia;
 
-var gameover3 = new Phaser.Scene("gameover3");
+var gameover5 = new Phaser.Scene("gameover5");
 
-gameover3.preload = function () {
+gameover5.preload = function () {
     //carregando imagens do jogo
     this.load.image("parede", "assets/parede.png");
     this.load.image("ground", "assets/plataforma.png");
@@ -55,7 +55,7 @@ gameover3.preload = function () {
     this.load.audio("muerte", "assets/sons/morte.mp3");
 };
 
-gameover3.create = function () {
+gameover5.create = function () {
     //imagem de fundo
     this.add.image(400, 300, "parede");
     this.add.image(1200, 300, "parede");
@@ -169,7 +169,7 @@ gameover3.create = function () {
             //music.stop();
             player.anims.play("turn", false);
             gameOver = false;
-            this.scene.start(fase3);
+            this.scene.start(fase5);
         },
         this
     );
@@ -177,7 +177,7 @@ gameover3.create = function () {
 //fim do create
 //----------------------------------------------
 
-gameover3.update = function () {
+gameover5.update = function () {
     //animação pendencia
     pendencia.children.iterate(function (child) {
 
@@ -189,5 +189,5 @@ gameover3.update = function () {
 };
 
 export {
-    gameover3
+    gameover5
 };

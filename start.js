@@ -17,22 +17,20 @@ var gameOver = true;
 var scoreText;
 var music;
 
+//criando título
+var titulo;
+
 start.preload = function () {
   this.load.image("parede", "assets/parede.png");
   this.load.image("ground", "assets/plataforma.png");
   this.load.image("bloco", "assets/bloco.png");
   this.load.image("blocolongo", "assets/bloco2.png");
-  this.load.image("star", "assets/star.png");
-  this.load.image("bomb", "assets/bomb.png");
-
   this.load.image("porta", "assets/portaverde.png");
   this.load.image("parede", "assets/parede.png");
-  this.load.image("resistor", "assets/fases/fase4/resistor.png");
+  this.load.image("resistor1", "assets/fases/fase4/resistor.png");
   this.load.image("iniciar", "assets/iniciar.png");
-  this.load.image("inicio", "assets/inicio.png");
-  // this.load.image('telebross', 'assets/telebross.png');
-  this.load.image("capacitor", "assets/fases/fase5/capacitor.png");
-  this.load.image("indutor", "assets/fases/fase5/indutor.png");
+  this.load.image("capacitor1", "assets/fases/fase5/capacitor.png");
+  this.load.image("indutor1", "assets/fases/fase5/indutor.png");
   this.load.spritesheet("idle", "assets/ifiano/idle.png", {
     frameWidth: 38,
     frameHeight: 62
@@ -41,42 +39,21 @@ start.preload = function () {
     frameWidth: 64,
     frameHeight: 64
   });
-  //animação do diodo
-  /*this.load.spritesheet('diodo', 'assets/fases/fase5/diodo.png', {
-    frameWidth: 0,
-    frameHeight: 16,
+
+  //título
+  this.load.spritesheet("telebross", "assets/telebross.png", {
+    frameWidth: 481,
+    frameHeight: 291
   });
-  this.load.spritesheet('diodo2', 'assets/fases/fase5/diodo.png', {
-    frameWidth: 9,
-    frameHeight: 16
-  });*/
+
   this.load.audio("music", "assets/sons/telainicial.mp3");
 };
 start.create = function () {
-  //animação do diodo
-  /*this.anims.create({
-    key: 'diodovermelho',
-    frames: this.anims.generateFrameNumbers('diodo1', {
-      start: 0,
-      end: 8
-    }),
-    frameRate: 10,
-    repeat: -1
-  });*/
 
-  /*this.anims.create({
-    key: 'diodoverde',
-    frames: this.anims.generateFrameNumbers('diodo', {
-      start: 9,
-      end: 16
-    }),
-    frameRate: 10,
-    repeat: -1
-  });
-  */
   //  A simple background for our game
   this.add.image(400, 300, "parede");
   this.add.image(700, 510, "porta");
+
 
   //adicionando qualquer texto ao jogo
   /*this.GameOverText = this.add.text(25, 200, 'click here play game', { //(x,y, 'texto',)
@@ -88,9 +65,15 @@ start.create = function () {
 */
   //adicionando física das plataformas
   platforms = this.physics.add.staticGroup();
+  titulo = this.physics.add.staticGroup();
 
-  //  Here we create the ground.
-  //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
+  titulo
+    .create(350, 150, "telebross")
+    .setScale(2)
+    .refreshBody(); //titulo
+
+  //  criando plataformas do jogo
+  //chão
   platforms
     .create(400, 700, "ground")
     .setScale(2)
@@ -99,10 +82,14 @@ start.create = function () {
     .create(1200, 700, "ground")
     .setScale(2)
     .refreshBody(); //chão
+
+  //primeiro nível de plataforma
   platforms
     .create(600, 455, "bloco")
     .setScale(2)
     .refreshBody(); //nivel 1
+
+  //segundo nível de plataforma
   platforms
     .create(350, 320, "blocolongo")
     .setScale(2)
@@ -120,7 +107,7 @@ start.create = function () {
 
   //adiconando objetos a tela
   capacitor = this.physics.add.group({
-    key: "capacitor",
+    key: "capacitor1",
     repeat: 2,
     setXY: {
       x: 100,
@@ -143,7 +130,7 @@ start.create = function () {
 
   //adiconando objetos a tela
   resistor = this.physics.add.group({
-    key: "resistor",
+    key: "resistor1",
     repeat: 2,
     setXY: {
       x: 0,
@@ -166,7 +153,7 @@ start.create = function () {
 
   //adiconando objetos a tela
   indutor = this.physics.add.group({
-    key: "indutor",
+    key: "indutor1",
     repeat: 2,
     setXY: {
       x: 50,
