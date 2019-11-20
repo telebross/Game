@@ -706,11 +706,11 @@ fase4.update = function () {
   //-----------------------------------------------------
 
   //movimentação boneco1
-  if (boneco1.body.position.x - 1999 > 200) {
-    boneco1.setVelocityX(-200);
+  if (boneco1.body.position.x - 2000 > 600) {
+    boneco1.setVelocityX(-290);
     boneco1.setFlipX(false);
     boneco1.anims.play("animeresistor", true);
-  } else if (boneco1.body.position.x - 1999 < -200) {
+  } else if (boneco1.body.position.x - 2000 < -1000) {
     boneco1.setVelocityX(200);
     boneco1.setFlipX(true);
     boneco1.anims.play("animeresistor", true);
@@ -719,14 +719,15 @@ fase4.update = function () {
   boneco2.anims.play("animeresistor", true);
 
   //movimentação boneco3
-  if (boneco3.body.position.x - 3000 > 10) {
-    boneco3.setVelocityX(-300);
+
+  if (boneco3.body.position.x - 2000 > 600) {
+    boneco3.setVelocityX(-290);
     boneco3.setFlipX(false);
     boneco3.anims.play("animeresistor", true);
-  } else if (boneco3.body.position.x - 3000 < -100) {
-    boneco3.setVelocityX(300);
+  } else if (boneco3.body.position.x - 2000 < -1000) {
+    boneco3.setVelocityX(170);
     boneco3.setFlipX(true);
-    boneco3.anims.play("animeresistor", true);
+    boneco4.anims.play("animeresistor", true);
   }
 
   //movimentação boneco4
@@ -735,7 +736,7 @@ fase4.update = function () {
     boneco4.setFlipX(false);
     boneco4.anims.play("animeresistor", true);
   } else if (boneco4.body.position.x - 2000 < -1000) {
-    boneco4.setVelocityX(200);
+    boneco4.setVelocityX(190);
     boneco4.setFlipX(true);
     boneco4.anims.play("animeresistor", true);
   }

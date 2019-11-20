@@ -65,6 +65,7 @@ var config = {
         y: 500
       },
       debug: false
+
     }
   },
   // Suporte a tela cheia

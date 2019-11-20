@@ -94,8 +94,8 @@ fase6.preload = function () {
 
     //animação inimigo
     this.load.spritesheet("buzzer", "assets/fases/fase6/buzzer.png", {
-        frameWidth: 60,
-        frameHeight: 28
+        frameWidth: 30,
+        frameHeight: 18
     });
 
 
@@ -405,10 +405,10 @@ fase6.create = function () {
         frames: this.anims.generateFrameNumbers(
             "buzzer", {
                 start: 0,
-                end: 10
+                end: 3
             }
         ),
-        frameRate: 3,
+        frameRate: 5,
         repeat: -1
     });
 
