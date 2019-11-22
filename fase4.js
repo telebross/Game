@@ -459,11 +459,11 @@ fase4.create = function () {
   //coletavel1 
   binarios = this.physics.add.group({
     key: "fontaac",
-    repeat: 3,
+    repeat: 5,
     setXY: {
-      x: 1000,
-      y: 325,
-      stepX: 500
+      x: 600,
+      y: 0,
+      stepX: 400
     }
   });
 
@@ -477,9 +477,9 @@ fase4.create = function () {
   //coletável2
   pl = this.physics.add.group({
     key: "fontacc",
-    repeat: 1,
+    repeat: 0,
     setXY: {
-      x: 1100, //como adicionar mais de um ícone
+      x: 2500, //como adicionar mais de um ícone
       y: 210,
 
       stepX: 600
@@ -490,9 +490,9 @@ fase4.create = function () {
     key: "fontaac",
     repeat: 1,
     setXY: {
-      x: 1000,
-      y: 0,
-      stepX: 500
+      x: 1900,
+      y: 325,
+      stepX: 600
     }
   });
   /*binarios2.children.iterate(function (child) {
@@ -503,9 +503,9 @@ fase4.create = function () {
   //coletável4
   pl2 = this.physics.add.group({
     key: "fontacc",
-    repeat: 1,
+    repeat: 0,
     setXY: {
-      x: 1100, //como adicionar mais de um ícone
+      x: 2500, //como adicionar mais de um ícone
       y: 510,
 
       stepX: 1000
@@ -643,7 +643,7 @@ fase4.create = function () {
   boneco2 = inimigo.create(500, 0, "resistor");
   boneco2.setBounce(1);
   boneco2.setCollideWorldBounds(true);
-  boneco2.setVelocityY(10);
+  boneco2.setVelocityY(101);
   boneco2.allowGravity = false;
   // boneco2.setCircle(23);
 

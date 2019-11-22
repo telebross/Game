@@ -433,7 +433,7 @@ fase1.create = function () {
   boneco1.allowGravity = false;
   boneco1.setCircle(23);
   //adicionando inimigo2
-  boneco2 = inimigo.create(1300, 200, "antena1");
+  boneco2 = inimigo.create(1300, 0, "antena1");
   boneco2.setBounce(1);
   boneco2.setCollideWorldBounds(true);
   boneco2.setVelocityY(100);

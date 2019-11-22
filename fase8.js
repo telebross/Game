@@ -355,7 +355,7 @@ fase8.create = function () {
                 end: 15
             }
         ),
-        frameRate: 15,
+        frameRate: 25,
         repeat: -1
     });
 
@@ -365,7 +365,7 @@ fase8.create = function () {
             start: 0,
             end: 15
         }),
-        frameRate: 20,
+        frameRate: 25,
         repeat: -1
     });
 
@@ -375,7 +375,7 @@ fase8.create = function () {
             start: 0,
             end: 15
         }),
-        frameRate: 20,
+        frameRate: 25,
         repeat: -1
     });
 

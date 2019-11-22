@@ -568,10 +568,10 @@ fase2.create = function () {
     //boneco1.setCircle(23);
 
     //adicionando inimigo2
-    boneco2 = inimigo.create(520, 200, "fpfp");
+    boneco2 = inimigo.create(520, 0, "fpfp");
     boneco2.setBounce(1);
     boneco2.setCollideWorldBounds(true);
-    boneco2.setVelocityY(10);
+    boneco2.setVelocityY(101);
     boneco2.allowGravity = false;
     // boneco2.setCircle(23);
 

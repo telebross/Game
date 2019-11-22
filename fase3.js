@@ -627,7 +627,7 @@ fase3.create = function () {
     boneco2 = inimigo.create(1600, 0, "roteador");
     boneco2.setBounce(1);
     boneco2.setCollideWorldBounds(true);
-    boneco2.setVelocityY(10);
+    boneco2.setVelocityY(100);
     boneco2.allowGravity = false;
     boneco2.setCircle(13);
 

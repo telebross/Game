@@ -47,6 +47,9 @@ var coleta;
 //criação de letreiro
 var letreiro;
 
+//frases do baú
+var falabau;
+
 var fase7 = new Phaser.Scene("fase7");
 
 fase7.preload = function () {
@@ -171,170 +174,130 @@ fase7.create = function () {
 
 
     //criando plataformas
-    // primeira linha
-    /*
-        platforms
-            .create(904, 445, "blocolongo") //nível 1  eixo Y 127
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1108, 445, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1312, 445, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1516, 445, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1720, 445, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1924, 445, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2128, 445, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2332, 445, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2536, 445, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2740, 445, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2944, 445, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
+    //escada1
+    platforms
+        .create(300, 508, "bloco")
+        .setScale(2)
+        .refreshBody(); //nivel 1
+    platforms
+        .create(600, 420, "bloco")
+        .setScale(2)
+        .refreshBody(); //nivel 2
 
-        //----------------------------------------------------
-        //segunda linha
-        platforms
-            .create(904, 318, "blocolongo") //nível 2 eixo Y
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1108, 318, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1312, 318, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1516, 318, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1720, 318, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1924, 318, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2128, 318, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2332, 318, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2536, 318, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2740, 318, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2944, 318, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
+    //obstáculo1
+    platforms
+        .create(900, 508, "bloco")
+        .setScale(2)
+        .refreshBody(); //nivel1
+    platforms
+        .create(1055, 508, "blocolongo")
+        .setScale(2)
+        .refreshBody(); //nivel1
+    platforms
+        .create(1259, 508, "blocolongo")
+        .setScale(2)
+        .refreshBody(); //nivel1
+    platforms
+        .create(900, 444, "bloco")
+        .setScale(2)
+        .refreshBody(); //nivel2
+    platforms
+        .create(1055, 444, "blocolongo")
+        .setScale(2)
+        .refreshBody(); //nivel2
+    platforms
+        .create(1259, 444, "blocolongo")
+        .setScale(2)
+        .refreshBody(); //nivel2
+    platforms
+        .create(900, 380, "bloco")
+        .setScale(2)
+        .refreshBody(); //nivel3
+    platforms
+        .create(900, 316, "bloco")
+        .setScale(2)
+        .refreshBody(); //nivel4
+    platforms
+        .create(1259, 316, "blocolongo")
+        .setScale(2)
+        .refreshBody(); //nivel4
+    //escada 2
+    platforms
+        .create(1800, 508, "bloco")
+        .setScale(2)
+        .refreshBody(); //nivel 1
+    platforms
+        .create(2100, 420, "bloco")
+        .setScale(2)
+        .refreshBody(); //nivel 2
+    platforms
+        .create(1800, 316, "bloco")
+        .setScale(2)
+        .refreshBody(); //nivel3
+    platforms
+        .create(2100, 228, "bloco")
+        .setScale(2)
+        .refreshBody(); //nivel4
 
-        //-------------------------------------------------
-        //terceira linha
-        platforms
-            .create(904, 191, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1108, 191, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1312, 191, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1516, 191, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1720, 191, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1924, 191, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2128, 191, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2332, 191, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2536, 191, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2740, 191, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2944, 191, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        //-------------------------------------------
+    //ultimo obstaculo
+    //parte1
+    platforms
+        .create(2350, 508, "bloco")
+        .setScale(2)
+        .refreshBody(); //nivel1
+    platforms
+        .create(2350, 444, "bloco")
+        .setScale(2)
+        .refreshBody(); //nivel2
+    platforms
+        .create(2400, 380, "blocolongo")
+        .setScale(2)
+        .refreshBody(); //nivel3
+    platforms
+        .create(2400, 316, "blocolongo")
+        .setScale(2)
+        .refreshBody(); //nivel4
+    platforms
+        .create(2400, 252, "blocolongo")
+        .setScale(2)
+        .refreshBody(); //nivel5
+    platforms
+        .create(2400, 188, "blocolongo")
+        .setScale(2)
+        .refreshBody(); //nivel6
+    //parte2
+    platforms
+        .create(2725, 380, "blocolongo")
+        .setScale(2)
+        .refreshBody(); //nivel3
+    platforms
+        .create(2929, 380, "blocolongo")
+        .setScale(2)
+        .refreshBody(); //nivel3
+    platforms
+        .create(3133, 380, "blocolongo")
+        .setScale(2)
+        .refreshBody(); //nivel3
+    platforms
+        .create(2725, 316, "blocolongo")
+        .setScale(2)
+        .refreshBody(); //nivel4
+    platforms
+        .create(2880, 316, "bloco")
+        .setScale(2)
+        .refreshBody(); //nivel4
+    platforms
+        .create(2725, 252, "blocolongo")
+        .setScale(2)
+        .refreshBody(); //nivel5
+    platforms
+        .create(2675, 188, "bloco")
+        .setScale(2)
+        .refreshBody(); //nivel6
 
-        //escadinha
 
-        platforms
-            .create(600, 508, "bloco")
-            .setScale(2)
-            .refreshBody(); //nivel 1 D
-        platforms
-            .create(400, 444, "bloco")
-            .setScale(2)
-            .refreshBody(); //nivel 2 E
-        platforms
-            .create(600, 350, "bloco")
-            .setScale(2)
-            .refreshBody(); //nivel 3 D
-        platforms
-            .create(400, 245, "bloco")
-            .setScale(2)
-            .refreshBody(); //nivel 4 E
-        platforms
-            .create(600, 160, "bloco")
-            .setScale(2)
-            .refreshBody(); //nivel 3 D*/
+
+
     //------------------------------------------------
 
     // adicionando player ao jogo
@@ -360,7 +323,7 @@ fase7.create = function () {
                 end: 15
             }
         ),
-        frameRate: 15,
+        frameRate: 25,
         repeat: -1
     });
 
@@ -370,7 +333,7 @@ fase7.create = function () {
             start: 0,
             end: 15
         }),
-        frameRate: 20,
+        frameRate: 25,
         repeat: -1
     });
 
@@ -380,7 +343,7 @@ fase7.create = function () {
             start: 0,
             end: 15
         }),
-        frameRate: 20,
+        frameRate: 25,
         repeat: -1
     });
 
@@ -494,11 +457,11 @@ fase7.create = function () {
     //coletavel1 
     binarios = this.physics.add.group({
         key: "transistor",
-        repeat: 3,
+        repeat: 2,
         setXY: {
-            x: 1000,
-            y: 325,
-            stepX: 500
+            x: 300,
+            y: 200,
+            stepX: 300
         }
     });
 
@@ -514,20 +477,20 @@ fase7.create = function () {
         key: "fibra",
         repeat: 1,
         setXY: {
-            x: 1100, //como adicionar mais de um ícone
-            y: 210,
+            x: 1055, //como adicionar mais de um ícone
+            y: 200,
 
-            stepX: 600
+            stepX: 250
         }
     });
     //coletável3
     binarios2 = this.physics.add.group({
         key: "rede",
-        repeat: 1,
+        repeat: 2,
         setXY: {
-            x: 1000,
-            y: 0,
-            stepX: 500
+            x: 1600,
+            y: 510,
+            stepX: 650
         }
     });
     /*binarios2.children.iterate(function (child) {
@@ -540,10 +503,10 @@ fase7.create = function () {
         key: "rede",
         repeat: 1,
         setXY: {
-            x: 1100, //como adicionar mais de um ícone
-            y: 200,
+            x: 2650, //como adicionar mais de um ícone
+            y: 0,
 
-            stepX: 1000
+            stepX: 500
         }
     });
     //----------------------------------------------------------
@@ -559,6 +522,22 @@ fase7.create = function () {
         fill: "#000"
     });
     scoreText.setScrollFactor(0);
+
+    //falas do bau
+    falabau = this.add.text(2900, 100, "batatina!", {
+        fontSize: "32px",
+        fill: "#000"
+    });
+    falabau = this.add.text(2800, 150, "continha de buteco", {
+        fontSize: "32px",
+        fill: "#000"
+    });
+    falabau = this.add.text(2900, 50, "naveia?", {
+        fontSize: "32px",
+        fill: "#000"
+    });
+
+
 
     //--------------------------------------------------
 
@@ -667,36 +646,37 @@ fase7.create = function () {
     );
     //-------------------------------------------
     //adicionando inimigo1
-    boneco1 = inimigo.create(2000, 510, "antena");
-    boneco1.setBounce(0);
+    boneco1 = inimigo.create(600, 520, "antena");
+    boneco1.setBounce(1);
     boneco1.setCollideWorldBounds(true);
     boneco1.setVelocityX(100);
     boneco1.allowGravity = false;
     //boneco1.setCircle(23);
 
     //adicionando inimigo2
-    boneco2 = inimigo.create(500, 0, "antena");
+    boneco2 = inimigo.create(1950, 0, "antena");
     boneco2.setBounce(1);
     boneco2.setCollideWorldBounds(true);
-    boneco2.setVelocityY(10);
+    boneco2.setVelocityY(100);
     boneco2.allowGravity = false;
     // boneco2.setCircle(23);
 
     //adicionando inimigo3
-    boneco3 = inimigo.create(2900, 200, "bau");
-    boneco3.setBounce(0);
+    boneco3 = inimigo.create(3000, 316, "bau");
+    boneco3.setBounce(1);
     boneco3.setCollideWorldBounds(true);
-    boneco3.setVelocityY(0);
+    boneco3.setVelocityX(100);
     boneco3.allowGravity = false;
     boneco3.setScale(2)
     //boneco3.setCircle(23);
 
     //adicionando inimigo4
-    boneco4 = inimigo.create(1900, 300, "antena");
+    boneco4 = inimigo.create(2800, 510, "bau");
     boneco4.setBounce(0);
     boneco4.setCollideWorldBounds(true);
     boneco4.setVelocityX(100);
     boneco4.allowGravity = false;
+    boneco4.setScale(2)
     //boneco3.setCircle(23);
 };
 //fim da função create
@@ -742,38 +722,40 @@ fase7.update = function () {
     //-----------------------------------------------------
 
     //movimentação boneco1
-    if (boneco1.body.position.x - 1999 > 200) {
-        boneco1.setVelocityX(-200);
-        boneco1.setFlipX(false);
-        boneco1.anims.play("animeantena", true);
-    } else if (boneco1.body.position.x - 1999 < -200) {
-        boneco1.setVelocityX(200);
-        boneco1.setFlipX(true);
-        boneco1.anims.play("animeantena", true);
-    }
+    boneco1.anims.play("animeantena", true);
+    /* if (boneco1.body.position.x - 599 > 200) {
+         boneco1.setVelocityX(-200);
+         boneco1.setFlipX(false);
+         boneco1.anims.play("animeantena", true);
+     } else if (boneco1.body.position.x - 599 < -200) {
+         boneco1.setVelocityX(200);
+         boneco1.setFlipX(true);
+         boneco1.anims.play("animeantena", true);
+}*/
     //animação do boneco2
     boneco2.anims.play("animeantena", true);
 
     //movimentação boneco3
-    if (boneco3.body.position.x - 3000 > 10) {
-        boneco3.setVelocityX(-300);
-        boneco3.setFlipX(false);
-        boneco3.anims.play("animebau", true);
-    } else if (boneco3.body.position.x - 3000 < -100) {
-        boneco3.setVelocityX(300);
-        boneco3.setFlipX(true);
-        boneco3.anims.play("animebau", true);
-    }
+    boneco3.anims.play("animebau", true);
+    /* if (boneco3.body.position.x - 3000 > 10) {
+         boneco3.setVelocityX(-300);
+         boneco3.setFlipX(false);
+         boneco3.anims.play("animebau", true);
+     } else if (boneco3.body.position.x - 3000 < -100) {
+         boneco3.setVelocityX(300);
+         boneco3.setFlipX(true);
+         boneco3.anims.play("animebau", true);
+     }*/
 
     //movimentação boneco4
-    if (boneco4.body.position.x - 2000 > 300) {
-        boneco4.setVelocityX(-290);
+    if (boneco4.body.position.x - 2801 > 200) {
+        boneco4.setVelocityX(-230);
         boneco4.setFlipX(false);
-        boneco4.anims.play("animeantena", true);
-    } else if (boneco4.body.position.x - 2000 < -1000) {
-        boneco4.setVelocityX(200);
+        boneco4.anims.play("animebau", true);
+    } else if (boneco4.body.position.x - 2801 < -300) {
+        boneco4.setVelocityX(230);
         boneco4.setFlipX(true);
-        boneco4.anims.play("animeantena", true);
+        boneco4.anims.play("animebau", true);
     }
 
     //--------------------------------------------------

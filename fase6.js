@@ -47,6 +47,9 @@ var coleta;
 //criação de letreiro
 var letreiro;
 
+//anjo
+var anjo;
+
 var fase6 = new Phaser.Scene("fase6");
 
 fase6.preload = function () {
@@ -57,7 +60,7 @@ fase6.preload = function () {
     this.load.image("blocolongo", "assets/bloco2.png");
     this.load.image("porta", "assets/portaverde.png");
     this.load.image("letreiro6", "assets/fases/fase6/fase6.png");
-
+    this.load.image("anjo", "assets/fases/fase6/anjo.png");
     //animações dos personagem
     this.load.spritesheet("idle", "assets/ifiano/idle.png", {
         frameWidth: 38,
@@ -118,10 +121,6 @@ fase6.create = function () {
     this.cameras.main.setBounds(0, 0, 3200, 600);
     this.physics.world.setBounds(0, 0, 3200, 600);
 
-    //parte de tela dupla no jogo local, ajutar alguns detalhes
-    //this.cameras.main.setSize(800, 300);
-    //this.cameras.add(0, 300, 800, 300);
-
     //  colocando a imagem de fundo
     this.add.image(400, 300, "parede");
     this.add.image(1200, 300, "parede");
@@ -161,174 +160,100 @@ fase6.create = function () {
 
 
     //criando plataformas
-    // primeira linha
-    /*
-        platforms
-            .create(904, 445, "blocolongo") //nível 1  eixo Y 127
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1108, 445, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1312, 445, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1516, 445, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1720, 445, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1924, 445, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2128, 445, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2332, 445, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2536, 445, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2740, 445, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2944, 445, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
+    // obstáculo1
+    platforms
+        .create(200, 508, "bloco")
+        .setScale(2)
+        .refreshBody(); //nivel 1
+    platforms
+        .create(355, 508, "blocolongo")
+        .setScale(2)
+        .refreshBody(); //nivel 1
+    platforms
+        .create(355, 444, "blocolongo")
+        .setScale(2)
+        .refreshBody(); //nivel 2
+    platforms
+        .create(405, 380, "bloco")
+        .setScale(2)
+        .refreshBody(); //nivel 3
 
-        //----------------------------------------------------
-        //segunda linha
-        platforms
-            .create(904, 318, "blocolongo") //nível 2 eixo Y
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1108, 318, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1312, 318, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1516, 318, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1720, 318, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1924, 318, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2128, 318, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2332, 318, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2536, 318, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2740, 318, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2944, 318, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
+    //escadinha
+    platforms
+        .create(1000, 508, "bloco")
+        .setScale(2)
+        .refreshBody(); //nivel 1 D
+    platforms
+        .create(800, 444, "bloco")
+        .setScale(2)
+        .refreshBody(); //nivel 2 E
+    platforms
+        .create(1000, 350, "bloco")
+        .setScale(2)
+        .refreshBody(); //nivel 3 D
 
-        //-------------------------------------------------
-        //terceira linha
-        platforms
-            .create(904, 191, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1108, 191, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1312, 191, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1516, 191, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1720, 191, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1924, 191, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2128, 191, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2332, 191, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2536, 191, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2740, 191, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2944, 191, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        //-------------------------------------------
+    //coluna1
+    platforms
+        .create(1400, 508, "bloco")
+        .setScale(2)
+        .refreshBody(); //nivel1
+    platforms
+        .create(1400, 444, "bloco")
+        .setScale(2)
+        .refreshBody(); //nivel2
+    platforms
+        .create(1400, 380, "bloco")
+        .setScale(2)
+        .refreshBody(); //nivel3
+    platforms
+        .create(1400, 316, "bloco")
+        .setScale(2)
+        .refreshBody(); //nivel4
+    //coluna2
+    platforms
+        .create(1600, 444, "bloco")
+        .setScale(2)
+        .refreshBody(); //nivel2
+    platforms
+        .create(1600, 380, "bloco")
+        .setScale(2)
+        .refreshBody(); //nivel3
+    platforms
+        .create(1600, 316, "bloco")
+        .setScale(2)
+        .refreshBody(); //nivel4
 
-        //escadinha
+    //escadinha2
+    platforms
+        .create(2000, 508, "blocolongo")
+        .setScale(2)
+        .refreshBody(); //nivel 1
+    platforms
+        .create(2050, 444, "bloco")
+        .setScale(2)
+        .refreshBody(); //nivel 2
 
-        platforms
-            .create(600, 508, "bloco")
-            .setScale(2)
-            .refreshBody(); //nivel 1 D
-        platforms
-            .create(400, 444, "bloco")
-            .setScale(2)
-            .refreshBody(); //nivel 2 E
-        platforms
-            .create(600, 350, "bloco")
-            .setScale(2)
-            .refreshBody(); //nivel 3 D
-        platforms
-            .create(400, 245, "bloco")
-            .setScale(2)
-            .refreshBody(); //nivel 4 E
-        platforms
-            .create(600, 160, "bloco")
-            .setScale(2)
-            .refreshBody(); //nivel 3 D*/
+    //linha
+    platforms
+        .create(2296, 350, "blocolongo") //nível 2 eixo Y
+        .setScale(2) //distancia entre os blocos eixo X 204
+        .refreshBody();
+    platforms
+        .create(2500, 350, "blocolongo") //nível 2 eixo Y 
+        .setScale(2) //distancia entre os blocos eixo X 204
+        .refreshBody();
+    platforms
+        .create(2704, 350, "blocolongo") //nível 2 eixo Y 
+        .setScale(2) //distancia entre os blocos eixo X 204
+        .refreshBody();
+
     //------------------------------------------------
 
     // adicionando player ao jogo
     player = this.physics.add.sprite(100, 450, "idle");
+
+    //adicionando anjo ao jogo
+    anjo = this.add.image(100, 100, "anjo");
 
     //parte do player com cameras
     this.cameras.main.startFollow(
@@ -337,6 +262,8 @@ fase6.create = function () {
         0.05,
         0.05
     );
+
+
 
     //colição do player com as bordas do mapa
     player.setCollideWorldBounds(true);
@@ -350,7 +277,7 @@ fase6.create = function () {
                 end: 15
             }
         ),
-        frameRate: 15,
+        frameRate: 25,
         repeat: -1
     });
 
@@ -360,7 +287,7 @@ fase6.create = function () {
             start: 0,
             end: 15
         }),
-        frameRate: 20,
+        frameRate: 25,
         repeat: -1
     });
 
@@ -370,7 +297,7 @@ fase6.create = function () {
             start: 0,
             end: 15
         }),
-        frameRate: 20,
+        frameRate: 25,
         repeat: -1
     });
 
@@ -459,11 +386,11 @@ fase6.create = function () {
     //coletavel1 
     binarios = this.physics.add.group({
         key: "monofone",
-        repeat: 3,
+        repeat: 1,
         setXY: {
-            x: 1000,
-            y: 325,
-            stepX: 500
+            x: 800,
+            y: 200,
+            stepX: 200
         }
     });
 
@@ -477,22 +404,22 @@ fase6.create = function () {
     //coletável2
     pl = this.physics.add.group({
         key: "senoide",
-        repeat: 1,
+        repeat: 2,
         setXY: {
-            x: 1100, //como adicionar mais de um ícone
-            y: 210,
+            x: 1400, //como adicionar mais de um ícone
+            y: 100,
 
-            stepX: 600
+            stepX: 100
         }
     });
     //coletável3
     binarios2 = this.physics.add.group({
         key: "monofone",
-        repeat: 1,
+        repeat: 2,
         setXY: {
-            x: 1000,
+            x: 2050,
             y: 0,
-            stepX: 500
+            stepX: 300
         }
     });
     /*binarios2.children.iterate(function (child) {
@@ -508,7 +435,7 @@ fase6.create = function () {
             x: 1100, //como adicionar mais de um ícone
             y: 510,
 
-            stepX: 1000
+            stepX: 1100
         }
     });
     //----------------------------------------------------------
@@ -632,34 +559,34 @@ fase6.create = function () {
     );
     //-------------------------------------------
     //adicionando inimigo1
-    boneco1 = inimigo.create(2000, 510, "buzzer");
-    boneco1.setBounce(0);
+    boneco1 = inimigo.create(1200, 510, "buzzer");
+    boneco1.setBounce(1);
     boneco1.setCollideWorldBounds(true);
-    boneco1.setVelocityX(100);
+    boneco1.setVelocityX(200);
     boneco1.allowGravity = false;
     boneco1.setScale(2);
     //boneco1.setCircle(23);
 
     //adicionando inimigo2
-    boneco2 = inimigo.create(500, 0, "buzzer");
+    boneco2 = inimigo.create(1500, 0, "buzzer");
     boneco2.setBounce(1);
     boneco2.setCollideWorldBounds(true);
-    boneco2.setVelocityY(10);
+    boneco2.setVelocityY(101);
     boneco2.allowGravity = false;
     boneco2.setScale(2);
     // boneco2.setCircle(23);
 
     //adicionando inimigo3
-    boneco3 = inimigo.create(2900, 200, "buzzer");
+    boneco3 = inimigo.create(2400, 200, "buzzer");
     boneco3.setBounce(0);
     boneco3.setCollideWorldBounds(true);
-    boneco3.setVelocityY(0);
+    boneco3.setVelocityX(100);
     boneco3.allowGravity = false;
     boneco3.setScale(2);
     //boneco3.setCircle(23);
 
     //adicionando inimigo4
-    boneco4 = inimigo.create(1900, 300, "buzzer");
+    boneco4 = inimigo.create(2500, 500, "buzzer");
     boneco4.setBounce(0);
     boneco4.setCollideWorldBounds(true);
     boneco4.setVelocityX(100);
@@ -671,7 +598,6 @@ fase6.create = function () {
 //----------------------------------------------
 
 fase6.update = function () {
-
     //criação da camera
     var cam = this.cameras.main;
 
@@ -707,39 +633,49 @@ fase6.update = function () {
         player.setVelocityY(-330);
     }
 
+    //movimentação anjo
+    if (cursors.left.isDown && anjo.x > 0) {
+
+        anjo.x -= 4.5;
+    } else if (cursors.right.isDown && anjo.x < 3200) {
+
+        anjo.x += 4.5;
+    }
+
     //-----------------------------------------------------
 
     //movimentação boneco1
-    if (boneco1.body.position.x - 1999 > 200) {
-        boneco1.setVelocityX(-200);
-        boneco1.setFlipX(false);
-        boneco1.anims.play("animebuzzer", true);
-    } else if (boneco1.body.position.x - 1999 < -200) {
-        boneco1.setVelocityX(200);
-        boneco1.setFlipX(true);
-        boneco1.anims.play("animebuzzer", true);
-    }
+    boneco1.anims.play("animebuzzer", true);
+    /* if (boneco1.body.position.x - 1199 > 200) {
+         boneco1.setVelocityX(-200);
+         boneco1.setFlipX(false);
+         boneco1.anims.play("animebuzzer", true);
+     } else if (boneco1.body.position.x - 1199 < -200) {
+         boneco1.setVelocityX(200);
+         boneco1.setFlipX(true);
+         boneco1.anims.play("animebuzzer", true);
+     }*/
     //animação do boneco2
     boneco2.anims.play("animebuzzer", true);
 
     //movimentação boneco3
-    if (boneco3.body.position.x - 3000 > 10) {
-        boneco3.setVelocityX(-300);
+    if (boneco3.body.position.x - 2499 > 200) {
+        boneco3.setVelocityX(-290);
         boneco3.setFlipX(false);
         boneco3.anims.play("animebuzzer", true);
-    } else if (boneco3.body.position.x - 3000 < -100) {
-        boneco3.setVelocityX(300);
+    } else if (boneco3.body.position.x - 2499 < -200) {
+        boneco3.setVelocityX(290);
         boneco3.setFlipX(true);
         boneco3.anims.play("animebuzzer", true);
     }
 
     //movimentação boneco4
-    if (boneco4.body.position.x - 2000 > 300) {
+    if (boneco4.body.position.x - 2499 > 200) {
         boneco4.setVelocityX(-290);
         boneco4.setFlipX(false);
         boneco4.anims.play("animebuzzer", true);
-    } else if (boneco4.body.position.x - 2000 < -1000) {
-        boneco4.setVelocityX(200);
+    } else if (boneco4.body.position.x - 2499 < -200) {
+        boneco4.setVelocityX(290);
         boneco4.setFlipX(true);
         boneco4.anims.play("animebuzzer", true);
     }
