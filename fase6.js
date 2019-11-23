@@ -90,8 +90,8 @@ fase6.preload = function () {
     });
     //coletavel2
     this.load.spritesheet("senoide", "assets/fases/fase6/ondasenoidal.png", {
-        frameWidth: 55,
-        frameHeight: 45
+        frameWidth: 50,
+        frameHeight: 50
     });
 
 
@@ -345,10 +345,10 @@ fase6.create = function () {
         frames: this.anims.generateFrameNumbers(
             "senoide", {
                 start: 0,
-                end: 12
+                end: 8
             }
         ),
-        frameRate: 2,
+        frameRate: 8,
         repeat: -1
     });
     //animação coletável2

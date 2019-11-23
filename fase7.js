@@ -95,8 +95,8 @@ fase7.preload = function () {
     });
     //coletavel3
     this.load.spritesheet("cabo", "assets/fases/fase7/caboderede.png", {
-        frameWidth: 60,
-        frameHeight: 60
+        frameWidth: 30,
+        frameHeight: 30
     });
 
 
@@ -116,6 +116,12 @@ fase7.preload = function () {
     this.load.spritesheet("fullscreen", "assets/fullscreen.png", {
         frameWidth: 64,
         frameHeight: 64
+    });
+
+    //animação falabau
+    this.load.spritesheet("falabau", "assets/fases/fase7/falasbau.png", {
+        frameWidth: 80,
+        frameHeight: 80
     });
 
     //audios do jogo
@@ -141,19 +147,47 @@ fase7.create = function () {
     this.add.image(2000, 300, "parede");
     this.add.image(2800, 300, "parede");
 
+    //---------------------------------------------------
+    //criando fala do baú
+
+    //animação falabau
+    this.anims.create({
+        key: "animefalabau",
+        frames: this.anims.generateFrameNumbers(
+            "falabau", {
+                start: 0,
+                end: 30
+            }
+        ),
+        frameRate: 4,
+        repeat: -1
+    });
 
 
-    //  The platforms group contains the ground and the 2 ledges we can jump on
+    //criando física estática do falas do baú
+    falabau = this.physics.add.staticGroup();
+
+    //posicionando letreiro
+    falabau
+        .create(3000, 100, "animefalabau")
+        .setScale(4)
+        .refreshBody();
+
+    //-------------------------------------------------
+
+    //criando física estática das plataformas
     platforms = this.physics.add.staticGroup();
+
+    //criando física estática do letreiro
     letreiro = this.physics.add.staticGroup();
 
     //posicionando letreiro
     letreiro
-        .create(400, 200, "letreiro7")
+        .create(400, 100, "letreiro7")
         .setScale(8)
         .refreshBody();
 
-    //  criando chão 
+    //  criando chão
 
     platforms
         .create(400, 700, "ground")
@@ -434,7 +468,6 @@ fase7.create = function () {
         frameRate: 2,
         repeat: -1
     });
-
     //------------------------------------------------
 
     //adicionando sons
@@ -524,18 +557,18 @@ fase7.create = function () {
     scoreText.setScrollFactor(0);
 
     //falas do bau
-    falabau = this.add.text(2900, 100, "batatina!", {
-        fontSize: "32px",
-        fill: "#000"
-    });
-    falabau = this.add.text(2800, 150, "continha de buteco", {
-        fontSize: "32px",
-        fill: "#000"
-    });
-    falabau = this.add.text(2900, 50, "naveia?", {
-        fontSize: "32px",
-        fill: "#000"
-    });
+    /* falabau = this.add.text(2900, 100, "batatina!", {
+         fontSize: "32px",
+         fill: "#000"
+     });
+     falabau = this.add.text(2800, 150, "continha de buteco", {
+         fontSize: "32px",
+         fill: "#000"
+     });
+     falabau = this.add.text(2900, 50, "naveia?", {
+         fontSize: "32px",
+         fill: "#000"
+     });*/
 
 
 
@@ -776,12 +809,21 @@ fase7.update = function () {
     binarios2.children.iterate(function (child) {
 
         child.anims.play("animecabo", true);
+        child.setScale(2);
 
     });
     //animação coletável4
     pl2.children.iterate(function (child) {
 
         child.anims.play("animecabo", true);
+        child.setScale(2)
+    });
+    //animação falabau
+    falabau.children.iterate(function (child) {
+
+        child.allowGravity = false;
+
+        child.anims.play("animefalabau", true);
     });
 };
 
