@@ -908,10 +908,10 @@ function coletavel3(player, b) {
 
     if (binarios2.countActive(true) === 0) {
         //  novos coletáveis para coletar
-        binarios2.children.iterate(function (child) {
+        /*binarios2.children.iterate(function (child) {
             child.enableBody(true, -300, 0, true, true);
 
-        });
+        });*/
 
         //var x = (player.x < 400) // ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
 

@@ -47,6 +47,10 @@ var coleta;
 //criação de letreiro
 var letreiro;
 
+//adicioando pula pulas
+//var pular;
+var pula1;
+
 var fase8 = new Phaser.Scene("fase8");
 
 fase8.preload = function () {
@@ -166,174 +170,147 @@ fase8.create = function () {
 
 
     //criando plataformas
-    // primeira linha
-    /*
-        platforms
-            .create(904, 445, "blocolongo") //nível 1  eixo Y 127
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1108, 445, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1312, 445, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1516, 445, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1720, 445, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1924, 445, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2128, 445, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2332, 445, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2536, 445, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2740, 445, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2944, 445, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
 
-        //----------------------------------------------------
-        //segunda linha
-        platforms
-            .create(904, 318, "blocolongo") //nível 2 eixo Y
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1108, 318, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1312, 318, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1516, 318, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1720, 318, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1924, 318, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2128, 318, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2332, 318, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2536, 318, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2740, 318, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2944, 318, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
+    platforms.create(100, 205, 'blocolongo')
+        .setScale(2)
+        .refreshBody();
+    //linha alta
+    platforms
+        .create(292, 205, "blocolongo") //nível 1  eixo Y 127
+        .setScale(2) //distancia entre os blocos eixo X 204
+        .refreshBody();
+    platforms
+        .create(496, 205, "blocolongo") //nível 1  eixo Y 127
+        .setScale(2) //distancia entre os blocos eixo X 204
+        .refreshBody();
+    platforms
+        .create(700, 205, "blocolongo") //nível 1  eixo Y 127
+        .setScale(2) //distancia entre os blocos eixo X 204
+        .refreshBody();
+    platforms
+        .create(904, 205, "blocolongo") //nível 1  eixo Y 127
+        .setScale(2) //distancia entre os blocos eixo X 204
+        .refreshBody();
+    platforms
+        .create(1108, 205, "blocolongo") //nível 2 eixo Y 
+        .setScale(2) //distancia entre os blocos eixo X 204
+        .refreshBody();
+    platforms
+        .create(1312, 205, "blocolongo") //nível 2 eixo Y 
+        .setScale(2) //distancia entre os blocos eixo X 204
+        .refreshBody();
+    platforms
+        .create(1516, 205, "blocolongo") //nível 2 eixo Y 
+        .setScale(2) //distancia entre os blocos eixo X 204
+        .refreshBody();
+    platforms
+        .create(1720, 205, "blocolongo") //nível 2 eixo Y 
+        .setScale(2) //distancia entre os blocos eixo X 204
+        .refreshBody();
+    platforms
+        .create(1924, 205, "blocolongo") //nível 2 eixo Y 
+        .setScale(2) //distancia entre os blocos eixo X 204
+        .refreshBody();
+    platforms
+        .create(2128, 205, "blocolongo") //nível 2 eixo Y 
+        .setScale(2) //distancia entre os blocos eixo X 204
+        .refreshBody();
+    platforms
+        .create(2332, 205, "blocolongo") //nível 2 eixo Y 
+        .setScale(2) //distancia entre os blocos eixo X 204
+        .refreshBody();
+    platforms
+        .create(2536, 205, "blocolongo") //nível 2 eixo Y 
+        .setScale(2) //distancia entre os blocos eixo X 204
+        .refreshBody();
+    platforms
+        .create(2740, 205, "blocolongo") //nível 2 eixo Y 
+        .setScale(2) //distancia entre os blocos eixo X 204
+        .refreshBody();
+    platforms
+        .create(2944, 205, "blocolongo") //nível 2 eixo Y 
+        .setScale(2) //distancia entre os blocos eixo X 204
+        .refreshBody();
+    platforms
+        .create(3100, 205, "bloco") //nível 2 eixo Y 
+        .setScale(2) //distancia entre os blocos eixo X 204
+        .refreshBody();
 
-        //-------------------------------------------------
-        //terceira linha
-        platforms
-            .create(904, 191, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1108, 191, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1312, 191, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1516, 191, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1720, 191, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(1924, 191, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2128, 191, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2332, 191, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2536, 191, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2740, 191, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        platforms
-            .create(2944, 191, "blocolongo") //nível 2 eixo Y 
-            .setScale(2) //distancia entre os blocos eixo X 204
-            .refreshBody();
-        //-------------------------------------------
+    //------------------------------------------------------------------
 
-        //escadinha
+    //linha baixa
+    platforms
+        .create(160, 445, "blocolongo") //nível 1  eixo Y 127
+        .setScale(2) //distancia entre os blocos eixo X 204
+        .refreshBody();
+    platforms
+        .create(292, 445, "blocolongo") //nível 1  eixo Y 127
+        .setScale(2) //distancia entre os blocos eixo X 204
+        .refreshBody();
+    platforms
+        .create(496, 445, "blocolongo") //nível 1  eixo Y 127
+        .setScale(2) //distancia entre os blocos eixo X 204
+        .refreshBody();
+    platforms
+        .create(700, 445, "blocolongo") //nível 1  eixo Y 127
+        .setScale(2) //distancia entre os blocos eixo X 204
+        .refreshBody();
+    platforms
+        .create(3148, 445, "blocolongo") //nível 2 eixo Y 
+        .setScale(2) //distancia entre os blocos eixo X 204
+        .refreshBody();
+    platforms
+        .create(904, 445, "blocolongo") //nível 1  eixo Y 127
+        .setScale(2) //distancia entre os blocos eixo X 204
+        .refreshBody();
+    platforms
+        .create(1108, 445, "blocolongo") //nível 2 eixo Y 
+        .setScale(2) //distancia entre os blocos eixo X 204
+        .refreshBody();
+    platforms
+        .create(1312, 445, "blocolongo") //nível 2 eixo Y 
+        .setScale(2) //distancia entre os blocos eixo X 204
+        .refreshBody();
+    platforms
+        .create(1516, 445, "blocolongo") //nível 2 eixo Y 
+        .setScale(2) //distancia entre os blocos eixo X 204
+        .refreshBody();
+    platforms
+        .create(1720, 445, "blocolongo") //nível 2 eixo Y 
+        .setScale(2) //distancia entre os blocos eixo X 204
+        .refreshBody();
+    platforms
+        .create(1924, 445, "blocolongo") //nível 2 eixo Y 
+        .setScale(2) //distancia entre os blocos eixo X 204
+        .refreshBody();
+    platforms
+        .create(2128, 445, "blocolongo") //nível 2 eixo Y 
+        .setScale(2) //distancia entre os blocos eixo X 204
+        .refreshBody();
+    platforms
+        .create(2332, 445, "blocolongo") //nível 2 eixo Y 
+        .setScale(2) //distancia entre os blocos eixo X 204
+        .refreshBody();
+    platforms
+        .create(2536, 445, "blocolongo") //nível 2 eixo Y 
+        .setScale(2) //distancia entre os blocos eixo X 204
+        .refreshBody();
+    platforms
+        .create(2740, 445, "blocolongo") //nível 2 eixo Y 
+        .setScale(2) //distancia entre os blocos eixo X 204
+        .refreshBody();
+    platforms
+        .create(2944, 445, "blocolongo") //nível 2 eixo Y 
+        .setScale(2) //distancia entre os blocos eixo X 204
+        .refreshBody();
 
-        platforms
-            .create(600, 508, "bloco")
-            .setScale(2)
-            .refreshBody(); //nivel 1 D
-        platforms
-            .create(400, 444, "bloco")
-            .setScale(2)
-            .refreshBody(); //nivel 2 E
-        platforms
-            .create(600, 350, "bloco")
-            .setScale(2)
-            .refreshBody(); //nivel 3 D
-        platforms
-            .create(400, 245, "bloco")
-            .setScale(2)
-            .refreshBody(); //nivel 4 E
-        platforms
-            .create(600, 160, "bloco")
-            .setScale(2)
-            .refreshBody(); //nivel 3 D*/
+
+
+
     //------------------------------------------------
 
     // adicionando player ao jogo
-    player = this.physics.add.sprite(100, 450, "idle");
+    player = this.physics.add.sprite(100, 50, "idle");
 
     //parte do player com cameras
     this.cameras.main.startFollow(
@@ -528,6 +505,19 @@ fase8.create = function () {
             stepX: 1000
         }
     });
+    //pula pula 1
+    pula1 = this.physics.add.group({
+        key: "switch",
+        repeat: 50,
+        setXY: {
+            x: 500, //como adicionar mais de um ícone
+            y: 200,
+
+            stepX: 1000
+        }
+    });
+
+
     //----------------------------------------------------------
 
 
@@ -585,7 +575,8 @@ fase8.create = function () {
     //--------------------------------------------------------------
 
     //colisões
-
+    this.physics.add.collider(pula1, platforms);
+    this.physics.add.collider(player, pula1);
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(pl, platforms); //coletável com plataforma
     this.physics.add.collider(pl2, platforms); //coletável com plataforma
@@ -627,6 +618,8 @@ fase8.create = function () {
         null,
         this
     );
+    //colisão com pula pula
+    this.physics.add.overlap(player, pula1, pular, null, this);
 
     //-----------------------------------------------
 
@@ -657,7 +650,7 @@ fase8.create = function () {
     //boneco1.setCircle(23);
 
     //adicionando inimigo2
-    boneco2 = inimigo.create(500, 0, "antenaerb");
+    boneco2 = inimigo.create(500, 515, "antenaerb");
     boneco2.setBounce(1);
     boneco2.setCollideWorldBounds(true);
     boneco2.setVelocityY(10);
@@ -785,6 +778,14 @@ fase8.update = function () {
         child.anims.play("animeroteador", true);
         child.setCircle(13)
     });
+    //pula pula 1
+    pula1.children.iterate(function (child) {
+        //faz a estrela ficar pulando sempre
+        child.setBounceY(Phaser.Math.FloatBetween(1, 1));
+        child.setCollideWorldBounds = true
+        child.setScale(3);
+    });
+
 };
 
 
@@ -916,6 +917,11 @@ function coletavel4(player, l) {
     porta.setCollideWorldBounds(true);
     porta.allowGravity = true;*/
 
+    coleta.play();
+}
+
+function pular(player, pula1) {
+    pula1.disableBody(true, true);
     coleta.play();
 }
 //-----------------------------------------------------------

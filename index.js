@@ -77,7 +77,7 @@ var config = {
     height: 600
   },
   // Várias cenas, em sequência
-  scene: [fase8, gameover8, formatura, endgame]
+  scene: [start, fase1, gameover1, fase2, gameover2, fase3, gameover3, fase4, gameover4, fase5, gameover5, fase6, gameover6, fase7, gameover7, fase8, gameover8, formatura, endgame]
 };
 
 var game = new Phaser.Game(config);
