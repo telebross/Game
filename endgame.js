@@ -28,12 +28,10 @@ endgame.preload = function () {
   this.load.image("ground", "assets/plataforma.png");
   this.load.image("bloco", "assets/bloco.png");
   this.load.image("blocolongo", "assets/bloco2.png");
-  this.load.image("star", "assets/star.png");
   this.load.image("porta", "assets/portaverde.png");
   this.load.image("parede", "assets/parede.png");
   this.load.image("resistor", "assets/fases/fase4/resistor.png");
   this.load.image("recomeçar", "assets/recomeçar.png");
-  this.load.image("inicio", "assets/inicio.png");
   // this.load.image('telebross', 'assets/telebross.png');
   this.load.image("capacitor", "assets/fases/fase5/capacitor.png");
   this.load.image("indutor", "assets/fases/fase5/indutor.png");
@@ -232,9 +230,10 @@ endgame.create = function () {
 
   //botão para troca de cena
   var trocacena = this.add
-    .image(500 - 64, 400, "recomeçar", 0)
+    .image(500, 350, "recomeçar", 0)
     .setOrigin(1, 0)
-    .setInteractive();
+    .setInteractive()
+
   trocacena.on(
     "pointerup",
     function () {

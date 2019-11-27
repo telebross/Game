@@ -118,6 +118,20 @@ fase7.preload = function () {
         frameHeight: 64
     });
 
+    // d-pad
+    this.load.spritesheet("esquerda", "assets/esquerda.png", {
+        frameWidth: 64,
+        frameHeight: 64
+    });
+    this.load.spritesheet("direita", "assets/direita.png", {
+        frameWidth: 64,
+        frameHeight: 64
+    });
+    this.load.spritesheet("cima", "assets/cima.png", {
+        frameWidth: 64,
+        frameHeight: 64
+    });
+
     //animação falabau
     this.load.spritesheet("falabau", "assets/fases/fase7/falasbau.png", {
         frameWidth: 80,
@@ -735,9 +749,58 @@ fase7.update = function () {
         cam.scrollY += 4;
     }
 
+    //movimentação por botões
+    // Controle direcional por toque na tela
+    //
+    // Para a esquerda: correr
+    var esquerda = this.add
+        .image(50, 570, "esquerda", 0)
+        .setInteractive()
+        .setScrollFactor(0);
+    esquerda.on("pointerover", () => {
+        esquerda.setFrame(1);
+        player.setVelocityX(-300);
+        player.anims.play("left", true);
+    });
+    esquerda.on("pointerout", () => {
+        esquerda.setFrame(0);
+        player.setVelocityX(0);
+        player.anims.play("turn", true);
+    });
+    //
+    // Para a direita: correr
+    var direita = this.add
+        .image(124, 570, "direita", 0)
+        .setInteractive()
+        .setScrollFactor(0);
+    direita.on("pointerover", () => {
+        direita.setFrame(1);
+        player.setVelocityX(300);
+        player.anims.play("right", true);
+    });
+    direita.on("pointerout", () => {
+        direita.setFrame(0);
+        player.setVelocityX(0);
+        player.anims.play("turn", true);
+    });
+    //
+    // Para cima: pular
+    var cima = this.add
+        .image(750, 570, "cima", 0)
+        .setInteractive()
+        .setScrollFactor(0);
+    cima.on("pointerover", () => {
+        cima.setFrame(1);
+        if (player.body.touching.down) {
+            player.setVelocityY(-330);
+        }
+    });
+    cima.on("pointerout", () => {
+        cima.setFrame(0);
+    })
 
     //movimentação do personagem 1
-    else if (cursors.left.isDown) {
+    /*else if (cursors.left.isDown) {
         player.setVelocityX(-300);
         player.anims.play("left", true);
     } else if (cursors.right.isDown) {
@@ -750,7 +813,7 @@ fase7.update = function () {
     }
     if (cursors.up.isDown && player.body.touching.down) {
         player.setVelocityY(-330);
-    }
+    }*/
 
     //-----------------------------------------------------
 
