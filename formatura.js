@@ -32,6 +32,7 @@ var bois;
 
 //teclados do personagem
 var cursors;
+var pointer;
 
 //adicionando sons
 var formatura;
@@ -353,45 +354,6 @@ formatura.create = function () {
   this.physics.add.overlap(player, portas, mudarfase, null, this);
 
 
-};
-//fim do create
-//----------------------------------------------------------------------
-
-formatura.update = function () {
-
-  //animação setaesquerda
-  setaesquerda.children.iterate(function (child) {
-
-    child.allowGravity = false;
-
-    child.anims.play("animeesquerda", true);
-  });
-  //animação setaedireta
-  setadireita.children.iterate(function (child) {
-
-    child.allowGravity = false;
-
-    child.anims.play("animedireita", true);
-  });
-
-  //criação da camera
-  var cam = this.cameras.main;
-
-  //movimentação de cameras
-  if (moveCam) {
-    if (cursors.left.isDown) {
-      cam.scrollX -= 4;
-    } else if (cursors.right.isDown) {
-      cam.scrollX += 4;
-    }
-  }
-
-  if (cursors.up.isDown) {
-    cam.scrollY -= 4;
-  } else if (cursors.down.isDown) {
-    cam.scrollY += 4;
-  }
-
   //movimentação por botões
   // Controle direcional por toque na tela
   //
@@ -441,8 +403,46 @@ formatura.update = function () {
   cima.on("pointerout", () => {
     cima.setFrame(0);
   })
+};
+//fim do create
+//----------------------------------------------------------------------
 
-  //movimentação do personagem 1
+formatura.update = function () {
+
+  //animação setaesquerda
+  setaesquerda.children.iterate(function (child) {
+
+    child.allowGravity = false;
+
+    child.anims.play("animeesquerda", true);
+  });
+  //animação setaedireta
+  setadireita.children.iterate(function (child) {
+
+    child.allowGravity = false;
+
+    child.anims.play("animedireita", true);
+  });
+
+  //criação da camera
+  var cam = this.cameras.main;
+
+  //movimentação de cameras
+  if (moveCam) {
+    if (cursors.left.isDown) {
+      cam.scrollX -= 4;
+    } else if (cursors.right.isDown) {
+      cam.scrollX += 4;
+    }
+  }
+
+  if (cursors.up.isDown) {
+    cam.scrollY -= 4;
+  } else if (cursors.down.isDown) {
+    cam.scrollY += 4;
+  }
+
+  //movimentação do personagem 1 teclado de mesa
   /*if (cursors.left.isDown) {
     player.setVelocityX(-200);
     player.anims.play("left", true);

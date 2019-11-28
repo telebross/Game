@@ -33,6 +33,7 @@ var moveCam = false;
 
 //movimentação personagens
 var cursors;
+var pointer;
 
 
 //mudança de cena
@@ -47,9 +48,7 @@ var coleta;
 //criação de letreiro
 var letreiro;
 
-//adicioando pula pulas
-//var pular;
-var pula1;
+
 
 var fase8 = new Phaser.Scene("fase8");
 
@@ -98,8 +97,8 @@ fase8.preload = function () {
 
     //animação inimigo1
     this.load.spritesheet("antenaerb", "assets/fases/fase8/antenaerb.png", {
-        frameWidth: 60,
-        frameHeight: 80
+        frameWidth: 30,
+        frameHeight: 40
     });
     //animação inimigo2
     this.load.spritesheet("celular", "assets/fases/fase8/celular.png", {
@@ -136,6 +135,8 @@ fase8.preload = function () {
 fase8.create = function () {
     // Teclado alfanumérico
     cursors = this.input.keyboard.createCursorKeys();
+    // Touch
+    pointer = this.input.addPointer(1);
 
     //parte de movimentação de cameras
     this.cameras.main.setBounds(0, 0, 3200, 600);
@@ -484,7 +485,7 @@ fase8.create = function () {
 
     //coletável2
     pl = this.physics.add.group({
-        key: "roteador",
+        key: "celular",
         repeat: 1,
         setXY: {
             x: 1100, //como adicionar mais de um ícone
@@ -510,7 +511,7 @@ fase8.create = function () {
 
     //coletável4
     pl2 = this.physics.add.group({
-        key: "roteador",
+        key: "celular",
         repeat: 1,
         setXY: {
             x: 1100, //como adicionar mais de um ícone
@@ -519,17 +520,7 @@ fase8.create = function () {
             stepX: 1000
         }
     });
-    //pula pula 1
-    pula1 = this.physics.add.group({
-        key: "switch",
-        repeat: 50,
-        setXY: {
-            x: 500, //como adicionar mais de um ícone
-            y: 200,
 
-            stepX: 1000
-        }
-    });
 
 
     //----------------------------------------------------------
@@ -589,8 +580,6 @@ fase8.create = function () {
     //--------------------------------------------------------------
 
     //colisões
-    this.physics.add.collider(pula1, platforms);
-    this.physics.add.collider(player, pula1);
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(pl, platforms); //coletável com plataforma
     this.physics.add.collider(pl2, platforms); //coletável com plataforma
@@ -632,8 +621,7 @@ fase8.create = function () {
         null,
         this
     );
-    //colisão com pula pula
-    this.physics.add.overlap(player, pula1, pular, null, this);
+
 
     //-----------------------------------------------
 
@@ -672,7 +660,7 @@ fase8.create = function () {
     // boneco2.setCircle(23);
 
     //adicionando inimigo3
-    boneco3 = inimigo.create(2900, 200, "celular");
+    boneco3 = inimigo.create(2900, 200, "roteador");
     boneco3.setBounce(0);
     boneco3.setCollideWorldBounds(true);
     boneco3.setVelocityY(0);
@@ -680,35 +668,12 @@ fase8.create = function () {
     //boneco3.setCircle(23);
 
     //adicionando inimigo4
-    boneco4 = inimigo.create(1900, 300, "celular");
+    boneco4 = inimigo.create(1900, 300, "roteador");
     boneco4.setBounce(0);
     boneco4.setCollideWorldBounds(true);
     boneco4.setVelocityX(100);
     boneco4.allowGravity = false;
     //boneco.setCircle(23);
-};
-//fim da função create
-//----------------------------------------------
-
-fase8.update = function () {
-
-    //criação da camera
-    var cam = this.cameras.main;
-
-    //movimentação de cameras
-    if (moveCam) {
-        if (cursors.left.isDown) {
-            cam.scrollX -= 4;
-        } else if (cursors.right.isDown) {
-            cam.scrollX += 4;
-        }
-    }
-
-    if (cursors.up.isDown) {
-        cam.scrollY -= 4;
-    } else if (cursors.down.isDown) {
-        cam.scrollY += 4;
-    }
 
     //movimentação por botões
     // Controle direcional por toque na tela
@@ -760,21 +725,45 @@ fase8.update = function () {
         cima.setFrame(0);
     })
 
-    //movimentação do personagem 1
-    /* else if (cursors.left.isDown) {
-         player.setVelocityX(-300);
-         player.anims.play("left", true);
-     } else if (cursors.right.isDown) {
-         player.setVelocityX(300);
+};
+//fim da função create
+//----------------------------------------------
 
-         player.anims.play("right", true);
-     } else if (cursors.up.isUp && cursors.left.isUp && cursors.right.isUp) {
-         player.setVelocityX(0);
-         player.anims.play("turn");
-     }
-     if (cursors.up.isDown && player.body.touching.down) {
-         player.setVelocityY(-330);
-     }*/
+fase8.update = function () {
+
+    //criação da camera
+    var cam = this.cameras.main;
+
+    //movimentação de cameras
+    if (moveCam) {
+        if (cursors.left.isDown) {
+            cam.scrollX -= 4;
+        } else if (cursors.right.isDown) {
+            cam.scrollX += 4;
+        }
+    }
+
+    if (cursors.up.isDown) {
+        cam.scrollY -= 4;
+    } else if (cursors.down.isDown) {
+        cam.scrollY += 4;
+    }
+
+    //movimentação do personagem 1
+    /*else if (cursors.left.isDown) {
+        player.setVelocityX(-300);
+        player.anims.play("left", true);
+    } else if (cursors.right.isDown) {
+        player.setVelocityX(300);
+
+        player.anims.play("right", true);
+    } else if (cursors.up.isUp && cursors.left.isUp && cursors.right.isUp) {
+        player.setVelocityX(0);
+        player.anims.play("turn");
+    }
+    if (cursors.up.isDown && player.body.touching.down) {
+        player.setVelocityY(-330);
+    }*/
 
     //-----------------------------------------------------
 
@@ -795,22 +784,26 @@ fase8.update = function () {
     if (boneco3.body.position.x - 3000 > 10) {
         boneco3.setVelocityX(-300);
         boneco3.setFlipX(false);
-        boneco3.anims.play("animecelular", true);
+        boneco3.setCircle(13)
+        boneco3.anims.play("animeroteador", true);
     } else if (boneco3.body.position.x - 3000 < -100) {
         boneco3.setVelocityX(300);
         boneco3.setFlipX(true);
-        boneco3.anims.play("animecelular", true);
+        boneco3.setCircle(13)
+        boneco3.anims.play("animeroteador", true);
     }
 
     //movimentação boneco4
     if (boneco4.body.position.x - 2000 > 300) {
         boneco4.setVelocityX(-290);
         boneco4.setFlipX(false);
-        boneco4.anims.play("animecelular", true);
+        boneco4.setCircle(13)
+        boneco4.anims.play("animeroteador", true);
     } else if (boneco4.body.position.x - 2000 < -1000) {
         boneco4.setVelocityX(200);
         boneco4.setFlipX(true);
-        boneco4.anims.play("animecelular", true);
+        boneco4.setCircle(13)
+        boneco4.anims.play("animeroteador", true);
     }
 
     //--------------------------------------------------
@@ -825,8 +818,8 @@ fase8.update = function () {
     //animação coletável2
     pl.children.iterate(function (child) {
 
-        child.anims.play("animeroteador", true);
-        child.setCircle(13)
+        child.anims.play("animecelular", true);
+
     });
 
     //animação coletável3
@@ -838,16 +831,10 @@ fase8.update = function () {
     //animação coletável4
     pl2.children.iterate(function (child) {
 
-        child.anims.play("animeroteador", true);
-        child.setCircle(13)
+        child.anims.play("animecelular", true);
+
     });
-    //pula pula 1
-    pula1.children.iterate(function (child) {
-        //faz a estrela ficar pulando sempre
-        child.setBounceY(Phaser.Math.FloatBetween(1, 1));
-        child.setCollideWorldBounds = true
-        child.setScale(3);
-    });
+
 
 };
 
@@ -983,10 +970,7 @@ function coletavel4(player, l) {
     coleta.play();
 }
 
-function pular(player, pula1) {
-    pula1.disableBody(true, true);
-    coleta.play();
-}
+
 //-----------------------------------------------------------
 
 //função de morte

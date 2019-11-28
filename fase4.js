@@ -33,6 +33,7 @@ var moveCam = false;
 
 //movimentação personagens
 var cursors;
+var pointer;
 
 
 //mudança de cena
@@ -676,29 +677,6 @@ fase4.create = function () {
   boneco4.setVelocityX(100);
   boneco4.allowGravity = false;
   //boneco3.setCircle(23);
-};
-//fim da função create
-//----------------------------------------------
-
-fase4.update = function () {
-
-  //criação da camera
-  var cam = this.cameras.main;
-
-  //movimentação de cameras
-  if (moveCam) {
-    if (cursors.left.isDown) {
-      cam.scrollX -= 4;
-    } else if (cursors.right.isDown) {
-      cam.scrollX += 4;
-    }
-  }
-
-  if (cursors.up.isDown) {
-    cam.scrollY -= 4;
-  } else if (cursors.down.isDown) {
-    cam.scrollY += 4;
-  }
 
   //movimentação por botões
   // Controle direcional por toque na tela
@@ -749,9 +727,32 @@ fase4.update = function () {
   cima.on("pointerout", () => {
     cima.setFrame(0);
   })
+};
+//fim da função create
+//----------------------------------------------
+
+fase4.update = function () {
+
+  //criação da camera
+  var cam = this.cameras.main;
+
+  //movimentação de cameras
+  if (moveCam) {
+    if (cursors.left.isDown) {
+      cam.scrollX -= 4;
+    } else if (cursors.right.isDown) {
+      cam.scrollX += 4;
+    }
+  }
+
+  if (cursors.up.isDown) {
+    cam.scrollY -= 4;
+  } else if (cursors.down.isDown) {
+    cam.scrollY += 4;
+  }
 
 
-  //movimentação do personagem 1
+  //movimentação do personagem 1 no teclado de mesa
   /* else if (cursors.left.isDown) {
      player.setVelocityX(-300);
      player.anims.play("left", true);

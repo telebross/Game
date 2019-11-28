@@ -33,6 +33,7 @@ var moveCam = false;
 
 //movimentação personagens
 var cursors;
+var pointer;
 
 
 //mudança de cena
@@ -146,6 +147,8 @@ fase7.preload = function () {
 fase7.create = function () {
     // Teclado alfanumérico
     cursors = this.input.keyboard.createCursorKeys();
+    // Touch
+    pointer = this.input.addPointer(1);
 
     //parte de movimentação de cameras
     this.cameras.main.setBounds(0, 0, 3200, 600);
@@ -725,29 +728,6 @@ fase7.create = function () {
     boneco4.allowGravity = false;
     boneco4.setScale(2)
     //boneco3.setCircle(23);
-};
-//fim da função create
-//----------------------------------------------
-
-fase7.update = function () {
-
-    //criação da camera
-    var cam = this.cameras.main;
-
-    //movimentação de cameras
-    if (moveCam) {
-        if (cursors.left.isDown) {
-            cam.scrollX -= 4;
-        } else if (cursors.right.isDown) {
-            cam.scrollX += 4;
-        }
-    }
-
-    if (cursors.up.isDown) {
-        cam.scrollY -= 4;
-    } else if (cursors.down.isDown) {
-        cam.scrollY += 4;
-    }
 
     //movimentação por botões
     // Controle direcional por toque na tela
@@ -798,6 +778,30 @@ fase7.update = function () {
     cima.on("pointerout", () => {
         cima.setFrame(0);
     })
+};
+//fim da função create
+//----------------------------------------------
+
+fase7.update = function () {
+
+    //criação da camera
+    var cam = this.cameras.main;
+
+    //movimentação de cameras
+    if (moveCam) {
+        if (cursors.left.isDown) {
+            cam.scrollX -= 4;
+        } else if (cursors.right.isDown) {
+            cam.scrollX += 4;
+        }
+    }
+
+    if (cursors.up.isDown) {
+        cam.scrollY -= 4;
+    } else if (cursors.down.isDown) {
+        cam.scrollY += 4;
+    }
+
 
     //movimentação do personagem 1
     /*else if (cursors.left.isDown) {
