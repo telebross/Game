@@ -650,7 +650,7 @@ fase5.create = function () {
     // Controle direcional por toque na tela
     //
     // Para a esquerda: correr
-    var esquerda = this.add
+    /*var esquerda = this.add
         .image(50, 570, "esquerda", 0)
         .setInteractive()
         .setScrollFactor(0);
@@ -694,7 +694,7 @@ fase5.create = function () {
     });
     cima.on("pointerout", () => {
         cima.setFrame(0);
-    })
+    })*/
 };
 //fim da função create
 //----------------------------------------------
@@ -719,7 +719,7 @@ fase5.update = function () {
         cam.scrollY += 4;
     }
 
-    /*//movimentação do personagem 1 no de mesa
+    //movimentação do personagem 1 no de mesa
     else if (cursors.left.isDown) {
         player.setVelocityX(-300);
         player.anims.play("left", true);
@@ -733,7 +733,7 @@ fase5.update = function () {
     }
     if (cursors.up.isDown && player.body.touching.down) {
         player.setVelocityY(-330);
-    }*/
+    }
 
     //-----------------------------------------------------
 
