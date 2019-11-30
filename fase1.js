@@ -469,51 +469,51 @@ fase1.create = function () {
   // Controle direcional por toque na tela
   //
   // Para a esquerda: correr
-  /* var esquerda = this.add
-     .image(50, 570, "esquerda", 0)
-     .setInteractive()
-     .setScrollFactor(0);
-   esquerda.on("pointerover", () => {
-     esquerda.setFrame(1);
-     player.setVelocityX(-300);
-     player.anims.play("left", true);
-   });
-   esquerda.on("pointerout", () => {
-     esquerda.setFrame(0);
-     player.setVelocityX(0);
-     player.anims.play("turn", true);
-   });
-   //
-   // Para a direita: correr
-   var direita = this.add
-     .image(124, 570, "direita", 0)
-     .setInteractive()
-     .setScrollFactor(0);
-   direita.on("pointerover", () => {
-     direita.setFrame(1);
-     player.setVelocityX(300);
-     player.anims.play("right", true);
-   });
-   direita.on("pointerout", () => {
-     direita.setFrame(0);
-     player.setVelocityX(0);
-     player.anims.play("turn", true);
-   });
-   //
-   // Para cima: pular
-   var cima = this.add
-     .image(750, 570, "cima", 0)
-     .setInteractive()
-     .setScrollFactor(0);
-   cima.on("pointerover", () => {
-     cima.setFrame(1);
-     if (player.body.touching.down) {
-       player.setVelocityY(-330);
-     }
-   });
-   cima.on("pointerout", () => {
-     cima.setFrame(0);
-   })*/
+  var esquerda = this.add
+    .image(50, 570, "esquerda", 0)
+    .setInteractive()
+    .setScrollFactor(0);
+  esquerda.on("pointerover", () => {
+    esquerda.setFrame(1);
+    player.setVelocityX(-300);
+    player.anims.play("left", true);
+  });
+  esquerda.on("pointerout", () => {
+    esquerda.setFrame(0);
+    player.setVelocityX(0);
+    player.anims.play("turn", true);
+  });
+  //
+  // Para a direita: correr
+  var direita = this.add
+    .image(124, 570, "direita", 0)
+    .setInteractive()
+    .setScrollFactor(0);
+  direita.on("pointerover", () => {
+    direita.setFrame(1);
+    player.setVelocityX(300);
+    player.anims.play("right", true);
+  });
+  direita.on("pointerout", () => {
+    direita.setFrame(0);
+    player.setVelocityX(0);
+    player.anims.play("turn", true);
+  });
+  //
+  // Para cima: pular
+  var cima = this.add
+    .image(750, 570, "cima", 0)
+    .setInteractive()
+    .setScrollFactor(0);
+  cima.on("pointerover", () => {
+    cima.setFrame(1);
+    if (player.body.touching.down) {
+      player.setVelocityY(-330);
+    }
+  });
+  cima.on("pointerout", () => {
+    cima.setFrame(0);
+  })
 };
 //fim do create
 //------------------------------------------------
@@ -575,20 +575,20 @@ fase1.update = function () {
   }*/
 
   //movimentação do personagem 1 no teclado de mesa
-  else if (cursors.left.isDown) {
-    player.setVelocityX(-300);
-    player.anims.play("left", true);
-  } else if (cursors.right.isDown) {
-    player.setVelocityX(300);
+  /* else if (cursors.left.isDown) {
+     player.setVelocityX(-300);
+     player.anims.play("left", true);
+   } else if (cursors.right.isDown) {
+     player.setVelocityX(300);
 
-    player.anims.play("right", true);
-  } else if (cursors.up.isUp && cursors.left.isUp && cursors.right.isUp) {
-    player.setVelocityX(0);
-    player.anims.play("turn");
-  }
-  if (cursors.up.isDown && player.body.touching.down) {
-    player.setVelocityY(-330);
-  }
+     player.anims.play("right", true);
+   } else if (cursors.up.isUp && cursors.left.isUp && cursors.right.isUp) {
+     player.setVelocityX(0);
+     player.anims.play("turn");
+   }
+   if (cursors.up.isDown && player.body.touching.down) {
+     player.setVelocityY(-330);
+   }*/
   //movimentação personagem 2
   /*
     if (AKey.isDown) {

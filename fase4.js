@@ -682,7 +682,7 @@ fase4.create = function () {
   // Controle direcional por toque na tela
   //
   // Para a esquerda: correr
-  /*var esquerda = this.add
+  var esquerda = this.add
      .image(50, 570, "esquerda", 0)
      .setInteractive()
      .setScrollFactor(0);
@@ -726,7 +726,7 @@ fase4.create = function () {
    });
    cima.on("pointerout", () => {
      cima.setFrame(0);
-   })*/
+   })
 };
 //fim da função create
 //----------------------------------------------
@@ -753,7 +753,7 @@ fase4.update = function () {
 
 
   //movimentação do personagem 1 no teclado de mesa
-  else if (cursors.left.isDown) {
+  /*else if (cursors.left.isDown) {
     player.setVelocityX(-300);
     player.anims.play("left", true);
   } else if (cursors.right.isDown) {
@@ -766,7 +766,7 @@ fase4.update = function () {
   }
   if (cursors.up.isDown && player.body.touching.down) {
     player.setVelocityY(-330);
-  }
+  }*/
 
   //-----------------------------------------------------
 
