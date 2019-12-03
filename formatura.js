@@ -11,7 +11,7 @@ var player;
 
 //textos/placar
 var scoreText;
-var scoreJogador1 = 0;
+var scoreJogador1;
 
 
 //plataformas
@@ -32,14 +32,13 @@ var bois;
 
 //teclados do personagem
 var cursors;
-var pointer;
 
 //adicionando sons
 var formatura;
 
 //setas
-var setaesquerda;
-var setadireita
+var esquerda;
+var direita
 
 var formatura = new Phaser.Scene("formatura");
 
@@ -49,7 +48,9 @@ formatura.preload = function () {
   this.load.image("ground", "assets/plataforma.png");
   this.load.image("bloco", "assets/bloco.png");
   this.load.image("blocolongo", "assets/bloco2.png");
+  this.load.image("diploma", "assets/diploma.png");
   this.load.image("telefone", "assets/fases/fase1/telefone.png");
+  this.load.image("bomb", "assets/bomb.png");
   this.load.image("boi", "assets/boiformatura.png");
   this.load.image("porta", "assets/portaverde.png");
   this.load.image("recomeçar", "assets/Recomeçar.png");
@@ -80,27 +81,13 @@ formatura.preload = function () {
     frameHeight: 64
   });
 
-  // d-pad
-  this.load.spritesheet("esquerda", "assets/esquerda.png", {
-    frameWidth: 64,
-    frameHeight: 64
-  });
-  this.load.spritesheet("direita", "assets/direita.png", {
-    frameWidth: 64,
-    frameHeight: 64
-  });
-  this.load.spritesheet("cima", "assets/cima.png", {
-    frameWidth: 64,
-    frameHeight: 64
-  });
-
   //animação setas
-  this.load.spritesheet("setaesquerda", "assets/setaesquerda.png", {
+  this.load.spritesheet("esquerda", "assets/setaesquerda.png", {
     frameWidth: 60,
     frameHeight: 60
   })
 
-  this.load.spritesheet("setadireita", "assets/setadireita.png", {
+  this.load.spritesheet("direita", "assets/setadireita.png", {
     frameWidth: 60,
     frameHeight: 60
   })
@@ -134,7 +121,7 @@ formatura.create = function () {
   this.anims.create({
     key: "animeesquerda",
     frames: this.anims.generateFrameNumbers(
-      "setaesquerda", {
+      "esquerda", {
         start: 0,
         end: 3
       }
@@ -147,7 +134,7 @@ formatura.create = function () {
   this.anims.create({
     key: "animedireita",
     frames: this.anims.generateFrameNumbers(
-      "setadireita", {
+      "direita", {
         start: 0,
         end: 3
       }
@@ -159,16 +146,16 @@ formatura.create = function () {
   //criando física da porta/plataforma/setaesquerda/setadireita
   portas = this.physics.add.group();
   platforms = this.physics.add.staticGroup();
-  setaesquerda = this.physics.add.staticGroup();
-  setadireita = this.physics.add.staticGroup();
+  esquerda = this.physics.add.staticGroup();
+  direita = this.physics.add.staticGroup();
 
   //criando seta esquerda
-  setaesquerda
+  esquerda
     .create(2800, 200, "animeesquerda")
     .setScale(4)
     .refreshBody();
   //criando seta direita
-  setadireita
+  direita
     .create(400, 200, "animedireita")
     .setScale(4)
     .refreshBody();
@@ -354,55 +341,6 @@ formatura.create = function () {
   this.physics.add.overlap(player, portas, mudarfase, null, this);
 
 
-  //movimentação por botões
-  // Controle direcional por toque na tela
-  //
-  // Para a esquerda: correr
-  /* var esquerda = this.add
-     .image(50, 570, "esquerda", 0)
-     .setInteractive()
-     .setScrollFactor(0);
-   esquerda.on("pointerover", () => {
-     esquerda.setFrame(1);
-     player.setVelocityX(-200);
-     player.anims.play("left", true);
-   });
-   esquerda.on("pointerout", () => {
-     esquerda.setFrame(0);
-     player.setVelocityX(0);
-     player.anims.play("turn", true);
-   });
-   //
-   // Para a direita: correr
-   var direita = this.add
-     .image(124, 570, "direita", 0)
-     .setInteractive()
-     .setScrollFactor(0);
-   direita.on("pointerover", () => {
-     direita.setFrame(1);
-     player.setVelocityX(200);
-     player.anims.play("right", true);
-   });
-   direita.on("pointerout", () => {
-     direita.setFrame(0);
-     player.setVelocityX(0);
-     player.anims.play("turn", true);
-   });
-   //
-   // Para cima: pular
-   var cima = this.add
-     .image(750, 570, "cima", 0)
-     .setInteractive()
-     .setScrollFactor(0);
-   cima.on("pointerover", () => {
-     cima.setFrame(1);
-     if (player.body.touching.down) {
-       player.setVelocityY(-660);
-     }
-   });
-   cima.on("pointerout", () => {
-     cima.setFrame(0);
-   })*/
 };
 //fim do create
 //----------------------------------------------------------------------
@@ -410,14 +348,14 @@ formatura.create = function () {
 formatura.update = function () {
 
   //animação setaesquerda
-  setaesquerda.children.iterate(function (child) {
+  esquerda.children.iterate(function (child) {
 
     child.allowGravity = false;
 
     child.anims.play("animeesquerda", true);
   });
   //animação setaedireta
-  setadireita.children.iterate(function (child) {
+  direita.children.iterate(function (child) {
 
     child.allowGravity = false;
 
@@ -442,15 +380,17 @@ formatura.update = function () {
     cam.scrollY += 4;
   }
 
-  //movimentação do personagem 1 teclado de mesa
+  //movimentação do personagem 1
   if (cursors.left.isDown) {
     player.setVelocityX(-200);
     player.anims.play("left", true);
-  } else if (cursors.right.isDown) {
+  }
+  if (cursors.right.isDown) {
     player.setVelocityX(200);
 
     player.anims.play("right", true);
-  } else if (cursors.up.isUp && cursors.left.isUp && cursors.right.isUp) {
+  }
+  if (cursors.up.isUp && cursors.left.isUp && cursors.right.isUp) {
     player.setVelocityX(0);
     player.anims.play("turn");
   }

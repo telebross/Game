@@ -14,15 +14,6 @@ var boneco1;
 var boneco2;
 var boneco3;
 var boneco4;
-var boneco5;
-var boneco6;
-var boneco7;
-var boneco8;
-var boneco9;
-var boneco10;
-var boneco11;
-var boneco12;
-var boneco13;
 
 
 //plataformas/icones na tela
@@ -42,7 +33,6 @@ var moveCam = false;
 
 //movimentação personagens
 var cursors;
-var pointer;
 
 
 //mudança de cena
@@ -57,7 +47,9 @@ var coleta;
 //criação de letreiro
 var letreiro;
 
-
+//adicioando pula pulas
+//var pular;
+var pula1;
 
 var fase8 = new Phaser.Scene("fase8");
 
@@ -106,8 +98,8 @@ fase8.preload = function () {
 
     //animação inimigo1
     this.load.spritesheet("antenaerb", "assets/fases/fase8/antenaerb.png", {
-        frameWidth: 30,
-        frameHeight: 40
+        frameWidth: 60,
+        frameHeight: 80
     });
     //animação inimigo2
     this.load.spritesheet("celular", "assets/fases/fase8/celular.png", {
@@ -122,20 +114,6 @@ fase8.preload = function () {
         frameHeight: 64
     });
 
-    // d-pad
-    this.load.spritesheet("esquerda", "assets/esquerda.png", {
-        frameWidth: 64,
-        frameHeight: 64
-    });
-    this.load.spritesheet("direita", "assets/direita.png", {
-        frameWidth: 64,
-        frameHeight: 64
-    });
-    this.load.spritesheet("cima", "assets/cima.png", {
-        frameWidth: 64,
-        frameHeight: 64
-    });
-
     //audios do jogo
     this.load.audio("fundodojogo", "assets/sons/fundodojogo.mp3");
     this.load.audio("coleta", "assets/sons/coleta.mp3");
@@ -144,8 +122,6 @@ fase8.preload = function () {
 fase8.create = function () {
     // Teclado alfanumérico
     cursors = this.input.keyboard.createCursorKeys();
-    // Touch
-    pointer = this.input.addPointer(1);
 
     //parte de movimentação de cameras
     this.cameras.main.setBounds(0, 0, 3200, 600);
@@ -169,7 +145,7 @@ fase8.create = function () {
 
     //posicionando letreiro
     letreiro
-        .create(400, 100, "letreiro8")
+        .create(400, 200, "letreiro8")
         .setScale(8)
         .refreshBody();
 
@@ -264,67 +240,67 @@ fase8.create = function () {
 
     //linha baixa
     platforms
-        .create(160, 420, "blocolongo") //nível 1  eixo Y 127
+        .create(160, 445, "blocolongo") //nível 1  eixo Y 127
         .setScale(2) //distancia entre os blocos eixo X 204
         .refreshBody();
     platforms
-        .create(292, 420, "blocolongo") //nível 1  eixo Y 127
+        .create(292, 445, "blocolongo") //nível 1  eixo Y 127
         .setScale(2) //distancia entre os blocos eixo X 204
         .refreshBody();
     platforms
-        .create(496, 420, "blocolongo") //nível 1  eixo Y 127
+        .create(496, 445, "blocolongo") //nível 1  eixo Y 127
         .setScale(2) //distancia entre os blocos eixo X 204
         .refreshBody();
     platforms
-        .create(700, 420, "blocolongo") //nível 1  eixo Y 127
+        .create(700, 445, "blocolongo") //nível 1  eixo Y 127
         .setScale(2) //distancia entre os blocos eixo X 204
         .refreshBody();
     platforms
-        .create(3148, 420, "blocolongo") //nível 2 eixo Y 
+        .create(3148, 445, "blocolongo") //nível 2 eixo Y 
         .setScale(2) //distancia entre os blocos eixo X 204
         .refreshBody();
     platforms
-        .create(904, 420, "blocolongo") //nível 1  eixo Y 127
+        .create(904, 445, "blocolongo") //nível 1  eixo Y 127
         .setScale(2) //distancia entre os blocos eixo X 204
         .refreshBody();
     platforms
-        .create(1108, 420, "blocolongo") //nível 2 eixo Y 
+        .create(1108, 445, "blocolongo") //nível 2 eixo Y 
         .setScale(2) //distancia entre os blocos eixo X 204
         .refreshBody();
     platforms
-        .create(1312, 420, "blocolongo") //nível 2 eixo Y 
+        .create(1312, 445, "blocolongo") //nível 2 eixo Y 
         .setScale(2) //distancia entre os blocos eixo X 204
         .refreshBody();
     platforms
-        .create(1516, 420, "blocolongo") //nível 2 eixo Y 
+        .create(1516, 445, "blocolongo") //nível 2 eixo Y 
         .setScale(2) //distancia entre os blocos eixo X 204
         .refreshBody();
     platforms
-        .create(1720, 420, "blocolongo") //nível 2 eixo Y 
+        .create(1720, 445, "blocolongo") //nível 2 eixo Y 
         .setScale(2) //distancia entre os blocos eixo X 204
         .refreshBody();
     platforms
-        .create(1924, 420, "blocolongo") //nível 2 eixo Y 
+        .create(1924, 445, "blocolongo") //nível 2 eixo Y 
         .setScale(2) //distancia entre os blocos eixo X 204
         .refreshBody();
     platforms
-        .create(2128, 420, "blocolongo") //nível 2 eixo Y 
+        .create(2128, 445, "blocolongo") //nível 2 eixo Y 
         .setScale(2) //distancia entre os blocos eixo X 204
         .refreshBody();
     platforms
-        .create(2332, 420, "blocolongo") //nível 2 eixo Y 
+        .create(2332, 445, "blocolongo") //nível 2 eixo Y 
         .setScale(2) //distancia entre os blocos eixo X 204
         .refreshBody();
     platforms
-        .create(2536, 420, "blocolongo") //nível 2 eixo Y 
+        .create(2536, 445, "blocolongo") //nível 2 eixo Y 
         .setScale(2) //distancia entre os blocos eixo X 204
         .refreshBody();
     platforms
-        .create(2740, 420, "blocolongo") //nível 2 eixo Y 
+        .create(2740, 445, "blocolongo") //nível 2 eixo Y 
         .setScale(2) //distancia entre os blocos eixo X 204
         .refreshBody();
     platforms
-        .create(2944, 420, "blocolongo") //nível 2 eixo Y 
+        .create(2944, 445, "blocolongo") //nível 2 eixo Y 
         .setScale(2) //distancia entre os blocos eixo X 204
         .refreshBody();
 
@@ -479,7 +455,7 @@ fase8.create = function () {
         key: "switch",
         repeat: 3,
         setXY: {
-            x: 500,
+            x: 1000,
             y: 325,
             stepX: 500
         }
@@ -494,13 +470,13 @@ fase8.create = function () {
 
     //coletável2
     pl = this.physics.add.group({
-        key: "celular",
+        key: "roteador",
         repeat: 1,
         setXY: {
-            x: 1750, //como adicionar mais de um ícone
+            x: 1100, //como adicionar mais de um ícone
             y: 210,
 
-            stepX: 500
+            stepX: 600
         }
     });
     //coletável3
@@ -508,7 +484,7 @@ fase8.create = function () {
         key: "switch",
         repeat: 1,
         setXY: {
-            x: 2000,
+            x: 1000,
             y: 0,
             stepX: 500
         }
@@ -520,16 +496,26 @@ fase8.create = function () {
 
     //coletável4
     pl2 = this.physics.add.group({
-        key: "celular",
+        key: "roteador",
         repeat: 1,
         setXY: {
-            x: 1000, //como adicionar mais de um ícone
+            x: 1100, //como adicionar mais de um ícone
             y: 510,
 
             stepX: 1000
         }
     });
+    //pula pula 1
+    pula1 = this.physics.add.group({
+        key: "switch",
+        repeat: 50,
+        setXY: {
+            x: 500, //como adicionar mais de um ícone
+            y: 200,
 
+            stepX: 1000
+        }
+    });
 
 
     //----------------------------------------------------------
@@ -589,6 +575,8 @@ fase8.create = function () {
     //--------------------------------------------------------------
 
     //colisões
+    this.physics.add.collider(pula1, platforms);
+    this.physics.add.collider(player, pula1);
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(pl, platforms); //coletável com plataforma
     this.physics.add.collider(pl2, platforms); //coletável com plataforma
@@ -630,7 +618,8 @@ fase8.create = function () {
         null,
         this
     );
-
+    //colisão com pula pula
+    this.physics.add.overlap(player, pula1, pular, null, this);
 
     //-----------------------------------------------
 
@@ -653,160 +642,36 @@ fase8.create = function () {
     );
     //-------------------------------------------
     //adicionando inimigo1
-    boneco1 = inimigo.create(300, 0, "antenaerb");
+    boneco1 = inimigo.create(2000, 400, "antenaerb");
     boneco1.setBounce(0);
     boneco1.setCollideWorldBounds(true);
     boneco1.setVelocityX(100);
     boneco1.allowGravity = false;
+    //boneco1.setCircle(23);
 
     //adicionando inimigo2
-    boneco2 = inimigo.create(3000, 240, "roteador");
+    boneco2 = inimigo.create(500, 515, "antenaerb");
     boneco2.setBounce(1);
     boneco2.setCollideWorldBounds(true);
-    boneco2.setVelocityX(0);
+    boneco2.setVelocityY(10);
     boneco2.allowGravity = false;
+    // boneco2.setCircle(23);
 
     //adicionando inimigo3
-    boneco3 = inimigo.create(100, 250, "antenaerb");
+    boneco3 = inimigo.create(2900, 200, "celular");
     boneco3.setBounce(0);
     boneco3.setCollideWorldBounds(true);
-    boneco3.setVelocityX(300);
+    boneco3.setVelocityY(0);
     boneco3.allowGravity = false;
+    //boneco3.setCircle(23);
 
     //adicionando inimigo4
-    boneco4 = inimigo.create(3000, 0, "roteador");
-    boneco4.setBounce(1);
+    boneco4 = inimigo.create(1900, 300, "celular");
+    boneco4.setBounce(0);
     boneco4.setCollideWorldBounds(true);
-    boneco4.setVelocityX(0);
-    boneco4.setCircle(13);
+    boneco4.setVelocityX(100);
     boneco4.allowGravity = false;
-
-    //adicionando inimigo5
-    boneco5 = inimigo.create(900, 0, "roteador");
-    boneco5.setBounce(1);
-    boneco5.setCollideWorldBounds(true);
-    boneco5.setVelocityX(0);
-    boneco5.setCircle(13);
-    boneco5.allowGravity = false;
-
-    //adicionando inimigo6
-    boneco6 = inimigo.create(2000, 0, "roteador");
-    boneco6.setBounce(1);
-    boneco6.setCollideWorldBounds(true);
-    boneco6.setVelocityX(0);
-    boneco6.setCircle(13);
-    boneco6.allowGravity = false;
-
-    //adicionando inimigo7
-    boneco7 = inimigo.create(2500, 0, "roteador");
-    boneco7.setBounce(1);
-    boneco7.setCollideWorldBounds(true);
-    boneco7.setVelocityX(0);
-    boneco7.setCircle(13);
-    boneco7.allowGravity = false;
-
-    //adicionando inimigo8
-    boneco8 = inimigo.create(1500, 0, "roteador");
-    boneco8.setBounce(1);
-    boneco8.setCollideWorldBounds(true);
-    boneco8.setVelocityX(0);
-    boneco8.setCircle(13);
-    boneco8.allowGravity = false;
-
-    //adicionando inimigo9
-    /* boneco9 = inimigo.create(3000, 250, "roteador");
-     boneco9.setBounce(1);
-     boneco9.setCollideWorldBounds(true);
-     boneco9.setVelocityX(0);
-     boneco9.setCircle(13);
-     boneco9.allowGravity = false;*/
-
-    //adicionando inimigo10
-    boneco10 = inimigo.create(2500, 240, "roteador");
-    boneco10.setBounce(1);
-    boneco10.setCollideWorldBounds(true);
-    boneco10.setVelocityX(0);
-    boneco10.setCircle(13);
-    boneco10.allowGravity = false;
-
-    //adicionando inimigo11
-    boneco11 = inimigo.create(2000, 240, "roteador");
-    boneco11.setBounce(1);
-    boneco11.setCollideWorldBounds(true);
-    boneco11.setVelocityX(0);
-    boneco11.setCircle(13);
-    boneco11.allowGravity = false;
-
-    //adicionando inimigo12
-    boneco12 = inimigo.create(1500, 240, "roteador");
-    boneco12.setBounce(1);
-    boneco12.setCollideWorldBounds(true);
-    boneco12.setVelocityX(0);
-    boneco12.setCircle(13);
-    boneco12.allowGravity = false;
-
-    //adicionando inimigo13
-    boneco13 = inimigo.create(900, 240, "roteador");
-    boneco13.setBounce(1);
-    boneco13.setCollideWorldBounds(true);
-    boneco13.setVelocityX(0);
-    boneco13.setCircle(13);
-    boneco13.allowGravity = false;
-
-
-    //----------------------------------------------------------------
-
-
-    //movimentação por botões
-    // Controle direcional por toque na tela
-    //
-    // Para a esquerda: correr
-    /*var esquerda = this.add
-        .image(50, 570, "esquerda", 0)
-        .setInteractive()
-        .setScrollFactor(0);
-    esquerda.on("pointerover", () => {
-        esquerda.setFrame(1);
-        player.setVelocityX(-300);
-        player.anims.play("left", true);
-    });
-    esquerda.on("pointerout", () => {
-        esquerda.setFrame(0);
-        player.setVelocityX(0);
-        player.anims.play("turn", true);
-    });
-    //
-    // Para a direita: correr
-    var direita = this.add
-        .image(124, 570, "direita", 0)
-        .setInteractive()
-        .setScrollFactor(0);
-    direita.on("pointerover", () => {
-        direita.setFrame(1);
-        player.setVelocityX(300);
-        player.anims.play("right", true);
-    });
-    direita.on("pointerout", () => {
-        direita.setFrame(0);
-        player.setVelocityX(0);
-        player.anims.play("turn", true);
-    });
-    //
-    // Para cima: pular
-    var cima = this.add
-        .image(750, 570, "cima", 0)
-        .setInteractive()
-        .setScrollFactor(0);
-    cima.on("pointerover", () => {
-        cima.setFrame(1);
-        if (player.body.touching.down) {
-            player.setVelocityY(-330);
-        }
-    });
-    cima.on("pointerout", () => {
-        cima.setFrame(0);
-    })*/
-
+    //boneco.setCircle(23);
 };
 //fim da função create
 //----------------------------------------------
@@ -831,15 +696,18 @@ fase8.update = function () {
         cam.scrollY += 4;
     }
 
+
     //movimentação do personagem 1
-    else if (cursors.left.isDown) {
+    if (cursors.left.isDown) {
         player.setVelocityX(-300);
         player.anims.play("left", true);
-    } else if (cursors.right.isDown) {
+    }
+    if (cursors.right.isDown) {
         player.setVelocityX(300);
 
         player.anims.play("right", true);
-    } else if (cursors.up.isUp && cursors.left.isUp && cursors.right.isUp) {
+    }
+    if (cursors.up.isUp && cursors.left.isUp && cursors.right.isUp) {
         player.setVelocityX(0);
         player.anims.play("turn");
     }
@@ -850,65 +718,39 @@ fase8.update = function () {
     //-----------------------------------------------------
 
     //movimentação boneco1
-    if (boneco1.body.position.x - 1999 > 800) {
-        boneco1.setVelocityX(-290);
+    if (boneco1.body.position.x - 1999 > 200) {
+        boneco1.setVelocityX(-200);
         boneco1.setFlipX(false);
         boneco1.anims.play("animeantenaerb", true);
-    } else if (boneco1.body.position.x - 1999 < -1000) {
-        boneco1.setVelocityX(290);
+    } else if (boneco1.body.position.x - 1999 < -200) {
+        boneco1.setVelocityX(200);
         boneco1.setFlipX(true);
         boneco1.anims.play("animeantenaerb", true);
     }
     //animação do boneco2
-    /* if (boneco2.body.position.x - 2000 > 1900) {
-         boneco2.setVelocityX(-290);
-         boneco2.setFlipX(false);
-         boneco2.setCircle(13)
-         boneco2.anims.play("animeroteador", true);
-     } else if (boneco2.body.position.x - 2000 < -1500) {
-         boneco2.setVelocityX(290);
-         boneco2.setFlipX(true);
-         boneco2.setCircle(13)
-         boneco2.anims.play("animeroteador", true);
-     }*/
+    boneco2.anims.play("animeantenaerb", true);
 
     //movimentação boneco3
-    if (boneco3.body.position.x - 2000 > 800) {
-        boneco3.setVelocityX(-290);
+    if (boneco3.body.position.x - 3000 > 10) {
+        boneco3.setVelocityX(-300);
         boneco3.setFlipX(false);
-        boneco3.anims.play("animeantenaerb", true);
-    } else if (boneco3.body.position.x - 2000 < -1000) {
-        boneco3.setVelocityX(290);
+        boneco3.anims.play("animecelular", true);
+    } else if (boneco3.body.position.x - 3000 < -100) {
+        boneco3.setVelocityX(300);
         boneco3.setFlipX(true);
-        boneco3.anims.play("animeantenaerb", true);
+        boneco3.anims.play("animecelular", true);
     }
 
     //movimentação boneco4
-    boneco4.anims.play("animeroteador", true);
-
-    /* if (boneco4.body.position.x - 2000 > 2000) {
-         boneco4.setVelocityX(-290);
-         boneco4.setFlipX(false);
-         boneco4.setCircle(13)
-         boneco4.anims.play("animeroteador", true);
-     } else if (boneco4.body.position.x - 2000 < -100) {
-         boneco4.setVelocityX(290);
-         boneco4.setFlipX(true);
-         boneco4.setCircle(13)
-         boneco4.anims.play("animeroteador", true);
-     }*/
-
-    //animação boneco 5
-    boneco5.anims.play("animeroteador", true);
-
-    //animação boneco 6
-    boneco6.anims.play("animeroteador", true);
-
-    //animação boneco 7
-    boneco7.anims.play("animeroteador", true);
-
-    //animação boneco 8
-    boneco8.anims.play("animeroteador", true);
+    if (boneco4.body.position.x - 2000 > 300) {
+        boneco4.setVelocityX(-290);
+        boneco4.setFlipX(false);
+        boneco4.anims.play("animecelular", true);
+    } else if (boneco4.body.position.x - 2000 < -1000) {
+        boneco4.setVelocityX(200);
+        boneco4.setFlipX(true);
+        boneco4.anims.play("animecelular", true);
+    }
 
     //--------------------------------------------------
 
@@ -922,8 +764,8 @@ fase8.update = function () {
     //animação coletável2
     pl.children.iterate(function (child) {
 
-        child.anims.play("animecelular", true);
-
+        child.anims.play("animeroteador", true);
+        child.setCircle(13)
     });
 
     //animação coletável3
@@ -935,10 +777,16 @@ fase8.update = function () {
     //animação coletável4
     pl2.children.iterate(function (child) {
 
-        child.anims.play("animecelular", true);
-
+        child.anims.play("animeroteador", true);
+        child.setCircle(13)
     });
-
+    //pula pula 1
+    pula1.children.iterate(function (child) {
+        //faz a estrela ficar pulando sempre
+        child.setBounceY(Phaser.Math.FloatBetween(1, 1));
+        child.setCollideWorldBounds = true
+        child.setScale(3);
+    });
 
 };
 
@@ -967,7 +815,7 @@ function coletavel1(player, binario) {
             ? Phaser.Math.Between(400, 800)
             : Phaser.Math.Between(0, 400);*/
 
-        var porta = portas.create(3200, 500, "saida");
+        var porta = portas.create(4000, 500, "saida");
         //this.physics.pause();
         //porta.setBounce(1);
         porta.setCollideWorldBounds(true);
@@ -1074,7 +922,10 @@ function coletavel4(player, l) {
     coleta.play();
 }
 
-
+function pular(player, pula1) {
+    pula1.disableBody(true, true);
+    coleta.play();
+}
 //-----------------------------------------------------------
 
 //função de morte

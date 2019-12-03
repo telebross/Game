@@ -33,7 +33,6 @@ var moveCam = false;
 
 //movimentação personagens
 var cursors;
-var pointer;
 
 
 //mudança de cena
@@ -50,7 +49,6 @@ var letreiro;
 
 //anjo
 var anjo;
-var deslocamento;
 
 var fase6 = new Phaser.Scene("fase6");
 
@@ -106,20 +104,6 @@ fase6.preload = function () {
 
     //fullscreen
     this.load.spritesheet("fullscreen", "assets/fullscreen.png", {
-        frameWidth: 64,
-        frameHeight: 64
-    });
-
-    // d-pad
-    this.load.spritesheet("esquerda", "assets/esquerda.png", {
-        frameWidth: 64,
-        frameHeight: 64
-    });
-    this.load.spritesheet("direita", "assets/direita.png", {
-        frameWidth: 64,
-        frameHeight: 64
-    });
-    this.load.spritesheet("cima", "assets/cima.png", {
         frameWidth: 64,
         frameHeight: 64
     });
@@ -609,57 +593,6 @@ fase6.create = function () {
     boneco4.allowGravity = false;
     boneco4.setScale(2);
     //boneco4.setCircle(23);
-
-    //movimentação por botões
-    // Controle direcional por toque na tela
-    //
-    // Para a esquerda: correr
-    /* var esquerda = this.add
-         .image(50, 570, "esquerda", 0)
-         .setInteractive()
-         .setScrollFactor(0);
-     esquerda.on("pointerover", () => {
-         esquerda.setFrame(1);
-         player.setVelocityX(-300);
-         player.anims.play("left", true);
-         deslocamento = 4.5;
-     });
-     esquerda.on("pointerout", () => {
-         esquerda.setFrame(0);
-         player.setVelocityX(0);
-         player.anims.play("turn", true);
-     });
-     //
-     // Para a direita: correr
-     var direita = this.add
-         .image(124, 570, "direita", 0)
-         .setInteractive()
-         .setScrollFactor(0);
-     direita.on("pointerover", () => {
-         direita.setFrame(1);
-         player.setVelocityX(300);
-         player.anims.play("right", true);
-     });
-     direita.on("pointerout", () => {
-         direita.setFrame(0);
-         player.setVelocityX(0);
-         player.anims.play("turn", true);
-     });
-     //
-     // Para cima: pular
-     var cima = this.add
-         .image(750, 570, "cima", 0)
-         .setInteractive()
-         .setScrollFactor(0);
-     cima.on("pointerover", () => {
-         cima.setFrame(1);
-         if (player.body.touching.down) {
-             player.setVelocityY(-330);
-         }
-     });
-     cima.on("pointerout", () => {
-         cima.setFrame(0);
-     })*/
 };
 //fim da função create
 //----------------------------------------------
@@ -684,20 +617,31 @@ fase6.update = function () {
     }
 
 
-    //movimentação do personagem 1 no teclado de mesa
-    else if (cursors.left.isDown) {
+    //movimentação do personagem 1
+    if (cursors.left.isDown) {
         player.setVelocityX(-300);
         player.anims.play("left", true);
-    } else if (cursors.right.isDown) {
+    }
+    if (cursors.right.isDown) {
         player.setVelocityX(300);
 
         player.anims.play("right", true);
-    } else if (cursors.up.isUp && cursors.left.isUp && cursors.right.isUp) {
+    }
+    if (cursors.up.isUp && cursors.left.isUp && cursors.right.isUp) {
         player.setVelocityX(0);
         player.anims.play("turn");
     }
     if (cursors.up.isDown && player.body.touching.down) {
         player.setVelocityY(-330);
+    }
+
+    //movimentação anjo
+    if (cursors.left.isDown && anjo.x > 0) {
+
+        anjo.x -= 4.5;
+    } else if (cursors.right.isDown && anjo.x < 3200) {
+
+        anjo.x += 4.5;
     }
 
     //-----------------------------------------------------
@@ -762,8 +706,6 @@ fase6.update = function () {
 
         child.anims.play("animesenoide", true);
     });
-
-    anjo.x = player.body.x;
 };
 
 
