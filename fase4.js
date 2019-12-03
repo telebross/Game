@@ -226,94 +226,94 @@ fase4.create = function () {
   //----------------------------------------------------
   //segunda linha
   platforms
-    .create(904, 318, "blocolongo") //nível 2 eixo Y
+    .create(904, 300, "blocolongo") //nível 2 eixo Y
     .setScale(2) //distancia entre os blocos eixo X 204
     .refreshBody();
   platforms
-    .create(1108, 318, "blocolongo") //nível 2 eixo Y 
+    .create(1108, 300, "blocolongo") //nível 2 eixo Y 
     .setScale(2) //distancia entre os blocos eixo X 204
     .refreshBody();
   platforms
-    .create(1312, 318, "blocolongo") //nível 2 eixo Y 
+    .create(1312, 300, "blocolongo") //nível 2 eixo Y 
     .setScale(2) //distancia entre os blocos eixo X 204
     .refreshBody();
   platforms
-    .create(1516, 318, "blocolongo") //nível 2 eixo Y 
+    .create(1516, 300, "blocolongo") //nível 2 eixo Y 
     .setScale(2) //distancia entre os blocos eixo X 204
     .refreshBody();
   platforms
-    .create(1720, 318, "blocolongo") //nível 2 eixo Y 
+    .create(1720, 300, "blocolongo") //nível 2 eixo Y 
     .setScale(2) //distancia entre os blocos eixo X 204
     .refreshBody();
   platforms
-    .create(1924, 318, "blocolongo") //nível 2 eixo Y 
+    .create(1924, 300, "blocolongo") //nível 2 eixo Y 
     .setScale(2) //distancia entre os blocos eixo X 204
     .refreshBody();
   platforms
-    .create(2128, 318, "blocolongo") //nível 2 eixo Y 
+    .create(2128, 300, "blocolongo") //nível 2 eixo Y 
     .setScale(2) //distancia entre os blocos eixo X 204
     .refreshBody();
   platforms
-    .create(2332, 318, "blocolongo") //nível 2 eixo Y 
+    .create(2332, 300, "blocolongo") //nível 2 eixo Y 
     .setScale(2) //distancia entre os blocos eixo X 204
     .refreshBody();
   platforms
-    .create(2536, 318, "blocolongo") //nível 2 eixo Y 
+    .create(2536, 300, "blocolongo") //nível 2 eixo Y 
     .setScale(2) //distancia entre os blocos eixo X 204
     .refreshBody();
   platforms
-    .create(2740, 318, "blocolongo") //nível 2 eixo Y 
+    .create(2740, 300, "blocolongo") //nível 2 eixo Y 
     .setScale(2) //distancia entre os blocos eixo X 204
     .refreshBody();
   platforms
-    .create(2944, 318, "blocolongo") //nível 2 eixo Y 
+    .create(2944, 300, "blocolongo") //nível 2 eixo Y 
     .setScale(2) //distancia entre os blocos eixo X 204
     .refreshBody();
 
   //-------------------------------------------------
   //terceira linha
   platforms
-    .create(904, 191, "blocolongo") //nível 2 eixo Y 
+    .create(904, 150, "blocolongo") //nível 2 eixo Y 
     .setScale(2) //distancia entre os blocos eixo X 204
     .refreshBody();
   platforms
-    .create(1108, 191, "blocolongo") //nível 2 eixo Y 
+    .create(1108, 150, "blocolongo") //nível 2 eixo Y 
     .setScale(2) //distancia entre os blocos eixo X 204
     .refreshBody();
   platforms
-    .create(1312, 191, "blocolongo") //nível 2 eixo Y 
+    .create(1312, 150, "blocolongo") //nível 2 eixo Y 
     .setScale(2) //distancia entre os blocos eixo X 204
     .refreshBody();
   platforms
-    .create(1516, 191, "blocolongo") //nível 2 eixo Y 
+    .create(1516, 150, "blocolongo") //nível 2 eixo Y 
     .setScale(2) //distancia entre os blocos eixo X 204
     .refreshBody();
   platforms
-    .create(1720, 191, "blocolongo") //nível 2 eixo Y 
+    .create(1720, 150, "blocolongo") //nível 2 eixo Y 
     .setScale(2) //distancia entre os blocos eixo X 204
     .refreshBody();
   platforms
-    .create(1924, 191, "blocolongo") //nível 2 eixo Y 
+    .create(1924, 150, "blocolongo") //nível 2 eixo Y 
     .setScale(2) //distancia entre os blocos eixo X 204
     .refreshBody();
   platforms
-    .create(2128, 191, "blocolongo") //nível 2 eixo Y 
+    .create(2128, 150, "blocolongo") //nível 2 eixo Y 
     .setScale(2) //distancia entre os blocos eixo X 204
     .refreshBody();
   platforms
-    .create(2332, 191, "blocolongo") //nível 2 eixo Y 
+    .create(2332, 150, "blocolongo") //nível 2 eixo Y 
     .setScale(2) //distancia entre os blocos eixo X 204
     .refreshBody();
   platforms
-    .create(2536, 191, "blocolongo") //nível 2 eixo Y 
+    .create(2536, 150, "blocolongo") //nível 2 eixo Y 
     .setScale(2) //distancia entre os blocos eixo X 204
     .refreshBody();
   platforms
-    .create(2740, 191, "blocolongo") //nível 2 eixo Y 
+    .create(2740, 150, "blocolongo") //nível 2 eixo Y 
     .setScale(2) //distancia entre os blocos eixo X 204
     .refreshBody();
   platforms
-    .create(2944, 191, "blocolongo") //nível 2 eixo Y 
+    .create(2944, 150, "blocolongo") //nível 2 eixo Y 
     .setScale(2) //distancia entre os blocos eixo X 204
     .refreshBody();
   //-------------------------------------------
@@ -325,7 +325,7 @@ fase4.create = function () {
     .setScale(2)
     .refreshBody(); //nivel 1 D
   platforms
-    .create(400, 444, "bloco")
+    .create(300, 444, "bloco")
     .setScale(2)
     .refreshBody(); //nivel 2 E
   platforms
@@ -333,13 +333,31 @@ fase4.create = function () {
     .setScale(2)
     .refreshBody(); //nivel 3 D
   platforms
-    .create(400, 245, "bloco")
+    .create(300, 260, "bloco")
     .setScale(2)
     .refreshBody(); //nivel 4 E
   platforms
     .create(600, 160, "bloco")
     .setScale(2)
     .refreshBody(); //nivel 3 D
+
+  //escadinha
+  /* platforms
+     .create(1800, 508, "bloco")
+     .setScale(2)
+     .refreshBody(); //nivel 1
+   platforms
+     .create(2100, 420, "bloco")
+     .setScale(2)
+     .refreshBody(); //nivel 2
+   platforms
+     .create(1800, 316, "bloco")
+     .setScale(2)
+     .refreshBody(); //nivel3
+   platforms
+     .create(2100, 228, "bloco")
+     .setScale(2)
+     .refreshBody(); //nivel4*/
   //------------------------------------------------
 
   // adicionando player ao jogo
@@ -655,7 +673,7 @@ fase4.create = function () {
   //boneco1.setCircle(23);
 
   //adicionando inimigo2
-  boneco2 = inimigo.create(500, 0, "resistor");
+  boneco2 = inimigo.create(450, 0, "resistor");
   boneco2.setBounce(1);
   boneco2.setCollideWorldBounds(true);
   boneco2.setVelocityY(101);
@@ -683,50 +701,50 @@ fase4.create = function () {
   //
   // Para a esquerda: correr
   var esquerda = this.add
-     .image(50, 570, "esquerda", 0)
-     .setInteractive()
-     .setScrollFactor(0);
-   esquerda.on("pointerover", () => {
-     esquerda.setFrame(1);
-     player.setVelocityX(-300);
-     player.anims.play("left", true);
-   });
-   esquerda.on("pointerout", () => {
-     esquerda.setFrame(0);
-     player.setVelocityX(0);
-     player.anims.play("turn", true);
-   });
-   //
-   // Para a direita: correr
-   var direita = this.add
-     .image(124, 570, "direita", 0)
-     .setInteractive()
-     .setScrollFactor(0);
-   direita.on("pointerover", () => {
-     direita.setFrame(1);
-     player.setVelocityX(300);
-     player.anims.play("right", true);
-   });
-   direita.on("pointerout", () => {
-     direita.setFrame(0);
-     player.setVelocityX(0);
-     player.anims.play("turn", true);
-   });
-   //
-   // Para cima: pular
-   var cima = this.add
-     .image(750, 570, "cima", 0)
-     .setInteractive()
-     .setScrollFactor(0);
-   cima.on("pointerover", () => {
-     cima.setFrame(1);
-     if (player.body.touching.down) {
-       player.setVelocityY(-330);
-     }
-   });
-   cima.on("pointerout", () => {
-     cima.setFrame(0);
-   })
+    .image(50, 570, "esquerda", 0)
+    .setInteractive()
+    .setScrollFactor(0);
+  esquerda.on("pointerover", () => {
+    esquerda.setFrame(1);
+    player.setVelocityX(-300);
+    player.anims.play("left", true);
+  });
+  esquerda.on("pointerout", () => {
+    esquerda.setFrame(0);
+    player.setVelocityX(0);
+    player.anims.play("turn", true);
+  });
+  //
+  // Para a direita: correr
+  var direita = this.add
+    .image(124, 570, "direita", 0)
+    .setInteractive()
+    .setScrollFactor(0);
+  direita.on("pointerover", () => {
+    direita.setFrame(1);
+    player.setVelocityX(300);
+    player.anims.play("right", true);
+  });
+  direita.on("pointerout", () => {
+    direita.setFrame(0);
+    player.setVelocityX(0);
+    player.anims.play("turn", true);
+  });
+  //
+  // Para cima: pular
+  var cima = this.add
+    .image(750, 570, "cima", 0)
+    .setInteractive()
+    .setScrollFactor(0);
+  cima.on("pointerover", () => {
+    cima.setFrame(1);
+    if (player.body.touching.down) {
+      player.setVelocityY(-330);
+    }
+  });
+  cima.on("pointerout", () => {
+    cima.setFrame(0);
+  })
 };
 //fim da função create
 //----------------------------------------------
