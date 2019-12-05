@@ -535,7 +535,7 @@ fase7.create = function () {
     });
     //coletável3
     binarios2 = this.physics.add.group({
-        key: "rede",
+        key: "cabo",
         repeat: 2,
         setXY: {
             x: 1600,
@@ -543,14 +543,11 @@ fase7.create = function () {
             stepX: 650
         }
     });
-    /*binarios2.children.iterate(function (child) {
-      //  Give each star a slightly different bounce
-      child.setCircle(25);
-    });*/
+
 
     //coletável4
     pl2 = this.physics.add.group({
-        key: "rede",
+        key: "cabo",
         repeat: 1,
         setXY: {
             x: 2650, //como adicionar mais de um ícone
@@ -733,7 +730,7 @@ fase7.create = function () {
     // Controle direcional por toque na tela
     //
     // Para a esquerda: correr
-var esquerda = this.add
+    var esquerda = this.add
         .image(50, 570, "esquerda", 0)
         .setInteractive()
         .setScrollFactor(0);
@@ -804,7 +801,7 @@ fase7.update = function () {
 
 
     //movimentação do personagem 1
-   /* else if (cursors.left.isDown) {
+    /*else if (cursors.left.isDown) {
         player.setVelocityX(-300);
         player.anims.play("left", true);
     } else if (cursors.right.isDown) {
